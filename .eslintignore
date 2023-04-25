@@ -1,0 +1,6 @@
+*.config.*
+node_modules
+dist
+package.json
+.husky
+node_modules/fraction.js
