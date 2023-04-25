@@ -1,12 +1,17 @@
-import './App.css';
+// import useState
+import React from 'react';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Header from './components/header/header';
+import Home from './pages/homepage/index';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="bg-slate-300">Test</h1>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} exact />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
