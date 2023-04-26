@@ -64,7 +64,7 @@ export default function Header() {
               <img className="block w-auto" src={Logo} alt="Your Company" />
             </div>
             <div className="hidden text-center sm:ml-6 sm:block">
-              <div className="flex space-x-4 pt-8 font-body">
+              <div className="flex space-x-4 pt-8 font-body text-base">
                 <NavLink className="border-r border-black pr-8" to="#">
                   Listings
                 </NavLink>
