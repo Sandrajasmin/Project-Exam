@@ -20,13 +20,15 @@ export default function Header() {
               className="inline-flex items-center justify-center rounded-md p-2 text-black"
               aria-controls="mobile-menu"
               aria-expanded="false"
-              onClick={toggleMenu}>
+              onClick={toggleMenu}
+            >
               {isMenuOpen ? (
                 <svg
                   className="h-6 w-6"
                   viewBox="0 0 28 28"
                   fill="none"
-                  xmlns="http://www.w3.org/2000/svg">
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M6.125 6.125L21.875 21.875"
                     stroke="black"
@@ -49,7 +51,8 @@ export default function Header() {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  aria-hidden="true">
+                  aria-hidden="true"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -61,7 +64,7 @@ export default function Header() {
           </div>
           <div className="flex flex-1 justify-center sm:items-stretch sm:justify-between">
             <div className="flex flex-shrink-0 items-center">
-              <img className="block w-auto" src={Logo} alt="Your Company" />
+              <img className="block h-16 w-12" src={Logo} alt="Holidaze logo" />
             </div>
             <div className="hidden text-center sm:ml-6 sm:block">
               <div className="flex space-x-4 pt-8 font-body text-base">
@@ -103,7 +106,8 @@ export default function Header() {
       <div
         className={`fixed left-0 top-20 z-20 ${
           isMenuOpen ? 'flex' : 'hidden'
-        } z-30 flex h-[calc(100vh_-_80px)] w-full justify-center  bg-opacity-50 bg-clip-padding backdrop-blur-lg backdrop-filter lg:hidden`}>
+        } z-30 flex h-[calc(100vh_-_80px)] w-full justify-center  bg-opacity-50 bg-clip-padding backdrop-blur-lg backdrop-filter lg:hidden`}
+      >
         <div className="space-y-1 px-2 pb-3 pt-2">
           <NavLink className="block py-2" to="#">
             Listings
