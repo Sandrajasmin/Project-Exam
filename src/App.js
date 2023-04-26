@@ -2,6 +2,7 @@
 import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Header from './components/header/header';
+import Footer from './components/footer/footer';
 import Home from './pages/homepage/index';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} exact />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
