@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Logo from '../../assets/img/logo_small.png';
+import Logo from '../../assets/img/logo_small.webp';
 // import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -22,6 +22,7 @@ export default function Header() {
               aria-expanded="false"
               onClick={toggleMenu}
             >
+              <span className="sr-only">Open main menu</span>
               {isMenuOpen ? (
                 <svg
                   className="h-6 w-6"
@@ -64,7 +65,7 @@ export default function Header() {
           </div>
           <div className="flex flex-1 justify-center sm:items-stretch sm:justify-between">
             <div className="flex flex-shrink-0 items-center">
-              <img className="block h-16 w-12" src={Logo} alt="Holidaze logo" />
+              <img className="block h-12 w-12" src={Logo} alt="Holidaze logo" />
             </div>
             <div className="hidden text-center sm:ml-6 sm:block">
               <div className="flex space-x-4 pt-8 font-body text-base">

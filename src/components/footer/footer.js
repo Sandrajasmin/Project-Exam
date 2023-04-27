@@ -1,5 +1,5 @@
 import React from 'react';
-import Logo from '../../assets/img/logo_small.png';
+import Logo from '../../assets/img/logo_small.webp';
 import { NavLink } from 'react-router-dom';
 
 export default function Footer() {
@@ -8,7 +8,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-2 md:py-8 lg:px-8">
         <div className="sm:flex sm:items-center sm:justify-between">
           <NavLink className="mb-4 flex items-center sm:mb-0" to="/">
-            <img src={Logo} className="mr-3 h-10 w-8" alt="Holidaze logo" />
+            <img src={Logo} className="mr-3 h-12 w-12" alt="Holidaze logo" />
             <span className="text-1xl self-center whitespace-nowrap font-body font-semibold">
               Holidaze
             </span>
