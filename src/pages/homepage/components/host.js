@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-function Category() {
+function HostSection() {
   return (
     <div>
-      <div className="bg-gradient-to-t from-blue to-bluegreen my-10">
-        <div className="relative isolate px-6 lg:pt-14 lg:px-8">
+      <div className="my-10 bg-gradient-to-t from-blue to-bluegreen">
+        <div className="relative isolate px-6 lg:px-8 lg:pt-14">
           <div
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
@@ -21,7 +21,10 @@ function Category() {
                 guest – by phone, video call or chat.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
-                <NavLink to="#" className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-blue shadow-sm hover:bg-bluegreen hover:text-black">
+                <NavLink
+                  to="#"
+                  className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-blue shadow-sm hover:bg-bluegreen hover:text-black"
+                >
                   Get started
                 </NavLink>
                 <NavLink to="#" className="text-sm font-semibold leading-6 text-gray-900">
@@ -36,4 +39,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default HostSection;

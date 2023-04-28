@@ -3,6 +3,7 @@ import HeroSection from './components/hero';
 import Guarantee from './components/guarantee';
 import Category from './components/category';
 import Host from './components/host';
+import CardListing from './components/cardListing';
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <Guarantee />
       <Category />
       <Host />
+      <CardListing />
     </div>
   );
 }

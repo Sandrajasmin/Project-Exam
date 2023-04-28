@@ -11,7 +11,7 @@ module.exports = {
         lightgreen: '#DAFDBA',
         darkgrey: '#554E4E',
         white: '#FFFFFF',
-        lightgrey: 'E5E7EB'
+        lightgrey: '#E5E7EB'
       },
       fontFamily: {
         heading: ['Roboto', 'sans-serif'],
