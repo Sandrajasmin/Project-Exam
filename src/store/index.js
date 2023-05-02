@@ -3,11 +3,11 @@ import { combineReducers } from '@reduxjs/toolkit';
 import venueSlice from './modules/VenueSlice';
 
 const reducer = combineReducers({
-  venues: venueSlice
+    venues: venueSlice
 });
 
 const index = configureStore({
-  reducer
+    reducer
 });
 
 export default index;
