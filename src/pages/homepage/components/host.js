@@ -4,13 +4,13 @@ import { NavLink } from 'react-router-dom';
 function HostSection() {
   return (
     <div>
-      <div className="my-10 bg-gradient-to-t from-blue to-bluegreen">
-        <div className="relative isolate px-6 lg:px-8 lg:pt-14">
+      <div className=" bg-gradient-to-t from-blue to-bluegreen">
+        <div className="relative isolate px-6 lg:px-8">
           <div
             className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
             aria-hidden="true"
           ></div>
-          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+          <div className="mx-auto max-w-2xl py-32 sm:py-48">
             <div className="text-center">
               <h2 className="font-heading text-4xl font-bold tracking-tight text-white sm:text-6xl">
                 Do you want to become a host?

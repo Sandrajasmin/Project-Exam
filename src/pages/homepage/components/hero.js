@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import HeroImg from './../../../assets/img/hero_img.webp';
+import HeroImg from './../../../assets/img/heroimg.webp';
 
 export default function HeroSection() {
   return (
