@@ -6,15 +6,15 @@ import Host from './components/host';
 import CardListing from './components/cardListing';
 
 function Home() {
-  return (
-    <div>
-      <HeroSection />
-      <Guarantee />
-      <Category />
-      <Host />
-      <CardListing />
-    </div>
-  );
+    return (
+        <div>
+            <HeroSection />
+            <Guarantee />
+            <Category />
+            <Host />
+            <CardListing />
+        </div>
+    );
 }
 
 export default Home;
