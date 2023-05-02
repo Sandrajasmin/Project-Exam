@@ -1,32 +1,88 @@
-import React from 'react';
-import Cottage from '../../../../assets/img/cottage.png';
-import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchVenues } from '../../../../store/modules/VenueSlice';
+import { Link } from 'react-router-dom';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+// import ErrorComponent from "../../components/shared/ErrorComponent";
 
-function Card() {
+const AllProducts = () => {
+  const dispatch = useDispatch();
+  const { venues } = useSelector((state) => state.venues);
+
+  useEffect(() => {
+    dispatch(fetchVenues());
+  }, [dispatch])
+  
+
+    const settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4,
+      initialSlide: 0,
+      responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+    };
+
   return (
     <div className="my-10">
-      <div className="mx-5 flex flex-col gap-y-3">
-        <div className="">
-          <div className="">
-            <img src={Cottage} className="h-full w-full rounded-md object-cover" loading="lazy" />
-          </div>
-          <div className="mt-4 flex flex-col">
-            <h3 className="relative font-body text-lg font-bold text-darkgrey">
-              <NavLink>
-                <h3>Melby Strand, Sverige</h3>
-              </NavLink>
-            </h3>
-            <div className="flex gap-4">
-              <p className="font-body font-light text-darkgrey">01.05-01.07</p>
-              <p className="font-body font-light text-darkgrey">Super Host</p>
-            </div>
+      <div className="mx-5 flex-col gap-5">
+        <Slider {...settings}>
+        {venues.map((venue) => (
+          <div key={venue.id}>
+            <Link to={`venues/${venue.id}`}>
+              <div className="">
+                <img
+                  src={venue.media[0]}
+                  className="h-full w-full rounded-md object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="mt-4 flex flex-col">
+                <div className="relative font-body text-lg font-bold text-darkgrey">
+                  <h3>{venue.name}</h3>
+                </div>
+                <div className="flex gap-4">
+                  <p className="font-body font-light text-darkgrey">{venue.price}</p>
+                  <p className="font-body font-light text-darkgrey">Super Host</p>
+                </div>
 
-            <p className="font-body text-lg font-bold text-darkgrey">918 $ /night</p>
+                <p className="font-body text-lg font-bold text-darkgrey">918 $ /night</p>
+              </div>
+            </Link>
           </div>
-        </div>
+        ))}
+        </Slider>
       </div>
     </div>
   );
-}
+};
 
-export default Card;
+export default AllProducts;
