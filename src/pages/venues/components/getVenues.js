@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import dateFormat from '../../../components/date/dateFormat';
 import DefaultHouse from '../../../assets/img/default_house.png';
 import SearchBar from './search';
+import NoResult from '../../../assets/img/no_result.webp';
 // import ErrorComponent from "../../components/shared/ErrorComponent";
 
 const AllVenues = () => {
@@ -34,13 +35,21 @@ const AllVenues = () => {
     return (
         <div className="mx-auto">
             <SearchBar onSearch={handleSearch} />
+            {filterVenues.length === 0 ? (
+                <div className='flex flex-col items-center my-10 md:my-2'>
+                    <img src={NoResult} className='md:w-[400px]' />
+                    <p className='font-body text-2xl'>Sorry! No result found</p>
+                    <p className='font-byd text-sm font-light py-1'>Please try another title</p>
+                </div>
+            ) : (
             <div className="mx-auto grid max-w-3xl grid-rows-1 gap-10">
                 {filterVenues.map((venue) => (
                     <div className="mx-5 rounded-md bg-white shadow-lg" key={venue.id}>
                         <Link to={`venue/${venue.id}`} className="md:flex">
                             <div className="md:w-[300px]">
                                 <img
-                                    className={`h-full w-full rounded-t-md ${venue.media[0] ? 'object-cover md:rounded-none md:rounded-l-md' : 'object-contain'}`}
+                                    className="h-full w-full rounded-t-md md:rounded-none md:rounded-l-md"
+                                    style={{ objectFit: "cover" }}
                                     src={venue.media[0] ? venue.media[0] : DefaultHouse}
                                     alt={venue.name}
                                 />
@@ -167,7 +176,9 @@ const AllVenues = () => {
                     </div>
                 ))}
             </div>
+            )} 
         </div>
+    
     );
 };
 

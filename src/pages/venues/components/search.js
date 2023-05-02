@@ -12,6 +12,7 @@ const SearchBar = ({ onSearch }) => {
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
     };
+    
 
     return (
         <div className="mx-auto my-5 flex justify-center">
