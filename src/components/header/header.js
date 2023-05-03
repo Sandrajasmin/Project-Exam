@@ -71,10 +71,13 @@ export default function Header() {
                         </div>
                         <div className="hidden text-center sm:ml-6 sm:block">
                             <div className="flex space-x-4 pt-8 font-body text-base">
-                                <NavLink className="border-r border-black pr-8" to="/venue">
+                                <NavLink className="border-r border-black pr-8" to="/venues">
                                     Listings
                                 </NavLink>
-                                <NavLink className="border-r border-black pr-8" to="#">
+                                <NavLink
+                                    className="border-r border-black pr-8"
+                                    to={{ pathname: '/register', state: { modal: true } }}
+                                >
                                     Register
                                 </NavLink>
                                 <NavLink className="pr-8" to="#">
@@ -112,7 +115,7 @@ export default function Header() {
                 } z-30 flex h-[calc(100vh_-_80px)] w-full justify-center  bg-opacity-50 bg-clip-padding backdrop-blur-lg backdrop-filter lg:hidden`}
             >
                 <div className="space-y-1 px-2 pb-3 pt-2">
-                    <NavLink className="block py-2" to="/venue">
+                    <NavLink className="block py-2" to="/venues">
                         Listings
                     </NavLink>
                     <NavLink className="block py-2" to="#">
