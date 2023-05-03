@@ -69,18 +69,18 @@ export default function Header() {
                                 <img className="block h-12 w-12" src={Logo} alt="Holidaze logo" />
                             </NavLink>
                         </div>
-                        <div className="hidden text-center sm:ml-6 sm:block">
-                            <div className="flex space-x-4 pt-8 font-body text-base">
-                                <NavLink className="border-r border-black pr-8" to="/venues">
+                        <div className="hidden text-center sm:ml-6 sm:block font-body">
+                            <div className="flex pt-8 font-body text-base">
+                                <NavLink className="border-r w-20 border-black" to="/venues">
                                     Listings
                                 </NavLink>
                                 <NavLink
-                                    className="border-r border-black pr-8"
-                                    to={{ pathname: '/register', state: { modal: true } }}
+                                    className="border-r w-20 border-black"
+                                    to="/register"
                                 >
                                     Register
                                 </NavLink>
-                                <NavLink className="pr-8" to="#">
+                                <NavLink className="w-20" to="/log-in">
                                     Log in
                                 </NavLink>
                             </div>

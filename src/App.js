@@ -7,6 +7,7 @@ import Home from './pages/homepage/index';
 import Venues from './pages/venues/index';
 import DetailPage from './pages/detail/index';
 import RegisterUser from './pages/register';
+import LogIn from './pages/signin/index';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route path="/venues" element={<Venues />} />
                 <Route path="/venue/:id" element={<DetailPage />} />
                 <Route path="/register" element={<RegisterUser />} />
+                <Route path="/log-in" element={<LogIn />} />
             </Routes>
             <Footer />
         </BrowserRouter>
