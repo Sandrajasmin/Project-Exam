@@ -7,16 +7,13 @@ const validationSchema = Yup.object().shape({
         .min(3, 'Full name must be at least 3 characters')
         .required('Full name is required'),
     email: Yup.string().email('Invalid email address').required('Email is required'),
-    password: Yup.string()
-        .required('Required')
-        .min(6, 'Password must be at least 6 characters'),
+    password: Yup.string().required('Required').min(8, 'Password must be at least 8 characters'),
     confirmPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match')
         .required('Required'),
     avatar: Yup.string()
         .url('Invalid URL')
         .matches(/\.(gif|jpe?g|png)$/i, 'Invalid image URL')
-
 });
 
 const ContactForm = () => {
@@ -26,8 +23,7 @@ const ContactForm = () => {
             email: '',
             password: '',
             confirmPassword: '',
-            avatar: '',
-            venueManager: "no"
+            avatar: ''
         },
         validationSchema,
         onSubmit: (values) => {
@@ -35,7 +31,6 @@ const ContactForm = () => {
                 name: values.name,
                 email: values.email,
                 avatar: values.avatar,
-                venueManager: values.venueManager === "yes",
                 password: values.password
             };
             console.log(userData);
@@ -46,77 +41,75 @@ const ContactForm = () => {
                 },
                 body: JSON.stringify(userData)
             })
-                .then(response => {
+                .then((response) => {
                     if (!response.ok) {
-                        throw new Error(response.statusText)
+                        throw new Error(response.statusText);
                     }
-                    return response.json()
+                    return response.json();
                 })
-                .then(data => {
+                .then((data) => {
                     console.log(data);
-                    window.location.href = '/login';
+                    window.location.href = '/log-in';
                 })
-                .catch(error => {
-                    console.error(error)
-                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     });
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit} className="dark:bg-primaryblue relative bg-white pt-5">
-                <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 sm:px-6 md:flex-row md:justify-between lg:px-8">
-                    <div className="md:w-1/2 md:pt-20 flex flex-col gap-5">
-                        <div id='input_name'>
+            <form onSubmit={formik.handleSubmit}>
+                <div className="mx-auto  flex flex-col gap-5 px-4 sm:px-6 md:flex-row md:justify-between lg:px-8">
+                    <div className="flex flex-col gap-5 md:w-[400px]">
+                        <div id="input_name">
                             <label
                                 htmlFor="name"
                                 className="block font-heading text-sm leading-6 text-black"
                             >
                                 Name
                             </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.name}
-                                    id="name"
-                                    placeholder="John Doe"
-                                    className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
-                                />
-                                {formik.touched.name && formik.errors.name ? (
-                                    <div className="font-body text-sm font-light text-red-500 pl-1">
-                                        *{formik.errors.name}
-                                    </div>
-                                ) : null}
-                         
+                            <input
+                                type="text"
+                                name="name"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.name}
+                                id="name"
+                                placeholder="John Doe"
+                                className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
+                            />
+                            {formik.touched.name && formik.errors.name ? (
+                                <div className="pl-1 font-body text-sm font-light text-red-500">
+                                    *{formik.errors.name}
+                                </div>
+                            ) : null}
                         </div>
-                        <div id='input_email'>
+                        <div id="input_email">
                             <label
                                 htmlFor="email"
                                 className="block font-heading text-sm leading-6 text-black"
                             >
                                 Email
                             </label>
-                          
-                                <input
-                                    name="email"
-                                    type="email"
-                                    onChange={formik.handleChange}
-                                    onBlur={formik.handleBlur}
-                                    value={formik.values.email}
-                                    autoComplete="email"
-                                    placeholder='example@stud.noroff.no'
-                                    className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
-                                />
-                                {formik.touched.email && formik.errors.email ? (
-                                    <div className="font-body text-sm font-light text-red-500 pl-1">
-                                        *{formik.errors.email}
-                                    </div>
-                                ) : null}
-                         
+
+                            <input
+                                name="email"
+                                type="email"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.email}
+                                autoComplete="email"
+                                placeholder="example@stud.noroff.no"
+                                className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
+                            />
+                            {formik.touched.email && formik.errors.email ? (
+                                <div className="pl-1 font-body text-sm font-light text-red-500">
+                                    *{formik.errors.email}
+                                </div>
+                            ) : null}
                         </div>
-                        <div id='input_password'>
+                        <div id="input_password">
                             <label
                                 htmlFor="password"
                                 className="block font-heading text-sm leading-6 text-black"
@@ -131,17 +124,16 @@ const ContactForm = () => {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.password}
                                 autoComplete="password"
-                                placeholder='••••••••'
+                                placeholder="••••••••"
                                 className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
                             />
                             {formik.touched.password && formik.errors.password ? (
-                                <div className="font-body text-sm font-light text-red-500 pl-1">
+                                <div className="pl-1 font-body text-sm font-light text-red-500">
                                     *{formik.errors.password}
                                 </div>
                             ) : null}
-
                         </div>
-                        <div id='input_confirmPassword'>
+                        <div id="input_confirmPassword">
                             <label
                                 htmlFor="email"
                                 className="block font-heading text-sm leading-6 text-black"
@@ -156,17 +148,16 @@ const ContactForm = () => {
                                 onBlur={formik.handleBlur}
                                 value={formik.values.confirmPassword}
                                 autoComplete="password"
-                                placeholder='••••••••'
+                                placeholder="••••••••"
                                 className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
                             />
                             {formik.touched.confirmPassword && formik.errors.confirmPassword ? (
-                                <div className="font-body text-sm font-light text-red-500 pl-1">
+                                <div className="pl-1 font-body text-sm font-light text-red-500">
                                     *{formik.errors.confirmPassword}
                                 </div>
                             ) : null}
-
                         </div>
-                        <div id='input_Avatar'>
+                        <div id="input_Avatar">
                             <label
                                 htmlFor="avatar"
                                 className="block font-heading text-sm leading-6 text-black"
@@ -177,17 +168,46 @@ const ContactForm = () => {
                                 name="avatar"
                                 type="avatar"
                                 autoComplete="avatar"
-                                placeholder='avatar.com/image'
+                                placeholder="avatar.com/image"
                                 className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
                             />
                         </div>
-                        
-                        <div className="flex justify-end py-8">
+                        <fieldset className="flex flex-col gap-4 text-black md:flex-row md:gap-12">
+                            <p>Are you a venue manager?</p>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="true"
+                                    name="venueManager"
+                                    value="true"
+                                    checked={formik.values.venueManager === 'true'}
+                                    onChange={formik.handleChange}
+                                />
+                                <label htmlFor="true" className="ml-1">
+                                    Yes
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="false"
+                                    name="venueManager"
+                                    value="false"
+                                    checked={formik.values.venueManager === 'false'}
+                                    onChange={formik.handleChange}
+                                />
+                                <label htmlFor="false" className="ml-1">
+                                    No
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div className="flex">
                             <button
                                 type="submit"
-                                className="bg-blue hover:bg-bluegreen rounded-md px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm focus"
+                                className="w-full rounded-md bg-blue py-2.5 text-center text-sm font-normal text-white shadow-md hover:bg-bluegreen hover:text-black"
                             >
-                                Register User
+                                Create account
                             </button>
                         </div>
                     </div>
