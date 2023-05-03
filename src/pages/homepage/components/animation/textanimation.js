@@ -4,7 +4,7 @@ function HeroText() {
     const typedTextRef = useRef(null);
     const cursorRef = useRef(null);
 
-    const textArray = ['SPAIN', 'ITALY', 'CHINA' , 'MONACO' ,'JAPAN', 'POLEN'];
+    const textArray = ['SPAIN', 'ITALY', 'CHINA', 'MONACO', 'JAPAN', 'POLEN'];
     const typingDelay = 100;
     const erasingDelay = 80;
     const newTextDelay = 2000; // Delay between current and next text
@@ -34,10 +34,7 @@ function HeroText() {
                 if (!cursor.classList.contains('typing')) {
                     cursor.classList.add('typing');
                 }
-                typedText.textContent = textArray[textArrayIndex].substring(
-                    0,
-                    charIndex - 1
-                );
+                typedText.textContent = textArray[textArrayIndex].substring(0, charIndex - 1);
                 charIndex--;
                 setTimeout(erase, erasingDelay);
             } else {
@@ -63,11 +60,12 @@ function HeroText() {
 
     return (
         <div className="">
-            <h1 className="font-heading text-5xl md:text-8xl text-bluegreen font-bold">
+            <h1 className="font-heading text-5xl font-bold text-bluegreen md:text-8xl">
                 <span ref={typedTextRef} className="typed-text"></span>
-                <span ref={cursorRef} className="cursor">&nbsp;</span>
+                <span ref={cursorRef} className="cursor">
+                    &nbsp;
+                </span>
             </h1>
-            
         </div>
     );
 }
