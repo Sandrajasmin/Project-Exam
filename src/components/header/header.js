@@ -2,12 +2,41 @@ import React, { useState } from 'react';
 import Logo from '../../assets/img/logo_small.webp';
 // import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import DefaultAvatar from '../../assets/img/defaultAvatar.png'
+
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     function toggleMenu() {
         setIsMenuOpen(!isMenuOpen);
+    }
+
+    const accessToken = localStorage.getItem('accessToken');
+    const userName = localStorage.getItem('userName');
+    const avatar = localStorage.getItem('avatar');
+    console.log(accessToken);
+    console.log(userName);
+
+ 
+    let userAvatar;
+
+    if (avatar) {
+        userAvatar = (
+            <img
+                src={avatar}
+                alt="avatar"
+                className=" ounded-full"
+            />
+        );
+    } else {
+        userAvatar = (
+            <img
+                src={DefaultAvatar}
+                alt="avatar"
+                className=" h-8 w-8 rounded-full"
+            />
+        );
     }
 
     return (
@@ -69,20 +98,37 @@ export default function Header() {
                                 <img className="block h-12 w-12" src={Logo} alt="Holidaze logo" />
                             </NavLink>
                         </div>
-                        <div className="hidden text-center sm:ml-6 sm:block font-body">
-                            <div className="flex pt-8 font-body text-base">
-                                <NavLink className="border-r w-20 border-black" to="/venues">
-                                    Listings
-                                </NavLink>
-                                <NavLink
-                                    className="border-r w-20 border-black"
-                                    to="/register"
-                                >
-                                    Register
-                                </NavLink>
-                                <NavLink className="w-20" to="/log-in">
-                                    Log in
-                                </NavLink>
+                        <div className="hidden text-center font-body sm:ml-6 sm:block">
+                            <div className="">
+                               {accessToken ? (
+                                    <div className='flex items-center pt-8 font-body text-base'>
+                                        <NavLink className="pr-5 border-r border-black" to="/venues">
+                                            Venues
+                                        </NavLink>
+                                        <NavLink className="px-5 border-r border-black" to="/bookings">
+                                            Bookings
+                                        </NavLink>
+                                        <NavLink className="px-5 border-r border-black"  to="/Dashboard">
+                                            Dashboard
+                                        </NavLink>
+                                        <NavLink className="pl-5" to="/dashboard">
+                                            {userAvatar}
+                                        </NavLink>
+
+                                 </div>
+                               ) : (
+                                        <div>
+                                            <NavLink className="pr-5 border-r border-black" to="/venues">
+                                                Venues
+                                            </NavLink>
+                                            <NavLink className=" px-5 border-r border-black" to="/register">
+                                                Register
+                                            </NavLink>
+                                            <NavLink className="pl-5" to="/log-in">
+                                                Log in
+                                            </NavLink>
+                                        </div>
+                               )}
                             </div>
                         </div>
                     </div>

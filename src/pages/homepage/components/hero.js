@@ -6,10 +6,10 @@ import HeroText from './animation/textanimation';
 export default function HeroSection() {
     return (
         <div>
-            <div className="w-full mx-auto max-w-5xl mb-20">
-                <div className="relative flex justify-center my-10">
-                    <div className="absolute left-5 top-14 md:left-20 lg:left-30 md:top-20 z-10 w-[700px] text-black">
-                        <div className="font-heading text-xl md:text-4xl font-extrabold">
+            <div className="mx-auto mb-20 w-full max-w-5xl">
+                <div className="relative my-10 flex justify-center">
+                    <div className="lg:left-30 absolute left-5 top-14 z-10 w-[700px] text-black md:left-20 md:top-20">
+                        <div className="font-heading text-xl font-extrabold md:text-4xl">
                             <h1 className="">WHERE DO YOU WANT TO GO</h1>
                             <HeroText />
                         </div>
@@ -22,18 +22,15 @@ export default function HeroSection() {
                         />
                     </div>
 
-                    <div className="absolute right-10 -bottom-5 md:bottom-20 lg:right-[40px] lg:bottom-20 flex lg:w-72 flex-col gap-5 text-center">
+                    <div className="absolute -bottom-5 right-10 flex flex-col gap-5 text-center md:bottom-20 lg:bottom-20 lg:right-[40px] lg:w-72">
                         <Link to="/venues">
-                            <div className="font-heading text-xl p-2 md:text-4xl font-extrabold bg-blue md:p-5 rounded-md text-white">
-                                <h1 className="">
-                                    TRAVEL NOW
-                                </h1>
+                            <div className="rounded-md bg-blue p-2 font-heading text-xl font-extrabold text-white md:p-5 md:text-4xl">
+                                <h1 className="">TRAVEL NOW</h1>
                             </div>
                         </Link>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 }
