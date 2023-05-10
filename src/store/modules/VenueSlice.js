@@ -59,7 +59,9 @@ const accessToken = localStorage.getItem('accessToken');
 
 export const fetchVenues = () => async (dispatch) => {
     try {
-        const response = await fetch('https://nf-api.onrender.com/api/v1/holidaze/venues');
+        const response = await fetch(
+            'https://nf-api.onrender.com/api/v1/holidaze/venues?sort=created&sortOrder=desc&&_owner=true&_bookings=true'
+        );
         const data = await response.json();
         console.log(data);
         dispatch(SET_VENUES(data));

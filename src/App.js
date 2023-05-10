@@ -8,6 +8,7 @@ import Venues from './pages/venues/index';
 import DetailPage from './pages/detail/index';
 import RegisterUser from './pages/register';
 import LogIn from './pages/signin/index';
+import VenueDashboard from './pages/venuemanager/index';
 import CreateVenue from './pages/createvenue/index';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/venue/:id" element={<DetailPage />} />
                 <Route path="/register" element={<RegisterUser />} />
                 <Route path="/log-in" element={<LogIn />} />
+                <Route path="/venueManager" element={<VenueDashboard />} />
                 <Route path="/createVenue" element={<CreateVenue />} />
             </Routes>
             <Footer />
