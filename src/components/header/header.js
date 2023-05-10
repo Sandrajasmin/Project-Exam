@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import Logo from '../../assets/img/logo_small.webp';
 // import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import DefaultAvatar from '../../assets/img/defaultAvatar.png'
-
+import DefaultAvatar from '../../assets/img/defaultAvatar.png';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,30 +12,14 @@ export default function Header() {
     }
 
     const accessToken = localStorage.getItem('accessToken');
-    const userName = localStorage.getItem('userName');
     const avatar = localStorage.getItem('avatar');
-    console.log(accessToken);
-    console.log(userName);
 
- 
     let userAvatar;
 
     if (avatar) {
-        userAvatar = (
-            <img
-                src={avatar}
-                alt="avatar"
-                className=" ounded-full"
-            />
-        );
+        userAvatar = <img src={avatar} alt="avatar" className=" ounded-full" />;
     } else {
-        userAvatar = (
-            <img
-                src={DefaultAvatar}
-                alt="avatar"
-                className=" h-8 w-8 rounded-full"
-            />
-        );
+        userAvatar = <img src={DefaultAvatar} alt="avatar" className=" h-8 w-8 rounded-full" />;
     }
 
     return (
@@ -100,59 +83,94 @@ export default function Header() {
                         </div>
                         <div className="hidden text-center font-body sm:ml-6 sm:block">
                             <div className="">
-                               {accessToken ? (
-                                    <div className='flex items-center pt-8 font-body text-base'>
-                                        <NavLink className="pr-5 border-r border-black" to="/venues">
-                                            Venues
-                                        </NavLink>
-                                        <NavLink className="px-5 border-r border-black" to="/bookings">
+                                {accessToken ? (
+                                    <div className="flex items-center pt-8 font-body text-base">
+                                        <div className="relative inline-block text-left">
+                                            <NavLink className="border-r border-black pr-5">
+                                                <button onClick={toggleMenu} className="">
+                                                    Venues
+                                                </button>{' '}
+                                                <i className="fa fa-angle-down"></i>
+                                            </NavLink>
+                                            <div
+                                                className={`${
+                                                    isMenuOpen ? 'flex' : 'hidden'
+                                                } absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
+                                                role="menu"
+                                                aria-orientation="vertical"
+                                                aria-labelledby="menu-button"
+                                                tabIndex="-1"
+                                            >
+                                                <div className="py-1" role="none">
+                                                    <NavLink
+                                                        to="/venues"
+                                                        className="block px-4 py-2 text-sm text-gray-700"
+                                                        role="menuitem"
+                                                        tabIndex="-1"
+                                                        id="menu-item-0"
+                                                    >
+                                                        Travel
+                                                    </NavLink>
+                                                    <NavLink
+                                                        to="/createVenue"
+                                                        className="block px-4 py-2 text-sm text-gray-700"
+                                                        role="menuitem"
+                                                        tabIndex="-1"
+                                                        id="menu-item-1"
+                                                    >
+                                                        Create Venue
+                                                    </NavLink>
+                                                    <NavLink
+                                                        to="/manageVenues"
+                                                        className="block px-4 py-2 text-sm text-gray-700"
+                                                        role="menuitem"
+                                                        tabIndex="-1"
+                                                        id="menu-item-2"
+                                                    >
+                                                        Manage Venue
+                                                    </NavLink>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <NavLink
+                                            className="border-r border-black px-5"
+                                            to="/bookings"
+                                        >
                                             Bookings
                                         </NavLink>
-                                        <NavLink className="px-5 border-r border-black"  to="/Dashboard">
+                                        <NavLink
+                                            className="border-r border-black px-5"
+                                            to="/Dashboard"
+                                        >
                                             Dashboard
                                         </NavLink>
                                         <NavLink className="pl-5" to="/dashboard">
                                             {userAvatar}
                                         </NavLink>
-
-                                 </div>
-                               ) : (
-                                        <div>
-                                            <NavLink className="pr-5 border-r border-black" to="/venues">
-                                                Venues
-                                            </NavLink>
-                                            <NavLink className=" px-5 border-r border-black" to="/register">
-                                                Register
-                                            </NavLink>
-                                            <NavLink className="pl-5" to="/log-in">
-                                                Log in
-                                            </NavLink>
-                                        </div>
-                               )}
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <NavLink
+                                            className="border-r border-black pr-5"
+                                            to="/venues"
+                                        >
+                                            Venues
+                                        </NavLink>
+                                        <NavLink
+                                            className=" border-r border-black px-5"
+                                            to="/register"
+                                        >
+                                            Register
+                                        </NavLink>
+                                        <NavLink className="pl-5" to="/log-in">
+                                            Log in
+                                        </NavLink>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
-                    {/* 
-          IF USER LOGGED IN
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <div className="relative ml-3">
-              <div>
-                <button
-                  type="button"
-                  className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  id="user-menu-button"
-                  aria-expanded="false"
-                  aria-haspopup="true">
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    className="h-8 w-8 rounded-full"
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt=""
-                  />
-                </button>
-              </div>
-            </div>
-          </div> */}
                 </div>
             </div>
             <div
