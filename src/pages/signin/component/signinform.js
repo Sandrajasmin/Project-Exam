@@ -37,6 +37,8 @@ function SingIn() {
                     localStorage.setItem('userName', data.name);
                     localStorage.setItem('accessToken', data.accessToken);
                     localStorage.setItem('avatar', data.avatar);
+                    localStorage.setItem('venueManager', data.venueManager);
+                    localStorage.setItem('email', data.email);
                     window.location.href = '/';
                 })
                 .catch((error) => {

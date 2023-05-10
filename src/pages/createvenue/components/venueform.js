@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { newVenue } from '../../../store/modules/VenueSlice'
-import DefaultAvatar from '../../../assets/img/defaultAvatar.png';
+import { newVenue } from '../../../store/modules/VenueSlice';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string()
-        .min(8, 'Must be 6 characters or more')
-        .max(60, 'Can not be longer than 50 chars')
+        .min(6, 'Must be 6 chars or more')
+        .max(50, 'Can not be longer than 50 chars')
         .required('Required'),
     description: Yup.string()
-        .min(10, 'Must be at least 10 characters or more')
+        .min(6, 'Must be 6 chars or more')
         .max(1500, 'Can not be longer than 1500 chars')
         .required('Required'),
     media: Yup.string()
@@ -40,16 +39,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const VenueForm = () => {
+    const [mediaArray, setMediaArray] = useState([]);
     const dispatch = useDispatch();
-    const userName = localStorage.getItem('userName');
-    // const avatar = localStorage.getItem('avatar');
-    // let userAvatar;
-    // if (avatar) {
-    //     userAvatar = <img src={avatar} alt="avatar" className=" ounded-full" />;
-    // } else {
-    //     userAvatar = <img src={Defaultavatar} alt="avatar" className=" h-8 w-8 rounded-full" />;
-    // }
-
     const formik = useFormik({
         initialValues: {
             name: '',
@@ -57,7 +48,7 @@ const VenueForm = () => {
             media: [],
             price: 1,
             maxGuests: 1,
-            rating: 5,
+            rating: 3,
             meta: {
                 wifi: false,
                 parking: false,
@@ -79,10 +70,10 @@ const VenueForm = () => {
             const venueData = {
                 name: values.name,
                 description: values.description,
-                media: [values.media],
+                media: mediaArray,
                 price: values.price,
                 maxGuests: values.maxGuests,
-                rating: 5,
+                rating: 3,
                 meta: {
                     wifi: values.wifi,
                     parking: values.parking,
@@ -104,46 +95,27 @@ const VenueForm = () => {
         }
     });
 
+    function pushToMediaArray() {
+        const mediaValue = document.getElementById('media').value;
+        const urlRegex = /(ftp|http|https):\/\/[^ "]+$/;
+        if (urlRegex.test(mediaValue)) {
+            const newMediaArray = [...mediaArray, mediaValue];
+            setMediaArray(newMediaArray);
+            document.getElementById('media').value = '';
+        } else {
+            return null;
+        }
+    }
+
+    function deleteMedia(media) {
+        const newMediaArray = mediaArray.filter((item) => item !== media);
+        setMediaArray(newMediaArray);
+    }
 
     return (
         <div className="mx-auto max-w-7xl px-5">
             <div className="my-5 flex gap-5">
-                <div id="dashboard" className="hidden sm:block ">
-                    <aside className="sticky top-0  flex h-screen flex-col items-center rounded-md bg-gradient-to-r from-blue to-[#1798CE] lg:h-full">
-                        <div className="py-20">
-                            <img src={DefaultAvatar} />
-                            <p className="font-body text-white">{userName}</p>
-                        </div>
-                        <div className="flex flex-col gap-5 px-16 font-body text-white">
-                            <div className="items-base flex gap-2">
-                                <i className="fa fa-user" aria-hidden="true"></i>
-                                <Link to="/">Dashboard</Link>
-                            </div>
-                            <div className="items-base flex gap-2">
-                                <i className="fa-solid fa-person-walking-luggage"></i>
-                                <Link to="/">Bookings</Link>
-                            </div>
-                            <div className="items-base flex gap-2">
-                                <i className="fa-sharp fa-solid fa-house-chimney"></i>
-                                <Link to="/">Venus</Link>
-                            </div>
-                            <div className="items-base flex gap-2">
-                                <i className="fa-solid fa-door-open"></i>
-                                <Link to="/">Sign out</Link>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
                 <div id="create-venue" className="w-full bg-white px-5 py-5 drop-shadow-md">
-                    <div id="header">
-                        <h1 className="font-heading text-4xl font-bold leading-7 text-black">
-                            Hi 👋 {userName}
-                        </h1>
-                        <p className="font-body text-base text-black ">
-                            Ready to create a new listing? Don’t be afraid to contact us if you need
-                            help setting up your new venue.
-                        </p>
-                    </div>
                     <div id="form">
                         <form onSubmit={formik.handleSubmit} className="my-5">
                             <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:space-y-0">
@@ -185,21 +157,19 @@ const VenueForm = () => {
                                             >
                                                 Description
                                             </label>
-                                            {/* <p>{`${textAreaCount}/800`}</p> */}
                                         </div>
                                         <div className="mt-2">
                                             <textarea
                                                 id="description"
                                                 name="description"
                                                 rows="3"
+                                                onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
                                                 value={formik.values.description}
-                                                onChange={formik.handleChange}
                                                 placeholder="Write a good description of the venue you want to list"
                                                 className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             ></textarea>
-                                            {formik.touched.description &&
-                                                formik.errors.description ? (
+                                            {formik.touched.description && formik.errors.description ? (
                                                 <div className="text-sm text-red-600">
                                                     *{formik.errors.description}
                                                 </div>
@@ -233,6 +203,29 @@ const VenueForm = () => {
                                             </div>
                                             <div className="mt-2">
                                                 <label
+                                                    htmlFor="continent"
+                                                    className="my-2 block font-body font-medium leading-6 text-darkgrey"
+                                                >
+                                                    Continent
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="continent"
+                                                    id="continent"
+                                                    onChange={formik.handleChange}
+                                                    onBlur={formik.handleBlur}
+                                                    value={formik.values.continent || ''}
+                                                    className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
+                                                />
+                                                {formik.touched.continent &&
+                                                formik.errors.continent ? (
+                                                    <div className="text-sm text-red-600">
+                                                        *{formik.errors.continent}
+                                                    </div>
+                                                ) : null}
+                                            </div>
+                                            <div className="mt-2">
+                                                <label
                                                     htmlFor="city"
                                                     className="my-2 block font-body font-medium leading-6 text-darkgrey"
                                                 >
@@ -254,9 +247,9 @@ const VenueForm = () => {
                                                 ) : null}
                                             </div>
                                         </div>
-                                        <div id="adress" className="mt-2">
+                                        <div id="address" className="mt-2">
                                             <label
-                                                htmlFor="adress"
+                                                htmlFor="address"
                                                 className="my-2 block font-body font-medium leading-6 text-darkgrey"
                                             >
                                                 Address
@@ -302,52 +295,55 @@ const VenueForm = () => {
                                 </div>
                                 <div className=" flex flex-col gap-5">
                                     {/* GALLERY */}
-                                    <div className="">
-                                        <div className="mt-2 flex flex-col gap-5 rounded-lg border border-dashed border-darkgrey/25 px-10  py-10">
-                                            <div>
-                                                <label
-                                                    htmlFor="cover-photo"
-                                                    className="block font-body text-sm font-medium leading-6 text-black"
-                                                >
-                                                    Cover photo
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    name="media"
-                                                    className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                // onChange={formik.handleChange}
-                                                // onBlur={formik.handleBlur}
-                                                />
-                                                {/* {formik.touched.media && formik.errors.media ? (
-                                                        <div className="text-sm text-red-600">
-                                                            *{formik.errors.media}
-                                                        </div>
-                                                    ) : null} */}
+                                    <div className="flex flex-col items-start">
+                                        <label htmlFor="gallery" className="mb-[-16px]">
+                                            Gallery
+                                        </label>
+                                        {mediaArray && (
+                                            <div className="mt-4 flex flex-wrap gap-1">
+                                                {mediaArray.map((media) => (
+                                                    <div
+                                                        key={media}
+                                                        className="relative h-24 w-24 rounded bg-gray-200"
+                                                    >
+                                                        <img
+                                                            src={media}
+                                                            alt="gallery"
+                                                            className="h-full w-full rounded object-cover"
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => deleteMedia(media)}
+                                                            className="absolute right-[-4px] top-[-4px] flex h-4 w-4 items-center justify-center rounded-full bg-gray-200 text-sm"
+                                                        >
+                                                            x
+                                                        </button>
+                                                    </div>
+                                                ))}
                                             </div>
-                                            <div className="flex flex-col gap-2">
-                                                <label
-                                                    htmlFor="cover-photo"
-                                                    className="block font-body text-sm font-medium leading-6 text-black"
-                                                >
-                                                    Gallery
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    name="media"
-                                                    className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                                <input
-                                                    type="text"
-                                                    name="media"
-                                                    className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                                <input
-                                                    type="text"
-                                                    name="media"
-                                                    className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                                />
-                                            </div>
+                                        )}
+                                        <div className="mt-4 flex w-full gap-4">
+                                            <input
+                                                type="text"
+                                                name="media"
+                                                id="media"
+                                                className="w-full rounded border-2 border-[#125C85] p-1"
+                                                onChange={formik.handleChange}
+                                                onBlur={formik.handleBlur}
+                                            />
                                         </div>
+                                        {formik.touched.media && formik.errors.media ? (
+                                            <div className="text-red-600">
+                                                {formik.errors.media}
+                                            </div>
+                                        ) : null}
+                                        <button
+                                            type="button"
+                                            onClick={pushToMediaArray}
+                                            className="mt-4 place-self-end rounded bg-[#125C85] px-3 py-1 font-semibold text-white hover:bg-[#A2D9FF] hover:text-black"
+                                        >
+                                            Add
+                                        </button>
                                     </div>
                                     {/* PRICE */}
                                     <div className="">
@@ -360,7 +356,7 @@ const VenueForm = () => {
                                         <div className="mt-2">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     name="price"
                                                     id="price"
                                                     onChange={formik.handleChange}
@@ -376,7 +372,7 @@ const VenueForm = () => {
                                             ) : null}
                                         </div>
                                     </div>
-                                    {/* PRICE */}
+                                    {/*  */}
                                     <div className="">
                                         <label
                                             htmlFor="maxGuests"
@@ -387,7 +383,7 @@ const VenueForm = () => {
                                         <div className="mt-2">
                                             <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                                                 <input
-                                                    type="text"
+                                                    type="number"
                                                     name="maxGuests"
                                                     id="maxGuests"
                                                     onChange={formik.handleChange}
@@ -495,4 +491,3 @@ const VenueForm = () => {
 };
 
 export default VenueForm;
-

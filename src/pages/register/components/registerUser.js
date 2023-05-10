@@ -21,9 +21,10 @@ const ContactForm = () => {
         initialValues: {
             name: '',
             email: '',
+            avatar: '',
             password: '',
-            confirmPassword: '',
-            avatar: ''
+            passwordConfirm: '',
+            venueManager: false
         },
         validationSchema,
         onSubmit: (values) => {
@@ -31,6 +32,7 @@ const ContactForm = () => {
                 name: values.name,
                 email: values.email,
                 avatar: values.avatar,
+                venueManager: values.venueManager,
                 password: values.password
             };
             console.log(userData);
@@ -173,30 +175,41 @@ const ContactForm = () => {
                             />
                         </div>
                         <fieldset className="flex flex-col gap-4 text-black md:flex-row md:gap-12">
-                            <p>Are you a venue manager?</p>
+                            <p>Do you want to rent out an accommodation??</p>
                             <div>
                                 <input
+                                    checked={formik.values.venueManager}
+                                    onChange={(event) => {
+                                        formik.setFieldValue(
+                                            'venueManager',
+                                            event.target.value === 'true'
+                                        );
+                                    }}
                                     type="radio"
-                                    id="true"
+                                    id="yes"
                                     name="venueManager"
-                                    value="true"
-                                    checked={formik.values.venueManager === 'true'}
-                                    onChange={formik.handleChange}
+                                    value={true}
                                 />
-                                <label htmlFor="true" className="ml-1">
+
+                                <label htmlFor="yes" className="ml-1">
                                     Yes
                                 </label>
                             </div>
                             <div>
                                 <input
+                                    checked={formik.values.venueManager}
+                                    onChange={(event) => {
+                                        formik.setFieldValue(
+                                            'venueManager',
+                                            event.target.value === 'false'
+                                        );
+                                    }}
                                     type="radio"
-                                    id="false"
+                                    id="no"
                                     name="venueManager"
-                                    value="false"
-                                    checked={formik.values.venueManager === 'false'}
-                                    onChange={formik.handleChange}
+                                    value={false}
                                 />
-                                <label htmlFor="false" className="ml-1">
+                                <label htmlFor="no" className="ml-1">
                                     No
                                 </label>
                             </div>
