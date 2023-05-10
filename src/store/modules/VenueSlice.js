@@ -6,7 +6,8 @@ const venueSlice = createSlice({
         venues: [],
         singleVenue: null,
         cheapestHouses: [],
-        topRatedHouses: []
+        topRatedHouses: [],
+        createVenue: null
     },
     reducers: {
         SET_VENUES: (state, action) => {
@@ -38,7 +39,13 @@ const venueSlice = createSlice({
         },
         SET_SINGLE_VENUE: (state, action) => {
             state.singleVenue = action.payload;
+        },
+        SET_CREATE_VENUE: (state, action) => {
+            state.createVenue = action.payload;
         }
+        // SET_DELETE_VENUE: (state, action) => {
+        //     state.createVenue = action.payload
+        // }
     }
 });
 
@@ -46,6 +53,9 @@ export default venueSlice.reducer;
 
 const { SET_VENUES } = venueSlice.actions;
 const { SET_SINGLE_VENUE } = venueSlice.actions;
+const { SET_CREATE_VENUE } = venueSlice.actions;
+// const { SET_DELETE_VENUE } = venueSlice.actions
+const accessToken = localStorage.getItem('accessToken');
 
 export const fetchVenues = () => async (dispatch) => {
     try {
@@ -68,3 +78,35 @@ export const fetchSingleVenue = (id) => async (dispatch) => {
         console.log(e);
     }
 };
+
+export const newVenue = (venueData) => async (dispatch) => {
+    try {
+        const response = await fetch('https://nf-api.onrender.com/api/v1/holidaze/venues', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${accessToken}`
+            },
+            body: JSON.stringify(venueData)
+        });
+        const data = await response.json();
+        console.log(data);
+        dispatch(SET_CREATE_VENUE(data));
+        window.location.href = '/';
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+// export const deleteVenue = (id) => {
+//     fetch(`https://nf-api.onrender.com/api/v1/holidaze/venues/${id}`, {
+//         method: 'DELETE',
+//         headers: {
+//             'Content-Type': 'application/json',
+//             'Authorization': `Bearer ${accessToken}`
+//         },
+//     })
+//         .then(() => {
+//             window.location.href = '/profile';
+//         })
+// }
