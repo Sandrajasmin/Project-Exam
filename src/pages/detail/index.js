@@ -27,39 +27,10 @@ function DetailPage() {
     var settings = {
         dots: true,
         infinite: true,
-        speed: 700,
-        slidesToShow: 4,
-        slidesToScroll: 4,
-        initialSlide: 0,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        pauseOnHover: true,
-        responsive: [
-            {
-                breakpoint: 1024,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        swipeToSlide: true,
     };
 
     return (
@@ -68,9 +39,13 @@ function DetailPage() {
                 <div className="mx-auto max-w-7xl py-10">
                     <div className="mx-5">
                         <div className="">
-                            <h1 className="text-2xl font-bold tracking-tight text-black  sm:text-3xl">
+                            <h1 className="text-2xl font-bold tracking-tight text-black sm:text-3xl">
                                 {singleVenue.name}
                             </h1>
+                            <div className='flex gap-1'>
+                                <p>{singleVenue.location.address},</p>
+                                <p>{singleVenue.location.country}</p>
+                            </div>
                             <div className="">
                                 <div className="">
                                     {singleVenue.rating >= 1 ? (
@@ -108,7 +83,7 @@ function DetailPage() {
                                                 key={index}
                                                 src={media}
                                                 alt={singleVenue.name}
-                                                className="h-full w-full object-cover "
+                                                className="h-full w-full object-cover"
                                             />
                                         </div>
                                     ))}
@@ -187,6 +162,12 @@ function DetailPage() {
                                     </div>
                                 ) : null}
                             </div>
+                            <div className='flex items-center gap-2'>                              
+                                <div className='h-10 w-10' >
+                                    <img className='w-full h-full object-cover rounded-full' src={singleVenue.owner.avatar} />                                   
+                                </div>
+                                <p className='font-body font-bold text-blue'>{singleVenue.owner.name}</p>
+                            </div>
                         </div>
                         {/* description */}
                         <div className="py-5 font-body text-base">
@@ -216,10 +197,13 @@ function DetailPage() {
                                     <p>
                                         {' '}
                                         The boat is located in the marina approx. 500 meters from
-                                        the cabin.
+                                        the cabin
                                     </p>
                                 </div>
                             )}
+                        </div>
+                        <div className='flex justify-center my-5 md:my-1'>
+                            <button className='bg-blue px-10 py-2 rounded-md w-full md:w-48 text-white font-body drop-shadow-md hover:bg-bluegreen hover:text-black font-bold'>Book now!</button>
                         </div>
                     </div>
                 </div>

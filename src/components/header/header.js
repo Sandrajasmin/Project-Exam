@@ -17,7 +17,7 @@ export default function Header() {
     let userAvatar;
 
     if (avatar) {
-        userAvatar = <img src={avatar} alt="avatar" className=" ounded-full" />;
+        userAvatar = <img src={avatar} alt="avatar" className="h-8 w-8 rounded-full" />;
     } else {
         userAvatar = <img src={DefaultAvatar} alt="avatar" className=" h-8 w-8 rounded-full" />;
     }
