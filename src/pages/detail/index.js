@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleVenue } from '../../store/modules/VenueSlice';
 import Slider from 'react-slick';
+import DatePicker from '../../components/calendar/calendar';
 
 function DetailPage() {
     const dispatch = useDispatch();
@@ -30,51 +31,38 @@ function DetailPage() {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        swipeToSlide: true,
+        swipeToSlide: true
     };
 
     return (
         <>
             {singleVenue && !isError && (
                 <div className="mx-auto max-w-7xl py-10">
-                    <div className="mx-5">
-                        <div className="">
+                    <div className="">
+                        <div>
                             <h1 className="text-2xl font-bold tracking-tight text-black sm:text-3xl">
                                 {singleVenue.name}
                             </h1>
-                            <div className='flex gap-1'>
+                            <div id='location' className="flex gap-1">
                                 <p>{singleVenue.location.address},</p>
                                 <p>{singleVenue.location.country}</p>
                             </div>
-                            <div className="">
-                                <div className="">
-                                    {singleVenue.rating >= 1 ? (
-                                        <p className="font-body font-light">
-                                            {[...Array(singleVenue.rating)].map((_, i) => (
-                                                <span className="text-blue" key={i}>
-                                                    ★
-                                                </span>
-                                            ))}
-                                            {[...Array(5 - Math.round(singleVenue.rating))].map(
-                                                (_, i) => (
-                                                    <span className="text-blue" key={i}>
-                                                        ☆
-                                                    </span>
-                                                )
-                                            )}
-                                        </p>
-                                    ) : (
-                                        <p className="font-body text-sm font-light">
-                                            {[...Array(5)].map((_, i) => (
-                                                <span className="text-blue" key={i}>
-                                                    ☆
-                                                </span>
-                                            ))}
-                                        </p>
-                                    )}
-                                </div>
+                            <div id='rating'>
+                                <p className="font-body font-light">
+                                    {[...Array(5)].map((_, i) => (
+                                        <span
+                                            key={i}
+                                            className={`text-blue ${
+                                                i < Math.round(singleVenue.rating)
+                                                    ? 'font-bold'
+                                                    : ''
+                                            }`}
+                                        >
+                                            {i < Math.round(singleVenue.rating) ? '★' : '☆'}
+                                        </span>
+                                    ))}
+                                </p>
                             </div>
-                            {/* SLIDER */}
                             <div className="mx-2 my-5">
                                 <Slider className="mb-10" {...settings}>
                                     {singleVenue.media.map((media, index) => (
@@ -90,8 +78,7 @@ function DetailPage() {
                                 </Slider>
                             </div>
                         </div>
-                        {/* about */}
-                        <div className="flex flex-col items-center gap-2">
+                        <div id='about-section' className="flex flex-col items-center gap-2">
                             <h2 className="font-heading text-xl font-medium">About the property</h2>
                             <div className="flex gap-2 font-body text-sm font-light text-darkgrey md:text-base">
                                 <p>{singleVenue.maxGuests} Guests </p>
@@ -116,7 +103,7 @@ function DetailPage() {
                                     <p>1 Bedroom</p>
                                 )}
                             </div>
-                            <div className="flex max-w-[300px] gap-2">
+                            <div id='amenities' className="flex max-w-[300px] gap-2">
                                 {singleVenue.meta.wifi ? (
                                     <div className="flex items-center gap-1 font-body text-base font-light text-darkgrey">
                                         <div>
@@ -162,15 +149,20 @@ function DetailPage() {
                                     </div>
                                 ) : null}
                             </div>
-                            <div className='flex items-center gap-2'>                              
-                                <div className='h-10 w-10' >
-                                    <img className='w-full h-full object-cover rounded-full' src={singleVenue.owner.avatar} />                                   
+                            <div className="flex items-center gap-2 my-5">
+                                <div className="h-10 w-10">
+                                    <img
+                                        className="h-full w-full rounded-full object-cover"
+                                        src={singleVenue.owner.avatar}
+                                    />
                                 </div>
-                                <p className='font-body font-bold text-blue'>{singleVenue.owner.name}</p>
+                                <p className="font-body font-bold text-blue">
+                                    {singleVenue.owner.name}
+                                </p>
                             </div>
                         </div>
                         {/* description */}
-                        <div className="py-5 font-body text-base">
+                        <div id='description' className="py-5 font-body text-base">
                             {singleVenue.description.length > 10 ? (
                                 singleVenue.description.split('.').map((sentence, index) => (
                                     <React.Fragment key={index}>
@@ -202,8 +194,13 @@ function DetailPage() {
                                 </div>
                             )}
                         </div>
-                        <div className='flex justify-center my-5 md:my-1'>
-                            <button className='bg-blue px-10 py-2 rounded-md w-full md:w-48 text-white font-body drop-shadow-md hover:bg-bluegreen hover:text-black font-bold'>Book now!</button>
+                        <div className="">
+                           <DatePicker/>
+                            <div className=' flex justify-center md:my-1'>
+                                <button className="w-full rounded-md bg-blue px-10 py-2 font-body font-bold text-white drop-shadow-md hover:bg-bluegreen hover:text-black md:w-48">
+                                    Book now!
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

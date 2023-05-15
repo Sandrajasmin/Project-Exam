@@ -57,7 +57,7 @@ const VenueDashboard = () => {
                                                     alt={venue.name}
                                                 />
                                             </div>
-                                            <h3 className="text-center py-2 font-body font-medium text-black">
+                                            <h3 className="py-2 text-center font-body font-medium text-black">
                                                 {venue.name}
                                             </h3>
                                         </Link>
@@ -71,11 +71,14 @@ const VenueDashboard = () => {
                                                     <p>0</p>
                                                 )}
                                             </div>
-                                            <p className="font-light pb-3">Bookings</p>
+                                            <p className="pb-3 font-light">Bookings</p>
                                         </Link>
 
                                         <div className="flex justify-between font-body text-sm font-light text-darkgrey">
-                                            <Link to={`/editVenue/${venue.id}`} className="flex w-full justify-center gap-2 border-r border-t py-2 text-center">
+                                            <Link
+                                                to={`/editVenue/${venue.id}`}
+                                                className="flex w-full justify-center gap-2 border-r border-t py-2 text-center"
+                                            >
                                                 <div>
                                                     <i className="fa-solid fa-pen-nib" />
                                                 </div>

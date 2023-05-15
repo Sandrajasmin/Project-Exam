@@ -2,11 +2,11 @@ import React from 'react';
 import EditFormVenue from './components/editform';
 
 function editVenue() {
-    return ( 
+    return (
         <div>
-            <EditFormVenue/>
+            <EditFormVenue />
         </div>
-     );
+    );
 }
 
 export default editVenue;

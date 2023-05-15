@@ -6,10 +6,8 @@ import { Link, useParams } from 'react-router-dom';
 import { fetchSingleVenue, editVenue } from '../../../store/modules/VenueSlice';
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string()
-        .min(6, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars'),
-        
+    name: Yup.string().min(6, 'Must be 6 chars or more').max(50, 'Can not be longer than 50 chars'),
+
     description: Yup.string()
         .min(6, 'Must be 6 chars or more')
         .max(1500, 'Can not be longer than 1500 chars'),
@@ -18,8 +16,7 @@ const validationSchema = Yup.object().shape({
         .matches(/\.(gif|jpe?g|png)$/i, 'Invalid image URL')
         .nullable()
         .notRequired(),
-    price: Yup.number()
-        .required('Required'),
+    price: Yup.number().required('Required'),
     address: Yup.string()
         .min(2, 'Must be 6 chars or more')
         .max(50, 'Can not be longer than 50 chars'),
@@ -29,42 +26,40 @@ const validationSchema = Yup.object().shape({
     country: Yup.string()
         .min(2, 'Must be 6 chars or more')
         .max(50, 'Can not be longer than 50 chars'),
-    city: Yup.string()
-        .min(2, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars'),
+    city: Yup.string().min(2, 'Must be 6 chars or more').max(50, 'Can not be longer than 50 chars')
 });
 
 function EditFormVenue() {
-    let { id } = useParams()
-    const dispatch = useDispatch()
-    const { singleVenue } = useSelector(state => state.venues)
+    let { id } = useParams();
+    const dispatch = useDispatch();
+    const { singleVenue } = useSelector((state) => state.venues);
     useEffect(() => {
         if (id) {
-            dispatch(fetchSingleVenue(id))
+            dispatch(fetchSingleVenue(id));
         }
-    }, [dispatch, id])
+    }, [dispatch, id]);
     const [mediaArray, setMediaArray] = useState(singleVenue ? singleVenue.media : []);
-    
+
     const formik = useFormik({
         initialValues: {
-            name: singleVenue?.name || "",
-            description: singleVenue?.description || "",
+            name: singleVenue?.name || '',
+            description: singleVenue?.description || '',
             media: singleVenue?.media || [],
             price: singleVenue?.price || 1,
             maxGuests: singleVenue?.maxGuests || 1,
             rating: 5,
             meta: {
-                wifi: singleVenue?.meta.wifi || "",
-                parking: singleVenue?.meta.parking || "",
-                breakfast: singleVenue?.meta.breakfast || "",
-                pets: singleVenue?.meta.pets || ""
+                wifi: singleVenue?.meta.wifi || '',
+                parking: singleVenue?.meta.parking || '',
+                breakfast: singleVenue?.meta.breakfast || '',
+                pets: singleVenue?.meta.pets || ''
             },
             location: {
-                address: singleVenue?.location.address || "",
-                city: singleVenue?.location.city || "",
-                zip: singleVenue?.location.zip || "",
-                country: singleVenue?.location.country || "",
-                continent: singleVenue?.location.continent || "",
+                address: singleVenue?.location.address || '',
+                city: singleVenue?.location.city || '',
+                zip: singleVenue?.location.zip || '',
+                country: singleVenue?.location.country || '',
+                continent: singleVenue?.location.continent || '',
                 lat: 0,
                 lng: 0
             }
@@ -95,9 +90,9 @@ function EditFormVenue() {
                 }
             };
             console.log(venueData);
-            dispatch(editVenue(id, venueData))
+            dispatch(editVenue(id, venueData));
         }
-    })
+    });
 
     function pushToMediaArray() {
         const mediaValue = document.getElementById('media').value;
@@ -115,17 +110,16 @@ function EditFormVenue() {
         const newMediaArray = mediaArray.filter((item) => item !== media);
         setMediaArray(newMediaArray);
     }
-    
-    return ( 
-        <div className = "mx-auto max-w-7xl px-5" >
-            <div className="my-5 flex gap-5">        
+
+    return (
+        <div className="mx-auto max-w-7xl px-5">
+            <div className="my-5 flex gap-5">
                 <div id="create-venue" className="w-full bg-white px-5 py-5 drop-shadow-md">
                     <div id="form">
                         <form onSubmit={formik.handleSubmit} className="my-5">
                             <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:space-y-0">
                                 <div className="flex flex-col gap-y-5 lg:gap-y-10">
-                                    {/* TITLE */}
-                                    <div className="">
+                                    <div id='input_title'>
                                         <label
                                             htmlFor="name"
                                             className="block font-body font-medium leading-6 text-darkgrey"
@@ -142,7 +136,7 @@ function EditFormVenue() {
                                                     onBlur={formik.handleBlur}
                                                     value={formik.values.name || ''}
                                                     className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-darkgrey placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                    placeholder={"Write a good name"}
+                                                    placeholder={'Write a good name'}
                                                 />
                                             </div>
                                             {formik.touched.name && formik.errors.name ? (
@@ -151,9 +145,8 @@ function EditFormVenue() {
                                                 </div>
                                             ) : null}
                                         </div>
-                                    </div>
-                                    {/* Description */}
-                                    <div className="">
+                                    </div>                            
+                                    <div id='input_description'>
                                         <div className="flex justify-between">
                                             <label
                                                 htmlFor="description"
@@ -174,15 +167,14 @@ function EditFormVenue() {
                                                 className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             ></textarea>
                                             {formik.touched.description &&
-                                                formik.errors.description ? (
+                                            formik.errors.description ? (
                                                 <div className="text-sm text-red-600">
                                                     *{formik.errors.description}
                                                 </div>
                                             ) : null}
                                         </div>
                                     </div>
-                                    {/* ADRESS */}
-                                    <div className="">
+                                    <div id='input_country'>
                                         <div className="flex flex-col md:flex-row md:justify-between lg:gap-5">
                                             <div className="mt-2">
                                                 <label
@@ -223,7 +215,7 @@ function EditFormVenue() {
                                                     className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
                                                 />
                                                 {formik.touched.continent &&
-                                                    formik.errors.continent ? (
+                                                formik.errors.continent ? (
                                                     <div className="text-sm text-red-600">
                                                         *{formik.errors.continent}
                                                     </div>
@@ -490,12 +482,9 @@ function EditFormVenue() {
                         </form>
                     </div>
                 </div>
-             
-            
-            
             </div>
-        </div >
-     );
+        </div>
+    );
 }
 
 export default EditFormVenue;

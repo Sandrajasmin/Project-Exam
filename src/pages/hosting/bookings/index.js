@@ -17,18 +17,20 @@ function ManageBooking() {
         }
     }, [dispatch, userDetails.username]);
 
-    return ( 
+    return (
         <div className="mx-auto max-w-7xl px-5">
             <div className="my-5 flex justify-between gap-5 md:justify-between">
                 <Dashboard />
                 <div>
-                    <div className="bg-lightgray grid gap-5 rounded-md justify-center md:grid-cols-2 lg:grid-cols-3">
+                    <div className="bg-lightgray grid justify-center gap-5 rounded-md md:grid-cols-2 lg:grid-cols-3">
                         {singleProfile &&
                         singleProfile.bookings &&
                         singleProfile.bookings.length > 0 ? (
                             singleProfile.bookings.map((bookings) => (
                                 <div className=" " key={bookings.id}>
-                                    <h1 className="pb-5 font-heading text-4xl font-extrabold">Your Bookings for {bookings.name} </h1>
+                                    <h1 className="pb-5 font-heading text-4xl font-extrabold">
+                                        Your Bookings for {bookings.name}{' '}
+                                    </h1>
                                     <div className="flex w-72 flex-col justify-between rounded-md bg-white drop-shadow-md md:w-56 lg:w-72">
                                         <Link
                                             to={`/venue/${bookings.id}`}
@@ -46,11 +48,10 @@ function ManageBooking() {
                                                     alt={bookings.name}
                                                 />
                                             </div>
-                                            <h3 className="text-center py-2 font-body font-medium text-black">
+                                            <h3 className="py-2 text-center font-body font-medium text-black">
                                                 {bookings.name}
                                             </h3>
                                         </Link>
-                            
 
                                         <div className="flex justify-between font-body text-sm font-light text-darkgrey">
                                             <div className="flex w-full justify-center gap-2 border-r border-t py-2 text-center">
@@ -59,14 +60,12 @@ function ManageBooking() {
                                                 </div>
                                                 <p>Edit</p>
                                             </div>
-                                           
                                         </div>
                                     </div>
                                 </div>
                             ))
                         ) : (
                             <div className="flex flex-col items-center justify-center p-8">
-                                
                                 <p className="font-paragraph font-md text-md">
                                     You have no bookings for this venue yet{' '}
                                 </p>
@@ -80,7 +79,7 @@ function ManageBooking() {
                 </div>
             </div>
         </div>
-     );
+    );
 }
 
 export default ManageBooking;
