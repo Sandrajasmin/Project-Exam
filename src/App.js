@@ -8,6 +8,7 @@ import Venues from './pages/venues/index';
 import DetailPage from './pages/detail/index';
 import RegisterUser from './pages/register';
 import LogIn from './pages/signin/index';
+import DashBoard from './pages/dashboard/index';
 import VenueDashboard from './pages/hosting/venues/index';
 import CreateVenue from './pages/createvenue/index';
 import HostBooking from './pages/hosting/bookings/index';
@@ -23,6 +24,7 @@ function App() {
                 <Route path="/venue/:id" element={<DetailPage />} exact />
                 <Route path="/register" element={<RegisterUser />} />
                 <Route path="/log-in" element={<LogIn />} />
+                <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/venueManager" element={<VenueDashboard />} />
                 <Route path="/bookings/:id" element={<HostBooking />} />
                 <Route path="/createVenue" element={<CreateVenue />} />

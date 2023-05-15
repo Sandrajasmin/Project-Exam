@@ -8,7 +8,7 @@ const venueSlice = createSlice({
         cheapestHouses: [],
         topRatedHouses: [],
         createVenue: null,
-        bookVenue: null,
+        bookVenue: null
     },
     reducers: {
         SET_VENUES: (state, action) => {
@@ -109,14 +109,17 @@ export const newVenue = (venueData) => async (dispatch) => {
 
 export const bookVenue = (venueData) => async (dispatch) => {
     try {
-        const response = await fetch(`https://nf-api.onrender.com/api/v1/holidaze/venues/bookings`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${accessToken}`
-            },
-            body: JSON.stringify(venueData)
-        });
+        const response = await fetch(
+            `https://nf-api.onrender.com/api/v1/holidaze/venues/bookings`,
+            {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(venueData)
+            }
+        );
         const data = await response.json();
         console.log(data);
         dispatch(SET_BOOK_VENUE(data));

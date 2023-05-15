@@ -11,6 +11,17 @@ const AllProducts = () => {
     const dispatch = useDispatch();
     const { venues } = useSelector((state) => state.venues);
 
+    const truncateText = (text, maxWords) => {
+        const words = text.split(' '); // Split text into words
+
+        if (words.length <= maxWords) {
+            return text; // Return the original text if it has less than or equal to maxWords words
+        }
+
+        const truncatedWords = words.slice(0, maxWords); // Take the first maxWords words
+        return truncatedWords.join(' ') + '...'; // Join words and add ellipsis
+    };
+
     useEffect(() => {
         dispatch(fetchVenues());
     }, [dispatch]);
@@ -26,8 +37,8 @@ const AllProducts = () => {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 20,
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
                     infinite: true,
                     dots: true
                 }
@@ -36,16 +47,16 @@ const AllProducts = () => {
                 breakpoint: 600,
                 settings: {
                     slidesToShow: 2,
-                    slidesToScroll: 10,
+                    slidesToScroll: 2,
                     initialSlide: 2
                 }
             },
             {
                 breakpoint: 480,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
-                    initialSlide: 2
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    initialSlide: 1
                 }
             }
         ]
@@ -53,38 +64,33 @@ const AllProducts = () => {
 
     return (
         <div className="mx-auto my-10 max-w-7xl">
-            <div className="max-h-96 px-10">
+            <div className="px-10">
                 <Slider {...settings}>
-                    {venues.map((venue) => (
-                        <div className="" key={venue.id}>
-                            <Link to={`venues/${venue.id}`}>
-                                <div className="">
-                                    <img
-                                        src={venue.media[0]}
-                                        className="h-full w-full rounded-md object-cover"
-                                        loading="lazy"
-                                    />
-                                </div>
-                                <div className="mt-4 flex flex-col">
-                                    <div className="relative font-body text-lg font-bold text-darkgrey">
-                                        <h3>{venue.name}</h3>
+                    {venues.slice(0, 10).map((venue) => {
+                        const truncatedName = truncateText(venue.name, 3); // Define truncatedName variable here
+                        return (
+                            <div className=" h-72 md:px-5" key={venue.id}>
+                                <Link to={`/venue/${venue.id}`}>
+                                    <div className="h-44">
+                                        <img
+                                            src={venue.media[0]}
+                                            className="h-full w-full rounded-md object-cover"
+                                            loading="lazy"
+                                            alt=""
+                                        />
                                     </div>
-                                    <div className="flex gap-4">
-                                        <p className="font-body font-light text-darkgrey">
-                                            {venue.price}
-                                        </p>
-                                        <p className="font-body font-light text-darkgrey">
-                                            Super Host
+                                    <div className="mt-4 flex flex-col">
+                                        <div className="relative font-body text-lg font-bold text-darkgrey">
+                                            <h3>{truncatedName}</h3>
+                                        </div>
+                                        <p className="text-md font-body text-darkgrey">
+                                            {venue.price} $ /night
                                         </p>
                                     </div>
-
-                                    <p className="font-body text-lg font-bold text-darkgrey">
-                                        {venue.price} $ /night
-                                    </p>
-                                </div>
-                            </Link>
-                        </div>
-                    ))}
+                                </Link>
+                            </div>
+                        );
+                    })}
                 </Slider>
             </div>
         </div>
