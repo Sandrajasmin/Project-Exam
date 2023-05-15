@@ -170,9 +170,17 @@ const ContactForm = () => {
                                 name="avatar"
                                 type="avatar"
                                 autoComplete="avatar"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.avatar}
                                 placeholder="avatar.com/image"
                                 className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
                             />
+                            {formik.touched.avatar && formik.errors.avatar ? (
+                                <div className="pl-1 font-body text-sm font-light text-red-500">
+                                    *{formik.errors.avatar}
+                                </div>
+                            ) : null}
                         </div>
                         <fieldset className="flex flex-col gap-4 text-black md:flex-row md:gap-12">
                             <p>Do you want to rent out an accommodation??</p>

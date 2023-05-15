@@ -10,7 +10,7 @@ function Dashboard() {
     let userAvatar;
 
     if (avatar) {
-        userAvatar = <img src={avatar} alt="avatar" className=" ounded-full" />;
+        userAvatar = <img src={avatar} alt="avatar" className="h-8 w-8 rounded-full" />;
     } else {
         userAvatar = <img src={DefaultAvatar} alt="avatar" className=" h-8 w-8 rounded-full" />;
     }
@@ -18,10 +18,10 @@ function Dashboard() {
     return (
         <div id="dashboard" className="hidden sm:block ">
             <aside className="sticky top-0  flex h-screen flex-col items-center rounded-md bg-gradient-to-r from-blue to-[#1798CE] lg:h-full">
-                <div className="py-20 flex flex-col items-center">
-                    <img src={userAvatar} />
+                <div className="flex flex-col items-center py-20">
+                    {userAvatar}
                     <p className="font-body text-white">{userName}</p>
-                    <p className="font-body text-white text-sm">{email}</p>
+                    <p className="font-body text-sm text-white">{email}</p>
                 </div>
                 <div className="flex flex-col gap-5 px-16 font-body text-white">
                     <div className="items-base flex gap-2">
@@ -34,7 +34,7 @@ function Dashboard() {
                     </div>
                     <div className="items-base flex gap-2">
                         <i className="fa-sharp fa-solid fa-house-chimney"></i>
-                        <Link to="/venueManager">Venus</Link>
+                        <Link to="/venueManager">Hosting</Link>
                     </div>
                     <div className="items-base flex gap-2">
                         <i className="fa-solid fa-door-open"></i>

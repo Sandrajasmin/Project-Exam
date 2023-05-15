@@ -11,7 +11,9 @@ function SingIn() {
                         HOLIDAZE
                     </h1>
                     <div className="py-5">
-                        <h2 className="font-heading text-xl font-medium">Sign in to your account</h2>
+                        <h2 className="font-heading text-xl font-medium">
+                            Sign in to your account
+                        </h2>
                         <div className="text-darkgre flex justify-center gap-1 font-body text-sm">
                             <p>or</p>
                             <span className="text-blue">

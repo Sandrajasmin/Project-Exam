@@ -1,66 +1,65 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
-import { newVenue } from '../../../store/modules/VenueSlice';
+import { Link, useParams } from 'react-router-dom';
+import { fetchSingleVenue, editVenue } from '../../../store/modules/VenueSlice';
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string()
-        .min(6, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars')
-        .required('Required'),
+    name: Yup.string().min(6, 'Must be 6 chars or more').max(50, 'Can not be longer than 50 chars'),
+
     description: Yup.string()
         .min(6, 'Must be 6 chars or more')
-        .max(1500, 'Can not be longer than 1500 chars')
-        .required('Required'),
+        .max(1500, 'Can not be longer than 1500 chars'),
     media: Yup.string()
         .url('Invalid URL')
-        .matches(/\.(gif|jpe?g|png)$/i, 'Invalid image URL'),
+        .matches(/\.(gif|jpe?g|png)$/i, 'Invalid image URL')
+        .nullable()
+        .notRequired(),
     price: Yup.number().required('Required'),
-    maxGuests: Yup.number().required('Required'),
     address: Yup.string()
         .min(2, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars')
-        .required('Required'),
+        .max(50, 'Can not be longer than 50 chars'),
     continent: Yup.string()
         .min(2, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars')
-        .required('Required'),
+        .max(50, 'Can not be longer than 50 chars'),
     country: Yup.string()
         .min(2, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars')
-        .required('Required'),
-    city: Yup.string()
-        .min(2, 'Must be 6 chars or more')
-        .max(50, 'Can not be longer than 50 chars')
-        .required('Required'),
-    zip: Yup.string().required('Required')
+        .max(50, 'Can not be longer than 50 chars'),
+    city: Yup.string().min(2, 'Must be 6 chars or more').max(50, 'Can not be longer than 50 chars')
 });
 
-const VenueForm = () => {
-    const [mediaArray, setMediaArray] = useState([]);
+function EditFormVenue() {
+    let { id } = useParams();
     const dispatch = useDispatch();
+    const { singleVenue } = useSelector((state) => state.venues);
+    useEffect(() => {
+        if (id) {
+            dispatch(fetchSingleVenue(id));
+        }
+    }, [dispatch, id]);
+    const [mediaArray, setMediaArray] = useState(singleVenue ? singleVenue.media : []);
+
     const formik = useFormik({
         initialValues: {
-            name: '',
-            description: '',
-            media: [],
-            price: 1,
-            maxGuests: 1,
-            rating: 3,
+            name: singleVenue?.name || '',
+            description: singleVenue?.description || '',
+            media: singleVenue?.media || [],
+            price: singleVenue?.price || 1,
+            maxGuests: singleVenue?.maxGuests || 1,
+            rating: 5,
             meta: {
-                wifi: false,
-                parking: false,
-                breakfast: false,
-                pets: false
+                wifi: singleVenue?.meta.wifi || '',
+                parking: singleVenue?.meta.parking || '',
+                breakfast: singleVenue?.meta.breakfast || '',
+                pets: singleVenue?.meta.pets || ''
             },
             location: {
-                address: '',
-                city: '',
-                zip: '',
-                country: '',
-                continent: '',
+                address: singleVenue?.location.address || '',
+                city: singleVenue?.location.city || '',
+                zip: singleVenue?.location.zip || '',
+                country: singleVenue?.location.country || '',
+                continent: singleVenue?.location.continent || '',
                 lat: 0,
                 lng: 0
             }
@@ -73,7 +72,7 @@ const VenueForm = () => {
                 media: mediaArray,
                 price: values.price,
                 maxGuests: values.maxGuests,
-                rating: 3,
+                rating: 5,
                 meta: {
                     wifi: values.wifi,
                     parking: values.parking,
@@ -91,7 +90,7 @@ const VenueForm = () => {
                 }
             };
             console.log(venueData);
-            dispatch(newVenue(venueData));
+            dispatch(editVenue(id, venueData));
         }
     });
 
@@ -120,8 +119,7 @@ const VenueForm = () => {
                         <form onSubmit={formik.handleSubmit} className="my-5">
                             <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:space-y-0">
                                 <div className="flex flex-col gap-y-5 lg:gap-y-10">
-                                    {/* TITLE */}
-                                    <div className="">
+                                    <div id='input_title'>
                                         <label
                                             htmlFor="name"
                                             className="block font-body font-medium leading-6 text-darkgrey"
@@ -136,9 +134,9 @@ const VenueForm = () => {
                                                     id="name"
                                                     onChange={formik.handleChange}
                                                     onBlur={formik.handleBlur}
-                                                    value={formik.values.name}
+                                                    value={formik.values.name || ''}
                                                     className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-darkgrey placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                                                    placeholder="Write a good name"
+                                                    placeholder={'Write a good name'}
                                                 />
                                             </div>
                                             {formik.touched.name && formik.errors.name ? (
@@ -147,9 +145,8 @@ const VenueForm = () => {
                                                 </div>
                                             ) : null}
                                         </div>
-                                    </div>
-                                    {/* Description */}
-                                    <div className="">
+                                    </div>                            
+                                    <div id='input_description'>
                                         <div className="flex justify-between">
                                             <label
                                                 htmlFor="description"
@@ -162,10 +159,10 @@ const VenueForm = () => {
                                             <textarea
                                                 id="description"
                                                 name="description"
-                                                rows="3"
+                                                rows="6"
                                                 onChange={formik.handleChange}
                                                 onBlur={formik.handleBlur}
-                                                value={formik.values.description}
+                                                value={formik.values.description || ''}
                                                 placeholder="Write a good description of the venue you want to list"
                                                 className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             ></textarea>
@@ -177,8 +174,7 @@ const VenueForm = () => {
                                             ) : null}
                                         </div>
                                     </div>
-                                    {/* ADRESS */}
-                                    <div className="">
+                                    <div id='input_country'>
                                         <div className="flex flex-col md:flex-row md:justify-between lg:gap-5">
                                             <div className="mt-2">
                                                 <label
@@ -294,7 +290,7 @@ const VenueForm = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className=" flex flex-col gap-5">
+                                <div className=" flex flex-col gap-5 lg:w-1/2 xl:w-1/3">
                                     {/* GALLERY */}
                                     <div className="flex flex-col items-start">
                                         <label htmlFor="gallery" className="mb-[-16px]">
@@ -413,7 +409,7 @@ const VenueForm = () => {
                                                         name="pets"
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
-                                                        value={formik.values.pets}
+                                                        value={formik.values.pets || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -427,7 +423,7 @@ const VenueForm = () => {
                                                         name="wifi"
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
-                                                        value={formik.values.wifi}
+                                                        value={formik.values.wifi || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -441,7 +437,7 @@ const VenueForm = () => {
                                                         name="breakfast"
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
-                                                        value={formik.values.breakfast}
+                                                        value={formik.values.breakfast || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -455,7 +451,7 @@ const VenueForm = () => {
                                                         name="parking"
                                                         onChange={formik.handleChange}
                                                         onBlur={formik.handleBlur}
-                                                        value={formik.values.parking}
+                                                        value={formik.values.parking || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -469,7 +465,7 @@ const VenueForm = () => {
                                     {/* BUTTON */}
                                     <div className="flex items-center justify-end gap-x-6">
                                         <Link
-                                            to="/dashboard"
+                                            to="/venueManager"
                                             className="rounded-md bg-bluegreen px-5 py-2 font-body font-light drop-shadow-md hover:bg-blue hover:text-white"
                                         >
                                             Cancel
@@ -478,7 +474,7 @@ const VenueForm = () => {
                                             type="submit"
                                             className="rounded-md bg-blue px-10 py-2 font-body text-white shadow-sm hover:bg-[#1798CE] hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         >
-                                            Publish
+                                            Update
                                         </button>
                                     </div>
                                 </div>
@@ -489,6 +485,6 @@ const VenueForm = () => {
             </div>
         </div>
     );
-};
+}
 
-export default VenueForm;
+export default EditFormVenue;

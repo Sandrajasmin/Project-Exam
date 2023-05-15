@@ -8,8 +8,10 @@ import Venues from './pages/venues/index';
 import DetailPage from './pages/detail/index';
 import RegisterUser from './pages/register';
 import LogIn from './pages/signin/index';
-import VenueDashboard from './pages/venuemanager/index';
+import VenueDashboard from './pages/hosting/venues/index';
 import CreateVenue from './pages/createvenue/index';
+import HostBooking from './pages/hosting/bookings/index';
+import EditVenue from './pages/editvenue/index';
 
 function App() {
     return (
@@ -17,12 +19,14 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} exact />
-                <Route path="/venues" element={<Venues />} />
-                <Route path="/venue/:id" element={<DetailPage />} />
+                <Route path="/venues" element={<Venues />} exact />
+                <Route path="/venue/:id" element={<DetailPage />} exact />
                 <Route path="/register" element={<RegisterUser />} />
                 <Route path="/log-in" element={<LogIn />} />
                 <Route path="/venueManager" element={<VenueDashboard />} />
+                <Route path="/bookings/:id" element={<HostBooking />} />
                 <Route path="/createVenue" element={<CreateVenue />} />
+                <Route path="/editVenue/:id" element={<EditVenue />} />
             </Routes>
             <Footer />
         </BrowserRouter>
