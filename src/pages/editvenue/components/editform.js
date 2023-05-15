@@ -7,7 +7,6 @@ import { fetchSingleVenue, editVenue } from '../../../store/modules/VenueSlice';
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().min(6, 'Must be 6 chars or more').max(50, 'Can not be longer than 50 chars'),
-
     description: Yup.string()
         .min(6, 'Must be 6 chars or more')
         .max(1500, 'Can not be longer than 1500 chars'),
@@ -119,7 +118,7 @@ function EditFormVenue() {
                         <form onSubmit={formik.handleSubmit} className="my-5">
                             <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:space-y-0">
                                 <div className="flex flex-col gap-y-5 lg:gap-y-10">
-                                    <div id='input_title'>
+                                    <div id="input_title">
                                         <label
                                             htmlFor="name"
                                             className="block font-body font-medium leading-6 text-darkgrey"
@@ -145,8 +144,8 @@ function EditFormVenue() {
                                                 </div>
                                             ) : null}
                                         </div>
-                                    </div>                            
-                                    <div id='input_description'>
+                                    </div>
+                                    <div id="input_description">
                                         <div className="flex justify-between">
                                             <label
                                                 htmlFor="description"
@@ -174,7 +173,7 @@ function EditFormVenue() {
                                             ) : null}
                                         </div>
                                     </div>
-                                    <div id='input_country'>
+                                    <div id="input_country">
                                         <div className="flex flex-col md:flex-row md:justify-between lg:gap-5">
                                             <div className="mt-2">
                                                 <label

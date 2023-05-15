@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleVenue } from '../../store/modules/VenueSlice';
 import Slider from 'react-slick';
-import DatePicker from '../../components/calendar/calendar';
+// import DatePicker from '../../components/calendar/calendar';
 
 function DetailPage() {
     const dispatch = useDispatch();
@@ -43,11 +43,11 @@ function DetailPage() {
                             <h1 className="text-2xl font-bold tracking-tight text-black sm:text-3xl">
                                 {singleVenue.name}
                             </h1>
-                            <div id='location' className="flex gap-1">
+                            <div id="location" className="flex gap-1">
                                 <p>{singleVenue.location.address},</p>
                                 <p>{singleVenue.location.country}</p>
                             </div>
-                            <div id='rating'>
+                            <div id="rating">
                                 <p className="font-body font-light">
                                     {[...Array(5)].map((_, i) => (
                                         <span
@@ -78,7 +78,7 @@ function DetailPage() {
                                 </Slider>
                             </div>
                         </div>
-                        <div id='about-section' className="flex flex-col items-center gap-2">
+                        <div id="about-section" className="flex flex-col items-center gap-2">
                             <h2 className="font-heading text-xl font-medium">About the property</h2>
                             <div className="flex gap-2 font-body text-sm font-light text-darkgrey md:text-base">
                                 <p>{singleVenue.maxGuests} Guests </p>
@@ -103,7 +103,7 @@ function DetailPage() {
                                     <p>1 Bedroom</p>
                                 )}
                             </div>
-                            <div id='amenities' className="flex max-w-[300px] gap-2">
+                            <div id="amenities" className="flex max-w-[300px] gap-2">
                                 {singleVenue.meta.wifi ? (
                                     <div className="flex items-center gap-1 font-body text-base font-light text-darkgrey">
                                         <div>
@@ -149,7 +149,7 @@ function DetailPage() {
                                     </div>
                                 ) : null}
                             </div>
-                            <div className="flex items-center gap-2 my-5">
+                            <div className="my-5 flex items-center gap-2">
                                 <div className="h-10 w-10">
                                     <img
                                         className="h-full w-full rounded-full object-cover"
@@ -162,7 +162,7 @@ function DetailPage() {
                             </div>
                         </div>
                         {/* description */}
-                        <div id='description' className="py-5 font-body text-base">
+                        <div id="description" className="py-5 font-body text-base">
                             {singleVenue.description.length > 10 ? (
                                 singleVenue.description.split('.').map((sentence, index) => (
                                     <React.Fragment key={index}>
@@ -194,14 +194,7 @@ function DetailPage() {
                                 </div>
                             )}
                         </div>
-                        <div className="">
-                           <DatePicker/>
-                            <div className=' flex justify-center md:my-1'>
-                                <button className="w-full rounded-md bg-blue px-10 py-2 font-body font-bold text-white drop-shadow-md hover:bg-bluegreen hover:text-black md:w-48">
-                                    Book now!
-                                </button>
-                            </div>
-                        </div>
+                        <div className="">{/* <DatePicker/> */}</div>
                     </div>
                 </div>
             )}
