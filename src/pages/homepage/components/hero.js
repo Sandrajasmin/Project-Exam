@@ -6,8 +6,8 @@ import HeroText from './animation/textanimation';
 export default function HeroSection() {
     return (
         <div>
-            <div className="mx-auto mb-20 w-full max-w-5xl">
-                <div className="relative my-10 flex justify-center">
+            <div className="mx-auto mb-20 w-full max-w-5xl ">
+                <div className="relative my-12 flex justify-center ">
                     <div className="lg:left-30 absolute left-5 top-14 z-10 text-black md:left-20 md:top-20 md:w-[700px]">
                         <div className="font-heading text-xl font-extrabold md:text-4xl">
                             <h1 className="">WHERE DO YOU WANT TO GO</h1>

@@ -37,8 +37,8 @@ function DetailPage() {
     return (
         <>
             {singleVenue && !isError && (
-                <div className="mx-auto max-w-7xl py-10">
-                    <div className="">
+                <div className="mx-auto max-w-4xl py-10">
+                    <div className="mx-2">
                         <div>
                             <h1 className="text-2xl font-bold tracking-tight text-black sm:text-3xl">
                                 {singleVenue.name}
@@ -63,7 +63,7 @@ function DetailPage() {
                                     ))}
                                 </p>
                             </div>
-                            <div className="mx-2 my-5">
+                            <div className=" my-5">
                                 <Slider className="mb-10" {...settings}>
                                     {singleVenue.media.map((media, index) => (
                                         <div key={media} className="">

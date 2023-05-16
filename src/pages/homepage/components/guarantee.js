@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function GuaranteeSection() {
     return (
-        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-2 py-24 sm:px-6 lg:flex-row lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 py-12 sm:px-6 lg:flex-row lg:px-8">
             <div className="flex flex-col items-center gap-3 lg:w-1/3">
                 <div className="">
                     <img

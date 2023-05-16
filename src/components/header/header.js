@@ -115,7 +115,6 @@ export default function Header() {
                                                 <NavLink
                                                     className="border-r border-black pr-5"
                                                     onMouseEnter={toggleMenu}
-                                                    onMouseOut={closeMenu}
                                                 >
                                                     <button className="">Venues</button>{' '}
                                                     <i className="fa fa-angle-down"></i>
@@ -216,7 +215,7 @@ export default function Header() {
             <div
                 className={`fixed left-0 top-16 z-20 ${
                     isMenuOpen ? 'flex' : 'hidden'
-                } z-30 flex h-full w-full justify-center bg-white bg-clip-padding backdrop-blur-2xl backdrop-filter lg:hidden`}
+                } z-30 flex h-full w-full justify-center bg-white bg-clip-padding backdrop-blur-2xl backdrop-filter md:hidden`}
                 onBlur={closeMenu}
             >
                 {accessToken ? (
