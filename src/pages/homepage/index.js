@@ -9,8 +9,9 @@ function Home() {
     return (
         <div>
             <HeroSection />
-            <Category />
             <Guarantee />
+            <Category />
+            
             <Host />
             <CardListing />
         </div>
