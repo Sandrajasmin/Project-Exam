@@ -148,15 +148,6 @@ export default function Header() {
                                                         >
                                                             Create Venue
                                                         </NavLink>
-                                                        <NavLink
-                                                            to="/manageVenues"
-                                                            className="block px-4 py-2 text-sm text-gray-700"
-                                                            role="menuitem"
-                                                            tabIndex="-1"
-                                                            id="menu-item-2"
-                                                        >
-                                                            Manage Venue
-                                                        </NavLink>
                                                     </div>
                                                 </div>
                                             </div>
@@ -169,7 +160,7 @@ export default function Header() {
                                             </NavLink>
                                             <NavLink
                                                 className="border-r border-black px-5"
-                                                to="/Dashboard"
+                                                to="/dashboard"
                                             >
                                                 Dashboard
                                             </NavLink>
@@ -248,15 +239,6 @@ export default function Header() {
                                     >
                                         Create Venue
                                     </NavLink>
-                                    <NavLink
-                                        to="/manageVenues"
-                                        className="block px-7 py-2 text-sm text-black"
-                                        role="menuitem"
-                                        id="menu-item-2"
-                                        onClick={closeMenu}
-                                    >
-                                        Manage Venue
-                                    </NavLink>
                                 </div>
                             </div>
                         </div>
@@ -271,7 +253,7 @@ export default function Header() {
                             </NavLink>
                             <NavLink
                                 className="border-b border-black pb-2"
-                                to="/Dashboard"
+                                to="/dashboard"
                                 onClick={closeMenu}
                             >
                                 Dashboard

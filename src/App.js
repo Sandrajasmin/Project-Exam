@@ -26,7 +26,8 @@ function App() {
                 <Route path="/log-in" element={<LogIn />} />
                 <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/venueManager" element={<VenueDashboard />} />
-                <Route path="/bookings/:id" element={<HostBooking />} />
+                <Route path="/bookingManager" element={<VenueDashboard />} />
+                <Route path="/bookings" element={<HostBooking />} />
                 <Route path="/createVenue" element={<CreateVenue />} />
                 <Route path="/editVenue/:id" element={<EditVenue />} />
             </Routes>

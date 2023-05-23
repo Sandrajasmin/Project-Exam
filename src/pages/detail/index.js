@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleVenue } from '../../store/modules/VenueSlice';
 import Slider from 'react-slick';
-// import DatePicker from '../../components/calendar/calendar';
+import DatePicker from '../../components/calendar/calendar';
 
 function DetailPage() {
     const dispatch = useDispatch();
@@ -194,7 +194,7 @@ function DetailPage() {
                                 </div>
                             )}
                         </div>
-                        <div className="">{/* <DatePicker/> */}</div>
+                        <div className=""><DatePicker/></div>
                     </div>
                 </div>
             )}

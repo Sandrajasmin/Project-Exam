@@ -33,7 +33,7 @@ const AllVenues = () => {
     };
 
     return (
-        <div className="mx-auto">
+        <div className="mx-auto my-10">
             <SearchBar onSearch={handleSearch} />
             {filterVenues.length === 0 ? (
                 <div className="my-10 flex flex-col items-center md:my-2">
@@ -65,30 +65,18 @@ const AllVenues = () => {
                                                     {venue.name}
                                                 </h2>
                                             </Link>
-                                            {venue.rating >= 1 ? (
-                                                <p className="font-body text-sm font-light">
-                                                    {[...Array(venue.rating)].map((_, i) => (
-                                                        <span className="text-blue" key={i}>
-                                                            ★
-                                                        </span>
-                                                    ))}
-                                                    {[...Array(5 - Math.round(venue.rating))].map(
-                                                        (_, i) => (
-                                                            <span className="text-blue" key={i}>
-                                                                ☆
-                                                            </span>
-                                                        )
-                                                    )}
-                                                </p>
-                                            ) : (
-                                                <p className="font-body text-sm font-light">
-                                                    {[...Array(5)].map((_, i) => (
-                                                        <span className="text-blue" key={i}>
-                                                            ☆
-                                                        </span>
-                                                    ))}
-                                                </p>
-                                            )}
+                                            <p className="font-body text-sm font-light">
+                                                {[...Array(Math.floor(venue.rating))].map((_, i) => (
+                                                    <span className="text-blue" key={i}>
+                                                        ★
+                                                    </span>
+                                                ))}
+                                                {[...Array(5 - Math.ceil(venue.rating))].map((_, i) => (
+                                                    <span className="text-blue" key={i}>
+                                                        ☆
+                                                    </span>
+                                                ))}
+                                            </p>
                                         </div>
 
                                         <div className="flex flex-row justify-between">
