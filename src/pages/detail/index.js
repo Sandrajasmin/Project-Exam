@@ -37,7 +37,6 @@ const DetailPage = () => {
     return (
         <>
             <div className="mx-auto max-w-4xl py-10">
-
                 <div className="mx-2">
                     {singleVenue && !isError && (
                         <div>
@@ -214,9 +213,7 @@ const DetailPage = () => {
                         </div>
                     )}
                 </div>
-                
             </div>
-            
         </>
     );
 };

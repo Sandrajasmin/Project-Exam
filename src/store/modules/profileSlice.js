@@ -39,6 +39,28 @@ export const fetchProfile = (name, profileData) => async (dispatch) => {
     }
 };
 
+export const fetchBookingOwner = (name, profileData) => async (dispatch) => {
+    try {
+        const response = await fetch(
+            `https://nf-api.onrender.com/api/v1/holidaze/profiles/${name}/venues?_bookings=true&_owner=true`,
+            {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(profileData)
+            }
+        );
+        const data = await response.json();
+        console.log(data);
+        console.log(response);
+        dispatch(SET_SINGLE_PROFILE(data));
+    } catch (e) {
+        console.log(e);
+    }
+};
+
 // export const logIn = (userData) => {
 //     fetch('https://nf-api.onrender.com/api/v1/holidaze/auth/login', {
 //         method: 'POST',

@@ -30,7 +30,7 @@ function Dashboard() {
                     </div>
                     <div className="items-base flex gap-2">
                         <i className="fa-solid fa-person-walking-luggage"></i>
-                        <Link to="/">Bookings</Link>
+                        <Link to="/bookings">Bookings</Link>
                     </div>
                     <div className="items-base flex gap-2">
                         <i className="fa-sharp fa-solid fa-house-chimney"></i>

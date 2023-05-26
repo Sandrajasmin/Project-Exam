@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
@@ -26,12 +27,46 @@ const calculatePrice = (dateFrom, dateTo, pricePerNight) => {
     return totalPrice;
 };
 
+const Modal = ({ isOpen, onClose, children }) => {
+    const modalClasses = `fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'
+        }`;
+    return (
+        <div className={modalClasses}>
+            <div className="modal-overlay absolute inset-0 bg-black opacity-50"></div>
+            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+                <div className="modal-content py-4 text-left px-6">
+                    <button className="modal-close absolute top-0 right-0 mt-4 mr-4" onClick={onClose}>
+                        <svg
+                            className="fill-current h-6 w-6 text-gray-500"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                        >
+                            <path
+                                className="heroicon-ui"
+                                d="M14.35 14.35a1 1 0 0 1-1.42 0L10 11.41l-2.93 2.93a1 1 0 0 1-1.42-1.42L8.59 10 5.66 7.07a1 1 0 0 1 1.42-1.42L10 8.59l2.93-2.93a1 1 0 0 1 1.42 1.42L11.41 10l2.93 2.93a1 1 0 0 1 0 1.42z"
+                            />
+                        </svg>
+                    </button>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+Modal.propTypes = {
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+};
+
 const DetailPage = () => {
     const dispatch = useDispatch();
     const singleVenue = useSelector((state) => state.venues.singleVenue);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
     const { id } = useParams();
-
+    
     console.log('halo', singleVenue);
 
     useEffect(() => {
@@ -88,14 +123,16 @@ const DetailPage = () => {
 
     return (
         <>
-            {formSubmitted ? (
-                <div>
-                    <img src={Logo} />
-                    <h1>Thank you for your booking!</h1>
-                    <p>Email will be sent with your booking details</p>
-                </div>
-            ) : (
-                <div className="max-w-md rounded-md bg-white px-6 py-5 drop-shadow-md md:px-8">
+            
+            <div>
+                {formSubmitted ? (
+                    <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
+                        <img src={Logo} alt="Logo" />
+                        <h1 className="text-xl font-bold">Thank you for your booking!</h1>
+                        <p className="mt-2">Email will be sent with your booking details</p>
+                    </Modal>
+                ) : (
+                    <div className="max-w-md rounded-md bg-white px-6 py-5 drop-shadow-md md:px-8">
                         <form onSubmit={formik.handleSubmit}>
                             <div className="flex justify-center">
                                 <div>
@@ -200,9 +237,10 @@ const DetailPage = () => {
                                     </button>
                                 </div>
                             </div>
-                    </form>
-                </div>
-            )}
+                        </form>
+                    </div>
+                )}
+            </div>
         </>
     );
 };
