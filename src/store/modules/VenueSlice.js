@@ -48,7 +48,7 @@ const venueSlice = createSlice({
             state.updateVenue = action.payload;
         },
         SET_UPDATE_VENUE: (state, action) => {
-            state.createVenue = action.payload;
+            state.updateVenue = action.payload;
         }
     }
 });
@@ -110,22 +110,22 @@ export const newVenue = (venueData) => async (dispatch) => {
 export const bookVenue = (venueData) => async (dispatch) => {
     try {
         const response = await fetch(
-            `https://nf-api.onrender.com/api/v1/holidaze/venues/bookings`,
+            `https://nf-api.onrender.com/api/v1/holidaze/bookings`,
             {
-                method: 'PUT',
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: `Bearer ${accessToken}`,
                 },
-                body: JSON.stringify(venueData)
+                body: JSON.stringify(venueData),
             }
         );
         const data = await response.json();
         console.log(data);
+        console.log('yees this place has been booked for you');
         dispatch(SET_BOOK_VENUE(data));
-        window.location.href = '/bookingManager';
     } catch (e) {
-        console.log(e);
+        console.log('error');
     }
 };
 
