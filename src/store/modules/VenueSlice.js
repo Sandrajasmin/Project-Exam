@@ -45,7 +45,7 @@ const venueSlice = createSlice({
             state.createVenue = action.payload;
         },
         SET_BOOK_VENUE: (state, action) => {
-            state.createVenue = action.payload;
+            state.updateVenue = action.payload;
         },
         SET_UPDATE_VENUE: (state, action) => {
             state.createVenue = action.payload;
@@ -123,7 +123,7 @@ export const bookVenue = (venueData) => async (dispatch) => {
         const data = await response.json();
         console.log(data);
         dispatch(SET_BOOK_VENUE(data));
-        window.location.href = '/bookings';
+        window.location.href = '/bookingManager';
     } catch (e) {
         console.log(e);
     }

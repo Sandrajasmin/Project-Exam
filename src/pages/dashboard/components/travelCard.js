@@ -22,9 +22,9 @@ const TravelCard = () => {
             <div className="absolute right-0 top-0">
                 <h2 className="p-2 font-heading text-4xl font-bold text-white">TRAVEL</h2>
             </div>
-           <div className='w-[230px] h-[121px]'>
-                <img src={TravelImg} className="drop-shadow-md h-full w-full object-cover" />
-           </div>
+            <div className="h-[121px] w-[230px]">
+                <img src={TravelImg} className="h-full w-full object-cover drop-shadow-md" />
+            </div>
             <div className="py-2 text-center font-heading font-bold text-white">
                 <span className="pr-2 text-4xl">Bookings</span>
                 <div className="">

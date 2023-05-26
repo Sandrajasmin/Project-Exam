@@ -41,9 +41,9 @@ const HostingCard = () => {
                 </div>
             </Link>
             <Link id="booking" to="/bookingManager">
-               <div>
-                    <img src={BookingImg} className="drop-shadow-md h-full w-full" />
-               </div>
+                <div>
+                    <img src={BookingImg} className="h-full w-full drop-shadow-md" />
+                </div>
                 <div className="py-2 text-center font-heading font-bold text-white">
                     <span className="pr-2 text-4xl">Bookings</span>
                     <div className="">

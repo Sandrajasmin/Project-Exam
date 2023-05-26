@@ -5,6 +5,7 @@ import { getUserDetails } from '../../../utils/auth';
 import { Link } from 'react-router-dom';
 import Dashboard from '../../../components/dashboard/dashboard';
 import DefaultHouse from '../../../assets/img/default_house.jpeg';
+import noBookingsImg from '../../../assets/img/neighbourhoodVector.png';
 
 function ManageBooking() {
     const dispatch = useDispatch();
@@ -19,17 +20,15 @@ function ManageBooking() {
 
     return (
         <div className="mx-auto max-w-7xl px-5">
-            <div className="my-5 flex justify-center gap-5 md:justify-between">
+            <div className="my-5 flex gap-5 ">
                 <Dashboard />
                 <div>
-                    
-                        {singleProfile &&
-                        singleProfile.bookings &&
-                        singleProfile.bookings.length > 0 ? (
-                            singleProfile.bookings.map((bookings) => (
-                                <div className="" key={bookings.id}>
-                                <div className=" bg-lightgray grid justify-center gap-5 rounded-md md:grid-cols-2 lg:grid-cols-3">
-                               
+                    {singleProfile &&
+                    singleProfile.bookings &&
+                    singleProfile.bookings.length > 0 ? (
+                        singleProfile.bookings.map((bookings) => (
+                            <div className="" key={bookings.id}>
+                                <div className=" grid justify-center gap-5 rounded-md bg-white px-5 py-5 drop-shadow-md md:grid-cols-2 lg:grid-cols-3">
                                     <h1 className="pb-5 font-heading text-4xl font-extrabold">
                                         Your Bookings for {bookings.name}{' '}
                                     </h1>
@@ -60,26 +59,31 @@ function ManageBooking() {
                                                 <div>
                                                     <i className="fa-solid fa-pen-nib" />
                                                 </div>
-                                                <p>Edit</p>
+                                                <p>Edits</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="bg-blue-500 absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white">
-                                        {singleProfile && singleProfile.venues ? singleProfile.venues.length : 0}
+                                        {singleProfile && singleProfile.venues
+                                            ? singleProfile.venues.length
+                                            : 0}
                                     </div>
                                 </div>
-                                </div>
-                                
-                            ))
-                        ) : (
-                            <div className="flex flex-col items-center justify-center p-8">
-                                <p className="font-paragraph font-heading font-bold w-full font-md text-xl">
-                                    Sorry, You have no bookings{' '}
-                                </p>
                             </div>
-                        )}
-                  
-                    
+                        ))
+                    ) : (
+                        <div className="flex h-full w-full flex-col items-center justify-center bg-white p-8 drop-shadow-md ">
+                            <img src={noBookingsImg} />
+                            <h1 className="font-paragraph font-md w-full py-10 text-center font-heading text-xl font-bold">
+                                Sorry, you have no bookings right now{' '}
+                            </h1>
+                            <Link to="/dashboard">
+                                <button className="rounded-md bg-blue px-5 py-2 font-body text-white">
+                                    Return to dashboard
+                                </button>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

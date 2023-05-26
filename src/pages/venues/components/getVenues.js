@@ -66,16 +66,20 @@ const AllVenues = () => {
                                                 </h2>
                                             </Link>
                                             <p className="font-body text-sm font-light">
-                                                {[...Array(Math.floor(venue.rating))].map((_, i) => (
-                                                    <span className="text-blue" key={i}>
-                                                        ★
-                                                    </span>
-                                                ))}
-                                                {[...Array(5 - Math.ceil(venue.rating))].map((_, i) => (
-                                                    <span className="text-blue" key={i}>
-                                                        ☆
-                                                    </span>
-                                                ))}
+                                                {[...Array(Math.floor(venue.rating))].map(
+                                                    (_, i) => (
+                                                        <span className="text-blue" key={i}>
+                                                            ★
+                                                        </span>
+                                                    )
+                                                )}
+                                                {[...Array(5 - Math.ceil(venue.rating))].map(
+                                                    (_, i) => (
+                                                        <span className="text-blue" key={i}>
+                                                            ☆
+                                                        </span>
+                                                    )
+                                                )}
                                             </p>
                                         </div>
 
