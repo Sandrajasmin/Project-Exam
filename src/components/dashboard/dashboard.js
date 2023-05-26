@@ -17,13 +17,13 @@ function Dashboard() {
 
     return (
         <div id="dashboard" className="hidden sm:block ">
-            <aside className="sticky top-0  flex h-screen flex-col items-center rounded-md bg-gradient-to-r from-blue to-[#1798CE] lg:h-full">
-                <div className="flex flex-col items-center py-20">
+            <aside className="sticky top-0 flex h-screen flex-col items-center rounded-md bg-gradient-to-r from-blue to-[#1798CE] lg:h-full">
+                <div className="flex flex-col items-center py-20 ">
                     {userAvatar}
                     <p className="font-body text-white">{userName}</p>
                     <p className="font-body text-sm text-white">{email}</p>
                 </div>
-                <div className="flex flex-col gap-5 px-16 font-body text-white">
+                <div className="flex flex-col gap-5 px-16 pb-20 font-body text-white">
                     <div className="items-base flex gap-2">
                         <i className="fa fa-user" aria-hidden="true"></i>
                         <Link to="/">Dashboard</Link>

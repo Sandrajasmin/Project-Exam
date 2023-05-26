@@ -9,7 +9,7 @@ import MansionImg from '../../../assets/img/mansion.png';
 
 function Category() {
     return (
-        <div className="mx-auto max-w-6xl my-12 pb-24 px-5">
+        <div className="mx-auto my-12 max-w-6xl px-5 pb-24">
             <h2 className="font-body text-4xl font-extrabold">
                 Find a second home that suites your style{' '}
             </h2>
@@ -76,7 +76,10 @@ function Category() {
                             Lux
                         </p>
                     </Link>
-                    <Link to="/venues" className="relative h-24 md:h-48 lg:row-start-2 lg:h-[200px]">
+                    <Link
+                        to="/venues"
+                        className="relative h-24 md:h-48 lg:row-start-2 lg:h-[200px]"
+                    >
                         <img
                             className="h-full w-full rounded-lg object-cover"
                             src={MansionImg}

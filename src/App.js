@@ -12,6 +12,7 @@ import DashBoard from './pages/dashboard/index';
 import VenueDashboard from './pages/hosting/venues/index';
 import CreateVenue from './pages/createvenue/index';
 import HostBooking from './pages/hosting/bookings/index';
+import BookingById from './pages/hosting/bookingById';
 import EditVenue from './pages/editvenue/index';
 
 function App() {
@@ -26,8 +27,9 @@ function App() {
                 <Route path="/log-in" element={<LogIn />} />
                 <Route path="/dashboard" element={<DashBoard />} />
                 <Route path="/venueManager" element={<VenueDashboard />} />
-                <Route path="/bookingManager" element={<VenueDashboard />} />
+                <Route path="/bookingManager" element={<HostBooking />} />
                 <Route path="/bookings" element={<HostBooking />} />
+                <Route path="/bookings/:id" element={<BookingById />} />
                 <Route path="/createVenue" element={<CreateVenue />} />
                 <Route path="/editVenue/:id" element={<EditVenue />} />
             </Routes>

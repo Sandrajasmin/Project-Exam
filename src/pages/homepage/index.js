@@ -11,7 +11,7 @@ function Home() {
             <HeroSection />
             <Guarantee />
             <Category />
-            
+
             <Host />
             <CardListing />
         </div>

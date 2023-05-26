@@ -7,7 +7,7 @@ import { getUserDetails } from '../../../utils/auth';
 import Dashboard from '../../../components/dashboard/dashboard';
 import DefaultHouse from '../../../assets/img/default_house.jpeg';
 
-const VenueDashboard = () => {
+function BookingById() {
     const dispatch = useDispatch();
     const userDetails = getUserDetails();
     const singleProfile = useSelector((state) => state.profile.singleProfile);
@@ -33,12 +33,11 @@ const VenueDashboard = () => {
             <div className="my-5 flex justify-center gap-5 md:justify-between">
                 <Dashboard />
                 <div>
-                    <h1 className="pb-5 font-heading text-4xl font-extrabold">Your Venues</h1>
-                    <div className="bg-lightgray grid gap-5 rounded-md  md:grid-cols-2 lg:grid-cols-3">
+                    <div className="bg-lightgray grid gap-5 rounded-md ">
                         {singleProfile &&
-                        singleProfile.venues &&
-                        singleProfile.venues.length > 0 ? (
-                            singleProfile.venues.map((venue) => (
+                        singleProfile.bookings &&
+                        singleProfile.bookings.length > 0 ? (
+                            singleProfile.bookings.map((venue) => (
                                 <div className=" flex " key={venue.id}>
                                     <div className="flex w-72 flex-col justify-between rounded-md bg-white drop-shadow-md md:w-56 lg:w-72">
                                         <Link
@@ -99,21 +98,62 @@ const VenueDashboard = () => {
                                 </div>
                             ))
                         ) : (
-                            <div className="flex flex-col items-center justify-center p-8">
-                                <p className="font-paragraph font-md text-md">
-                                    You have no Accommodation that is being rentet out{' '}
-                                </p>
-                                <div></div>
+                            // <div className="flex flex-col items-center justify-center p-8">
+                            //     <p className="font-paragraph font-md text-md">
+                            //         You have no Accommodation that is being rentet out{' '}
+                            //     </p>
+                            // </div>
+                            <div className="mx-auto max-w-4xl">
+                                <h1 className="pb-5 font-heading text-4xl font-extrabold">
+                                    Your bookings at Cottage House
+                                </h1>
+                                <div className="">
+                                    <table className="w-full text-center text-sm text-black">
+                                        <thead className="bg-lightgrey text-xs uppercase text-black">
+                                            <tr>
+                                                <th
+                                                    scope="col"
+                                                    className="hidden py-3 sm:block md:px-6"
+                                                >
+                                                    Venue
+                                                </th>
+                                                <th scope="col" className="px-1 py-3 lg:px-6">
+                                                    Customer
+                                                </th>
+                                                <th scope="col" className="px-1 py-3 lg:px-6">
+                                                    Email
+                                                </th>
+                                                <th scope="col" className="px-1 py-3 lg:px-6">
+                                                    From - to
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr className="my-2 border-b bg-white font-body text-sm font-light text-black">
+                                                <th className="hidden h-24 w-24 sm:block">
+                                                    <img
+                                                        className="h-full w-full object-cover"
+                                                        src={DefaultHouse}
+                                                    />
+                                                </th>
+                                                <td className="px-1 py-4 lg:px-6">Sandra</td>
+                                                <td className="px-1 py-4 lg:px-6">
+                                                    Sandra-jasmin@stud.noroff.no
+                                                </td>
+                                                <td className="px-1 py-4 lg:px-6">
+                                                    17.05.23-18.05.23
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         )}
-                    </div>
-                    <div className="bg-blue-500 absolute right-0 top-0 flex h-10 w-10 items-center justify-center rounded-full text-sm font-bold text-white">
-                        {singleProfile && singleProfile.venues ? singleProfile.venues.length : 0}
                     </div>
                 </div>
             </div>
         </div>
     );
-};
+}
 
-export default VenueDashboard;
+export default BookingById;
