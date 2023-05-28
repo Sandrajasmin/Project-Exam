@@ -13,8 +13,6 @@ export const getUserDetails = () => {
     const token = localStorage.getItem('accessToken');
     const email = localStorage.getItem('email');
 
-    console.log(username, avatar, token, email);
-
     return {
         username: username,
         avatar: avatar,

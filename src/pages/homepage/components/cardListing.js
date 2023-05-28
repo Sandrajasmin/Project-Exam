@@ -5,21 +5,24 @@ import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-// import ErrorComponent from "../../components/shared/ErrorComponent";
+import DefaultHouse from '../../../assets/img/default_house.jpeg';
+import ErrorComponent from '../../../components/errorComponent';
 
 const AllProducts = () => {
     const dispatch = useDispatch();
     const { venues } = useSelector((state) => state.venues);
+    const { isError } = useSelector((state) => state.error);
+    const { errorMessage } = useSelector((state) => state.error);
 
     const truncateText = (text, maxWords) => {
-        const words = text.split(' '); // Split text into words
+        const words = text.split(' ');
 
         if (words.length <= maxWords) {
-            return text; // Return the original text if it has less than or equal to maxWords words
+            return text;
         }
 
-        const truncatedWords = words.slice(0, maxWords); // Take the first maxWords words
-        return truncatedWords.join(' ') + '...'; // Join words and add ellipsis
+        const truncatedWords = words.slice(0, maxWords);
+        return truncatedWords.join(' ') + '...';
     };
 
     useEffect(() => {
@@ -65,33 +68,37 @@ const AllProducts = () => {
     return (
         <div className="mx-auto my-10 max-w-7xl">
             <div className="px-10">
-                <Slider {...settings}>
-                    {venues.slice(0, 10).map((venue) => {
-                        const truncatedName = truncateText(venue.name, 3); // Define truncatedName variable here
-                        return (
-                            <div className=" h-72 md:px-5" key={venue.id}>
-                                <Link to={`/venue/${venue.id}`}>
-                                    <div className="h-44">
-                                        <img
-                                            src={venue.media[0]}
-                                            className="h-full w-full rounded-md object-cover"
-                                            loading="lazy"
-                                            alt=""
-                                        />
-                                    </div>
-                                    <div className="mt-4 flex flex-col">
-                                        <div className="relative font-body text-lg font-bold text-darkgrey">
-                                            <h3>{truncatedName}</h3>
+                {isError ? (
+                    <ErrorComponent message={errorMessage} />
+                ) : (
+                    <Slider {...settings}>
+                        {venues.slice(0, 10).map((venue) => {
+                            const truncatedName = truncateText(venue.name, 3); // Define truncatedName variable here
+                            return (
+                                <div className=" h-72 md:px-5" key={venue.id}>
+                                    <Link to={`/venue/${venue.id}`}>
+                                        <div className="h-44">
+                                            <img
+                                                src={venue.media[0] ? venue.media[0] : DefaultHouse}
+                                                className="h-full w-full rounded-md object-cover"
+                                                loading="lazy"
+                                                alt=""
+                                            />
                                         </div>
-                                        <p className="text-md font-body text-darkgrey">
-                                            {venue.price} $ /night
-                                        </p>
-                                    </div>
-                                </Link>
-                            </div>
-                        );
-                    })}
-                </Slider>
+                                        <div className="mt-4 flex flex-col">
+                                            <div className="relative font-body text-lg font-bold text-darkgrey">
+                                                <h3>{truncatedName}</h3>
+                                            </div>
+                                            <p className="text-md font-body text-darkgrey">
+                                                {venue.price} $ /night
+                                            </p>
+                                        </div>
+                                    </Link>
+                                </div>
+                            );
+                        })}
+                    </Slider>
+                )}
             </div>
         </div>
     );

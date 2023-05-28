@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { setLoadingState } from './loaderSlice';
+import { setError } from './errorSlice';
 
 const profileSlice = createSlice({
     name: 'profile',
@@ -18,6 +20,7 @@ const { SET_SINGLE_PROFILE } = profileSlice.actions;
 const accessToken = localStorage.getItem('accessToken');
 
 export const fetchProfile = (name, profileData) => async (dispatch) => {
+    dispatch(setLoadingState(true));
     try {
         const response = await fetch(
             `https://nf-api.onrender.com/api/v1/holidaze/profiles/${name}?_bookings=true&_venues=true`,
@@ -31,15 +34,15 @@ export const fetchProfile = (name, profileData) => async (dispatch) => {
             }
         );
         const data = await response.json();
-        console.log(data);
-        console.log(response);
         dispatch(SET_SINGLE_PROFILE(data));
+        dispatch(setLoadingState(false));
     } catch (e) {
-        console.log(e);
+        dispatch(setError(true, e.message));
     }
 };
 
 export const fetchBookingOwner = (name, profileData) => async (dispatch) => {
+    dispatch(setLoadingState(true));
     try {
         const response = await fetch(
             `https://nf-api.onrender.com/api/v1/holidaze/profiles/${name}/venues?_bookings=true&_owner=true`,
@@ -53,62 +56,9 @@ export const fetchBookingOwner = (name, profileData) => async (dispatch) => {
             }
         );
         const data = await response.json();
-        console.log(data);
-        console.log(response);
         dispatch(SET_SINGLE_PROFILE(data));
+        dispatch(setLoadingState(false));
     } catch (e) {
-        console.log(e);
+        dispatch(setError(true, e.message));
     }
 };
-
-// export const logIn = (userData) => {
-//     fetch('https://nf-api.onrender.com/api/v1/holidaze/auth/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(userData)
-//     })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(response.statusText)
-//             }
-//             return response.json()
-//         })
-//         .then(data => {
-//             console.log(data);
-//             localStorage.setItem('userName', data.name)
-//             localStorage.setItem('email', data.email)
-//             localStorage.setItem('avatar', data.avatar)
-//             localStorage.setItem('accessToken', data.accessToken)
-//             localStorage.setItem('venueManager', data.venueManager)
-//             window.location.href = '/';
-//         })
-//         .catch(error => {
-//             console.log(error);
-//             document.getElementById('errorMessage').innerHTML = "Wrong password or email"
-//         })
-// }
-
-// export const registerUser = (userData) => {
-//     fetch('https://nf-api.onrender.com/api/v1/holidaze/auth/register', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(userData)
-//     })
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error(response.statusText)
-//             }
-//             return response.json()
-//         })
-//         .then(data => {
-//             console.log(data);
-//             window.location.href = '/login';
-//         })
-//         .catch(error => {
-//             document.getElementById('errorMessage').innerHTML = "There was an Error, pleace try again"
-//         })
-// }

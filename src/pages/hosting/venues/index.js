@@ -11,8 +11,7 @@ const VenueDashboard = () => {
     const dispatch = useDispatch();
     const userDetails = getUserDetails();
     const singleProfile = useSelector((state) => state.profile.singleProfile);
-    
-    console.log("edit venue", singleProfile);
+
     useEffect(() => {
         if (userDetails.username) {
             dispatch(fetchProfile(userDetails.username));
@@ -64,7 +63,8 @@ const VenueDashboard = () => {
                                         </Link>
                                         <Link to={`/venue/${venue.id}`} className="text-center">
                                             <div className="pb-2 text-4xl font-extrabold">
-                                                {venue.bookings && venue.bookings.length !== undefined ? (
+                                                {venue.bookings &&
+                                                venue.bookings.length !== undefined ? (
                                                     <div>{venue.bookings.length}</div>
                                                 ) : (
                                                     <p>0</p>

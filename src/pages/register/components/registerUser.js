@@ -35,7 +35,6 @@ const ContactForm = () => {
                 venueManager: values.venueManager,
                 password: values.password
             };
-            console.log(userData);
             fetch('https://nf-api.onrender.com/api/v1/holidaze/auth/register', {
                 method: 'POST',
                 headers: {

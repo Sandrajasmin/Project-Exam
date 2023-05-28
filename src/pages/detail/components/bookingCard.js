@@ -28,16 +28,20 @@ const calculatePrice = (dateFrom, dateTo, pricePerNight) => {
 };
 
 const Modal = ({ isOpen, onClose, children }) => {
-    const modalClasses = `fixed inset-0 flex items-center justify-center z-50 ${isOpen ? '' : 'hidden'
-        }`;
+    const modalClasses = `fixed inset-0 flex items-center justify-center z-50 ${
+        isOpen ? '' : 'hidden'
+    }`;
     return (
         <div className={modalClasses}>
             <div className="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-            <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-                <div className="modal-content py-4 text-left px-6">
-                    <button className="modal-close absolute top-0 right-0 mt-4 mr-4" onClick={onClose}>
+            <div className="modal-container z-50 mx-auto w-11/12 overflow-y-auto rounded bg-white shadow-lg md:max-w-md">
+                <div className="modal-content px-6 py-4 text-left">
+                    <button
+                        className="modal-close absolute right-0 top-0 mr-4 mt-4"
+                        onClick={onClose}
+                    >
                         <svg
-                            className="fill-current h-6 w-6 text-gray-500"
+                            className="h-6 w-6 fill-current text-gray-500"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                         >
@@ -57,7 +61,7 @@ const Modal = ({ isOpen, onClose, children }) => {
 Modal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node.isRequired
 };
 
 const DetailPage = () => {
@@ -66,8 +70,6 @@ const DetailPage = () => {
     const [formSubmitted, setFormSubmitted] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const { id } = useParams();
-    
-    console.log('halo', singleVenue);
 
     useEffect(() => {
         if (id) {
@@ -123,7 +125,6 @@ const DetailPage = () => {
 
     return (
         <>
-            
             <div>
                 {formSubmitted ? (
                     <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
@@ -132,7 +133,7 @@ const DetailPage = () => {
                         <p className="mt-2">Email will be sent with your booking details</p>
                     </Modal>
                 ) : (
-                    <div className="max-w-md rounded-md bg-white px-6 py-5 drop-shadow-md md:px-8">
+                    <div className="max-w-md rounded-md bg-white px-6 py-5 drop-shadow-lg md:px-8">
                         <form onSubmit={formik.handleSubmit}>
                             <div className="flex justify-center">
                                 <div>
@@ -173,7 +174,9 @@ const DetailPage = () => {
                                         <input
                                             onChange={formik.handleChange}
                                             value={
-                                                formik.values.dateTo ? dateToYMD(formik.values.dateTo) : ''
+                                                formik.values.dateTo
+                                                    ? dateToYMD(formik.values.dateTo)
+                                                    : ''
                                             }
                                             id="dateTo"
                                             name="dateTo"
@@ -202,7 +205,9 @@ const DetailPage = () => {
                                     className="border-1 block w-full border border-green px-4 py-1.5"
                                 />
                                 {formik.touched.guests && formik.errors.guests ? (
-                                    <div className="text-sm text-red-600">{formik.errors.guests}</div>
+                                    <div className="text-sm text-red-600">
+                                        {formik.errors.guests}
+                                    </div>
                                 ) : null}
                             </div>
                             <div className="my-5 flex justify-center">
