@@ -215,14 +215,14 @@ const DetailPage = () => {
                                             <h3 className="font-body text-xl text-black">
                                                 {' '}
                                                 You need to be{' '}
-                                                <Link to="login" className="italic text-blue">
+                                                <Link to="/log-in" className="italic text-blue">
                                                     logged
                                                 </Link>{' '}
                                                 in to make a booking{' '}
                                             </h3>
                                             <p className="">
                                                 Not a customer?{' '}
-                                                <Link to="register" className="text-base text-blue">
+                                                <Link to="/register" className="text-base text-blue">
                                                     Register now
                                                 </Link>
                                             </p>

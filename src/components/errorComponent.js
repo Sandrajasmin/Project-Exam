@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const ErrorComponent = ({ message }) => {
     return (
-        <div className="bg-beig my-4 px-4 py-3 text-black shadow-md" role="alert">
+        <div className="bg-bluegreen my-4 px-4 py-3 text-black shadow-md" role="alert">
             <div className="flex">
                 <div className="py-1">
                     <svg

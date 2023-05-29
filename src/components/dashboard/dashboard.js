@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import DefaultAvatar from '../../assets/img/defaultAvatar.png';
+import { handleLogout } from '../../utils/auth';
+import LogOutBtn from '../logout';
 
 function Dashboard() {
     const userName = localStorage.getItem('userName');
@@ -41,7 +43,7 @@ function Dashboard() {
                     </div>
                     <div className="items-base flex gap-2">
                         <i className="fa-solid fa-door-open"></i>
-                        <Link to="/">Sign out</Link>
+                        <LogOutBtn handleLogout={handleLogout} />
                     </div>
                 </div>
             </aside>

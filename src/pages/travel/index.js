@@ -112,7 +112,7 @@ function Travel() {
                                     </div>
                                 ))
                             ) : (
-                                <div className="flex h-full w-full flex-col items-center justify-center  ">
+                                <div className="flex h-full w-full flex-col items-center justify-center py-10">
                                     <img src={noBookingsImg} />
                                     <h1 className="font-paragraph font-md w-full py-10 text-center font-heading text-xl font-bold">
                                         Sorry, you have no bookings right now{' '}

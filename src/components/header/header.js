@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Logo from '../../assets/img/logo_small.webp';
-// import { useSelector } from 'react-redux';
+import LogOutBtn from '../logout';
 import { NavLink } from 'react-router-dom';
 import DefaultAvatar from '../../assets/img/defaultAvatar.png';
+import { handleLogout } from '../../utils/auth';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -214,12 +215,17 @@ export default function Header() {
                             </NavLink>
                             <div className="">
                                 <NavLink
-                                    className="flex items-center gap-2 rounded-md bg-blue px-3 py-2 font-bold text-white"
+                                    className="flex flex-col items-center rounded-md bg-blue px-3 py-2 text-white"
                                     to="/dashboard"
                                     onClick={closeMenu}
                                 >
-                                    {userAvatar}
-                                    {userName}
+                                    <div className='flex items-center gap-2 font-bold'>
+                                        {userAvatar}
+                                        {userName}
+                                    </div>
+                                    <div className='font-light'>
+                                        <LogOutBtn handleLogout={handleLogout} />
+                                    </div>
                                 </NavLink>
                             </div>
                         </div>
@@ -242,7 +248,7 @@ export default function Header() {
                         >
                             Register
                         </NavLink>
-                        <NavLink className="block py-2" to="#" role="menuitem" onClick={closeMenu}>
+                        <NavLink className="block py-2" to="log-in" role="menuitem" onClick={closeMenu}>
                             Log in
                         </NavLink>
                     </div>

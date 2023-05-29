@@ -172,7 +172,7 @@ const ContactForm = () => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.avatar}
-                                placeholder="avatar.com/image"
+                                placeholder="avatar.jpg"
                                 className="block w-full rounded-md border-0 px-4 py-2 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-blue"
                             />
                             {formik.touched.avatar && formik.errors.avatar ? (
@@ -182,7 +182,7 @@ const ContactForm = () => {
                             ) : null}
                         </div>
                         <fieldset className="flex flex-col gap-4 text-black md:flex-row md:gap-12">
-                            <p>Do you want to rent out an accommodation??</p>
+                            <p>Are you looking to rent out a home or a venue?</p>
                             <div>
                                 <input
                                     checked={formik.values.venueManager}
