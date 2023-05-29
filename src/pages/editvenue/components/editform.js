@@ -88,7 +88,6 @@ function EditFormVenue() {
                     lng: 0
                 }
             };
-            console.log(venueData);
             dispatch(editVenue(id, venueData));
         }
     });
@@ -110,12 +109,14 @@ function EditFormVenue() {
         setMediaArray(newMediaArray);
     }
 
+    const { handleSubmit, handleChange, handleBlur, values, touched, errors } = formik;
+
     return (
         <div className="mx-auto max-w-7xl px-5">
             <div className="my-5 flex gap-5">
                 <div id="create-venue" className="w-full bg-white px-5 py-5 drop-shadow-md">
                     <div id="form">
-                        <form onSubmit={formik.handleSubmit} className="my-5">
+                        <form onSubmit={handleSubmit} className="my-5">
                             <div className="flex flex-col gap-5 lg:flex-row lg:justify-between lg:space-y-0">
                                 <div className="flex flex-col gap-y-5 lg:gap-y-10">
                                     <div id="input_title">
@@ -131,16 +132,15 @@ function EditFormVenue() {
                                                     type="text"
                                                     name="name"
                                                     id="name"
-                                                    onChange={formik.handleChange}
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.name || ''}
+                                                    onBlur={handleBlur}
+                                                    value={values.name || ''}
                                                     className="block flex-1 border-0 bg-transparent py-1.5 pl-2 text-darkgrey placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                                                     placeholder={'Write a good name'}
                                                 />
                                             </div>
-                                            {formik.touched.name && formik.errors.name ? (
+                                            {touched.name && errors.name ? (
                                                 <div className="text-sm text-red-600">
-                                                    *{formik.errors.name}
+                                                    *{errors.name}
                                                 </div>
                                             ) : null}
                                         </div>
@@ -159,16 +159,15 @@ function EditFormVenue() {
                                                 id="description"
                                                 name="description"
                                                 rows="6"
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.description || ''}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.description || ''}
                                                 placeholder="Write a good description of the venue you want to list"
                                                 className="block w-full rounded-md border-0 py-1.5 text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                             ></textarea>
-                                            {formik.touched.description &&
-                                            formik.errors.description ? (
+                                            {touched.description && errors.description ? (
                                                 <div className="text-sm text-red-600">
-                                                    *{formik.errors.description}
+                                                    *{errors.description}
                                                 </div>
                                             ) : null}
                                         </div>
@@ -186,14 +185,14 @@ function EditFormVenue() {
                                                     type="text"
                                                     name="country"
                                                     id="country"
-                                                    onChange={formik.handleChange}
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.country || ''}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.country || ''}
                                                     className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
                                                 />
-                                                {formik.touched.country && formik.errors.country ? (
+                                                {touched.country && errors.country ? (
                                                     <div className="text-sm text-red-600">
-                                                        *{formik.errors.country}
+                                                        *{errors.country}
                                                     </div>
                                                 ) : null}
                                             </div>
@@ -208,15 +207,14 @@ function EditFormVenue() {
                                                     type="text"
                                                     name="continent"
                                                     id="continent"
-                                                    onChange={formik.handleChange}
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.continent || ''}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.continent || ''}
                                                     className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
                                                 />
-                                                {formik.touched.continent &&
-                                                formik.errors.continent ? (
+                                                {touched.continent && errors.continent ? (
                                                     <div className="text-sm text-red-600">
-                                                        *{formik.errors.continent}
+                                                        *{errors.continent}
                                                     </div>
                                                 ) : null}
                                             </div>
@@ -231,14 +229,14 @@ function EditFormVenue() {
                                                     type="text"
                                                     name="city"
                                                     id="city"
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.city || ''}
-                                                    onChange={formik.handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.city || ''}
+                                                    onChange={handleChange}
                                                     className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
                                                 />
-                                                {formik.touched.city && formik.errors.city ? (
+                                                {touched.city && errors.city ? (
                                                     <div className="text-sm text-red-600">
-                                                        *{formik.errors.city}
+                                                        *{errors.city}
                                                     </div>
                                                 ) : null}
                                             </div>
@@ -254,14 +252,14 @@ function EditFormVenue() {
                                                 type="text"
                                                 name="address"
                                                 id="address"
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.address || ''}
-                                                onChange={formik.handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.address || ''}
+                                                onChange={handleChange}
                                                 className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
                                             />
-                                            {formik.touched.address && formik.errors.address ? (
+                                            {touched.address && errors.address ? (
                                                 <div className="text-sm text-red-600">
-                                                    *{formik.errors.address}
+                                                    *{errors.address}
                                                 </div>
                                             ) : null}
                                         </div>
@@ -276,14 +274,14 @@ function EditFormVenue() {
                                                 type="text"
                                                 name="zip"
                                                 id="zip"
-                                                onBlur={formik.handleBlur}
-                                                value={formik.values.zip || ''}
-                                                onChange={formik.handleChange}
+                                                onBlur={handleBlur}
+                                                value={values.zip || ''}
+                                                onChange={handleChange}
                                                 className="block w-full rounded-md border-0 py-1.5 font-body font-light text-darkgrey shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue sm:leading-6"
                                             />
-                                            {formik.touched.zip && formik.errors.zip ? (
+                                            {touched.zip && errors.zip ? (
                                                 <div className="text-sm text-red-600">
-                                                    *{formik.errors.zip}
+                                                    *{errors.zip}
                                                 </div>
                                             ) : null}
                                         </div>
@@ -324,14 +322,12 @@ function EditFormVenue() {
                                                 name="media"
                                                 id="media"
                                                 className="w-full rounded border-2 border-[#125C85] p-1"
-                                                onChange={formik.handleChange}
-                                                onBlur={formik.handleBlur}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
                                             />
                                         </div>
-                                        {formik.touched.media && formik.errors.media ? (
-                                            <div className="text-red-600">
-                                                {formik.errors.media}
-                                            </div>
+                                        {touched.media && errors.media ? (
+                                            <div className="text-red-600">{errors.media}</div>
                                         ) : null}
                                         <button
                                             type="button"
@@ -355,15 +351,15 @@ function EditFormVenue() {
                                                     type="number"
                                                     name="price"
                                                     id="price"
-                                                    onChange={formik.handleChange}
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.price}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.price}
                                                     className="block flex-1 border-0 bg-transparent py-1.5 pl-2 font-body text-base font-light text-darkgrey focus:ring-0 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
-                                            {formik.touched.price && formik.errors.price ? (
+                                            {touched.price && errors.price ? (
                                                 <div className="text-sm text-red-600">
-                                                    *{formik.errors.price}
+                                                    *{errors.price}
                                                 </div>
                                             ) : null}
                                         </div>
@@ -382,15 +378,15 @@ function EditFormVenue() {
                                                     type="number"
                                                     name="maxGuests"
                                                     id="maxGuests"
-                                                    onChange={formik.handleChange}
-                                                    onBlur={formik.handleBlur}
-                                                    value={formik.values.maxGuests}
+                                                    onChange={handleChange}
+                                                    onBlur={handleBlur}
+                                                    value={values.maxGuests}
                                                     className="block flex-1 border-0 bg-transparent py-1.5 pl-2 font-body text-base font-light text-darkgrey focus:ring-0 sm:text-sm sm:leading-6"
                                                 />
                                             </div>
-                                            {formik.touched.maxGuests && formik.errors.maxGuests ? (
+                                            {touched.maxGuests && errors.maxGuests ? (
                                                 <div className="text-sm text-red-600">
-                                                    *{formik.errors.maxGuests}
+                                                    *{errors.maxGuests}
                                                 </div>
                                             ) : null}
                                         </div>
@@ -406,9 +402,9 @@ function EditFormVenue() {
                                                     <input
                                                         id="pets"
                                                         name="pets"
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.pets || ''}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.pets || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -420,9 +416,9 @@ function EditFormVenue() {
                                                     <input
                                                         id="wifi"
                                                         name="wifi"
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.wifi || ''}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.wifi || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -434,9 +430,9 @@ function EditFormVenue() {
                                                     <input
                                                         id="breakfast"
                                                         name="breakfast"
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.breakfast || ''}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.breakfast || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />
@@ -448,9 +444,9 @@ function EditFormVenue() {
                                                     <input
                                                         id="parking"
                                                         name="parking"
-                                                        onChange={formik.handleChange}
-                                                        onBlur={formik.handleBlur}
-                                                        value={formik.values.parking || ''}
+                                                        onChange={handleChange}
+                                                        onBlur={handleBlur}
+                                                        value={values.parking || ''}
                                                         type="checkbox"
                                                         className="h-4 w-4 rounded border-gray-300 text-blue focus:ring-blue"
                                                     />

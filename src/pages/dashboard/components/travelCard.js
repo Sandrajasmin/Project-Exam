@@ -3,6 +3,7 @@ import TravelImg from '../../../assets/img/travelVector.png';
 import { getUserDetails } from '../../../utils/auth';
 import { fetchProfile } from '../../../store/modules/profileSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const TravelCard = () => {
     const dispatch = useDispatch();
@@ -18,7 +19,10 @@ const TravelCard = () => {
     // FIX!!!!! IT ONLY SHOWS BOOKINGS ON YOUR OWN VENUES
 
     return (
-        <div className="relative flex h-[300px] w-[300px] flex-col items-center justify-center rounded-md bg-bluegreen md:w-[330px] lg:w-[290px]">
+        <Link
+            to="/bookings"
+            className="relative flex h-[300px] w-[300px] flex-col items-center justify-center rounded-md bg-bluegreen md:w-[330px] lg:w-[290px]"
+        >
             <div className="absolute right-0 top-0">
                 <h2 className="p-2 font-heading text-4xl font-bold text-white">TRAVEL</h2>
             </div>
@@ -40,7 +44,7 @@ const TravelCard = () => {
                     )}
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

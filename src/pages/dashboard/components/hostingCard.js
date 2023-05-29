@@ -46,17 +46,8 @@ const HostingCard = () => {
                 </div>
                 <div className="py-2 text-center font-heading font-bold text-white">
                     <span className="pr-2 text-4xl">Bookings</span>
-                    <div className="">
-                        {singleProfile &&
-                        singleProfile._count &&
-                        singleProfile._count.bookings !== undefined ? (
-                            <div className="flex justify-center gap-2 font-body font-bold">
-                                {singleProfile._count.bookings}
-                                <p className=" font-light">Bookings</p>
-                            </div>
-                        ) : (
-                            <p>0 bookings</p>
-                        )}
+                    <div className="flex justify-center gap-2 font-body font-bold">
+                        <p className=" font-light italic">Check out your upcoming guests</p>
                     </div>
                 </div>
             </Link>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleVenue } from '../../store/modules/VenueSlice';
+import { Link } from 'react-router-dom';
 import BookingCard from './components/bookingCard';
 import Slider from 'react-slick';
 
@@ -165,53 +166,74 @@ const DetailPage = () => {
                                 </div>
                             </div>
                             {/* description */}
-                            <div id="description" className="py-5 font-body text-base">
-                                {singleVenue.description.length > 10 ? (
-                                    singleVenue.description.split('.').map((sentence, index) => (
-                                        <React.Fragment key={index}>
-                                            <p>{sentence.trim()}.</p>
-                                            <br />
-                                        </React.Fragment>
-                                    ))
-                                ) : (
-                                    <div className="flex flex-col gap-5">
-                                        <p>
-                                            The property is idyllically located in Mellby and boasts
-                                            impeccable sun and view conditions. The property
-                                            consists of a holiday home, outbuilding and annexe.
-                                        </p>
-                                        <p>
-                                            The holiday home has a living room/kitchen with
-                                            fantastic views, four bedrooms (incl. annex), bathroom
-                                            and toilet room. The cabin was significantly upgraded in
-                                            2016.{' '}
-                                        </p>
-                                        <p>
-                                            The annexe is about 15 square meters. If you have, you
-                                            and the family can enjoy sunny days fishing from shore
-                                            or boat.{' '}
-                                        </p>
-                                        <p>
+                            <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-5">
+                                <div id="description" className="py-5 font-body text-base lg:w-2/4">
+                                    {singleVenue.description.length > 10 ? (
+                                        singleVenue.description
+                                            .split('.')
+                                            .map((sentence, index) => (
+                                                <React.Fragment key={index}>
+                                                    <p>{sentence.trim()}.</p>
+                                                    <br />
+                                                </React.Fragment>
+                                            ))
+                                    ) : (
+                                        <div className="flex flex-col gap-5">
+                                            <p>
+                                                The property is idyllically located in Mellby and
+                                                boasts impeccable sun and view conditions. The
+                                                property consists of a holiday home, outbuilding and
+                                                annexe.
+                                            </p>
+                                            <p>
+                                                The holiday home has a living room/kitchen with
+                                                fantastic views, four bedrooms (incl. annex),
+                                                bathroom and toilet room. The cabin was
+                                                significantly upgraded in 2016.{' '}
+                                            </p>
+                                            <p>
+                                                The annexe is about 15 square meters. If you have,
+                                                you and the family can enjoy sunny days fishing from
+                                                shore or boat.{' '}
+                                            </p>
+                                            <p>
+                                                {' '}
+                                                The boat is located in the marina approx. 500 meters
+                                                from the cabin
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="self-center ">
+                                    {accessToken ? (
+                                        <div className="">
+                                            <BookingCard />
+                                        </div>
+                                    ) : (
+                                        <div>
                                             {' '}
-                                            The boat is located in the marina approx. 500 meters
-                                            from the cabin
-                                        </p>
-                                    </div>
-                                )}
+                                            <h3 className="font-body text-xl text-black">
+                                                {' '}
+                                                You need to be{' '}
+                                                <Link to="/log-in" className="italic text-blue">
+                                                    logged
+                                                </Link>{' '}
+                                                in to make a booking{' '}
+                                            </h3>
+                                            <p className="">
+                                                Not a customer?{' '}
+                                                <Link to="/register" className="text-base text-blue">
+                                                    Register now
+                                                </Link>
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     )}
+
                     {isError && <h1>Sorry, an error accured </h1>}
-                    {accessToken ? (
-                        <div>
-                            <BookingCard />
-                        </div>
-                    ) : (
-                        <div>
-                            {' '}
-                            <h1>must log in</h1>
-                        </div>
-                    )}
                 </div>
             </div>
         </>

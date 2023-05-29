@@ -33,7 +33,6 @@ function SingIn() {
                     return response.json();
                 })
                 .then((data) => {
-                    console.log(data);
                     localStorage.setItem('userName', data.name);
                     localStorage.setItem('accessToken', data.accessToken);
                     localStorage.setItem('avatar', data.avatar);

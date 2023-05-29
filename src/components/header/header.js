@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Logo from '../../assets/img/logo_small.webp';
-// import { useSelector } from 'react-redux';
+import LogOutBtn from '../logout';
 import { NavLink } from 'react-router-dom';
 import DefaultAvatar from '../../assets/img/defaultAvatar.png';
+import { handleLogout } from '../../utils/auth';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -113,43 +114,17 @@ export default function Header() {
                                         <div className="flex items-center pt-8 font-body text-base">
                                             <div className="relative inline-block text-left">
                                                 <NavLink
-                                                    className="border-r border-black pr-5"
-                                                    onMouseEnter={toggleMenu}
+                                                    className="border-r border-black px-5"
+                                                    to="/venues"
                                                 >
-                                                    <button className="">Venues</button>{' '}
-                                                    <i className="fa fa-angle-down"></i>
+                                                    Travel
                                                 </NavLink>
-                                                <div
-                                                    className={`${
-                                                        isMenuOpen ? 'flex' : 'hidden'
-                                                    } absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none`}
-                                                    role="menu"
-                                                    aria-orientation="vertical"
-                                                    aria-labelledby="menu-button"
-                                                    tabIndex="-1"
-                                                    id="venue-dropdown"
+                                                <NavLink
+                                                    to="/createVenue"
+                                                    className="border-r border-black px-5"
                                                 >
-                                                    <div className="py-1" role="none">
-                                                        <NavLink
-                                                            to="/venues"
-                                                            className="block px-4 py-2 text-sm text-gray-700"
-                                                            role="menuitem"
-                                                            tabIndex="-1"
-                                                            id="menu-item-0"
-                                                        >
-                                                            Travel
-                                                        </NavLink>
-                                                        <NavLink
-                                                            to="/createVenue"
-                                                            className="block px-4 py-2 text-sm text-gray-700"
-                                                            role="menuitem"
-                                                            tabIndex="-1"
-                                                            id="menu-item-1"
-                                                        >
-                                                            Create Venue
-                                                        </NavLink>
-                                                    </div>
-                                                </div>
+                                                    Create Venue
+                                                </NavLink>
                                             </div>
 
                                             <NavLink
@@ -211,39 +186,19 @@ export default function Header() {
             >
                 {accessToken ? (
                     <div className="flex flex-col gap-5 px-2 pb-3 pt-10">
-                        <div className="border-b border-black pb-2 pr-5">
-                            <button onClick={toggleMenu} className="">
-                                Venues
-                            </button>{' '}
-                            <div
-                                role="menu"
-                                aria-orientation="vertical"
-                                aria-labelledby="menu-button"
-                            >
-                                <div className="py-1" role="none">
-                                    <NavLink
-                                        to="/venues"
-                                        className="block px-7 py-2 text-sm text-black"
-                                        role="menuitem"
-                                        id="menu-item-0"
-                                        onClick={closeMenu}
-                                    >
-                                        Travels
-                                    </NavLink>
-                                    <NavLink
-                                        to="/createVenue"
-                                        className="block px-7 py-2 text-sm text-black"
-                                        role="menuitem"
-                                        id="menu-item-1"
-                                        onClick={closeMenu}
-                                    >
-                                        Create Venue
-                                    </NavLink>
-                                </div>
-                            </div>
-                        </div>
-
                         <div className="flex flex-col gap-5 font-body text-base">
+                            <NavLink
+                                to="/venues"
+                                className="border-b border-black pb-2"
+                            >
+                                Travel
+                            </NavLink>
+                            <NavLink
+                                to="/createVenue"
+                                className="border-b border-black pb-2"
+                            >
+                                Create Venue
+                            </NavLink>
                             <NavLink
                                 className="border-b border-black pb-2"
                                 to="/bookings"
@@ -260,12 +215,17 @@ export default function Header() {
                             </NavLink>
                             <div className="">
                                 <NavLink
-                                    className="flex items-center gap-2 rounded-md bg-blue px-3 py-2 font-bold text-white"
+                                    className="flex flex-col items-center rounded-md bg-blue px-3 py-2 text-white"
                                     to="/dashboard"
                                     onClick={closeMenu}
                                 >
-                                    {userAvatar}
-                                    {userName}
+                                    <div className='flex items-center gap-2 font-bold'>
+                                        {userAvatar}
+                                        {userName}
+                                    </div>
+                                    <div className='font-light'>
+                                        <LogOutBtn handleLogout={handleLogout} />
+                                    </div>
                                 </NavLink>
                             </div>
                         </div>
@@ -288,7 +248,7 @@ export default function Header() {
                         >
                             Register
                         </NavLink>
-                        <NavLink className="block py-2" to="#" role="menuitem" onClick={closeMenu}>
+                        <NavLink className="block py-2" to="log-in" role="menuitem" onClick={closeMenu}>
                             Log in
                         </NavLink>
                     </div>

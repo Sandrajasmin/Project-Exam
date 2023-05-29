@@ -4,18 +4,15 @@ import PropTypes from 'prop-types';
 const SearchBar = ({ onSearch }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        onSearch(searchTerm);
-    };
-
     const handleChange = (e) => {
-        setSearchTerm(e.target.value);
+        const { value } = e.target;
+        setSearchTerm(value);
+        onSearch(value); // Call the onSearch function with the current search value
     };
 
     return (
         <div className="mx-auto my-5 flex justify-center">
-            <form onSubmit={handleSearch} className="flex gap-2 md:gap-6">
+            <form className="flex gap-2 md:gap-6">
                 <input
                     type="text"
                     value={searchTerm}
@@ -34,8 +31,8 @@ const SearchBar = ({ onSearch }) => {
     );
 };
 
-export default SearchBar;
-
 SearchBar.propTypes = {
     onSearch: PropTypes.func.isRequired
 };
+
+export default SearchBar;
