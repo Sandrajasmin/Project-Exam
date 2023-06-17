@@ -85,6 +85,7 @@ function Travel() {
                                                                         ? bookings.venue.media[0]
                                                                         : DefaultHouse
                                                                 }
+                                                                alt={bookings.venue.name}
                                                             />
                                                         </th>
                                                         <td className="max-w-[140px] px-1 py-4 lg:px-6">
@@ -113,7 +114,7 @@ function Travel() {
                                 ))
                             ) : (
                                 <div className="flex h-full w-full flex-col items-center justify-center py-10">
-                                    <img src={noBookingsImg} />
+                                    <img src={noBookingsImg} alt='vector of house' />
                                     <h1 className="font-paragraph font-md w-full py-10 text-center font-heading text-xl font-bold">
                                         Sorry, you have no bookings right now{' '}
                                     </h1>

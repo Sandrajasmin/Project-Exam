@@ -8,7 +8,6 @@ import NoResult from '../../../assets/img/no_result.webp';
 import { fetchVenues } from '../../../store/modules/VenueSlice';
 import { FaWifi, FaParking, FaPaw } from 'react-icons/fa';
 import { GiKnifeFork } from 'react-icons/gi';
-// import ErrorComponent from "../../components/shared/ErrorComponent";
 
 const AllVenues = () => {
     const dispatch = useDispatch();

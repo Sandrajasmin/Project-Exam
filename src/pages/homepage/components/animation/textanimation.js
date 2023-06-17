@@ -7,7 +7,7 @@ function HeroText() {
     const textArray = ['SPAIN', 'ITALY', 'CHINA', 'MONACO', 'JAPAN', 'POLEN'];
     const typingDelay = 100;
     const erasingDelay = 80;
-    const newTextDelay = 2000; // Delay between current and next text
+    const newTextDelay = 1500; // Delay between current and next text
     let textArrayIndex = 0;
     let charIndex = 0;
 

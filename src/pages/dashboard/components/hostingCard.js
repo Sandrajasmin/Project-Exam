@@ -23,7 +23,7 @@ const HostingCard = () => {
                 <h2 className="p-2 font-heading text-4xl font-bold text-white">HOSTING</h2>
             </div>
             <Link id="Venues" to="/venueManager">
-                <img src={VenueImg} className="drop-shadow-md" />
+                <img src={VenueImg} alt='vector of house' className="drop-shadow-md" />
                 <div className="py-2 text-center font-heading font-bold text-white">
                     <span className="pr-2 text-4xl">Venues</span>
                     <div className="">
@@ -42,7 +42,7 @@ const HostingCard = () => {
             </Link>
             <Link id="booking" to="/bookingManager">
                 <div>
-                    <img src={BookingImg} className="h-full w-full drop-shadow-md" />
+                    <img src={BookingImg} alt='vector of calendar' className="h-full w-full drop-shadow-md" />
                 </div>
                 <div className="py-2 text-center font-heading font-bold text-white">
                     <span className="pr-2 text-4xl">Bookings</span>

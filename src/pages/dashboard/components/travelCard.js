@@ -24,12 +24,12 @@ const TravelCard = () => {
             className="relative flex h-[300px] w-[300px] flex-col items-center justify-center rounded-md bg-bluegreen md:w-[330px] lg:w-[290px]"
         >
             <div className="absolute right-0 top-0">
-                <h2 className="p-2 font-heading text-4xl font-bold text-white">TRAVEL</h2>
+                <h2 className="p-2 font-heading text-4xl font-bold text-black">TRAVEL</h2>
             </div>
             <div className="h-[121px] w-[230px]">
-                <img src={TravelImg} className="h-full w-full object-cover drop-shadow-md" />
+                <img src={TravelImg} alt='vector of travel' className="h-full w-full object-cover drop-shadow-md" />
             </div>
-            <div className="py-2 text-center font-heading font-bold text-white">
+            <div className="py-2 text-center font-heading font-bold text-black">
                 <span className="pr-2 text-4xl">Bookings</span>
                 <div className="">
                     {singleProfile &&
