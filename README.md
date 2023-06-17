@@ -6,8 +6,11 @@ Holidaze is a modern front-end accommodation booking application developed as a 
 
 Holidaze was developed to cater to the following user stories
 -🌐 Users can view a list of venues.
+
 -🔍 Users can search for a specific venue.
+
 -🏷️ Users can view a specific venue page by its ID.
+
 -🗓️ Users can view a calendar with available dates for a venue.
 -📧 Users with a noroff.no email can register as customers.
 -✍️ Registered customers can create bookings at venues.
