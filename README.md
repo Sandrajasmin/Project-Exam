@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Holidaze 🏠
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Holidaze is a modern front-end accommodation booking application developed as a final exam project at Noroff School of Technology. The main objective of this project is to create a user-friendly platform similar to Airbnb, where users can easily search for various accommodation options and make bookings. Venue managers can also register on the platform to list and manage their own rental properties. The project utilizes an API provided by Noroff, which serves as the backend for data retrieval and storage. You can find the detailed API documentation [here](API_documentation_link). [here](https://noroff-api-docs.netlify.app/social-endpoints/posts).
 
-## Available Scripts
+## User Stories 👥
 
-In the project directory, you can run:
+Holidaze was developed to cater to the following user stories
+-🌐 Users can view a list of venues.
+-🔍 Users can search for a specific venue.
+-🏷️ Users can view a specific venue page by its ID.
+-🗓️ Users can view a calendar with available dates for a venue.
+-📧 Users with a noroff.no email can register as customers.
+-✍️ Registered customers can create bookings at venues.
+-📅 Registered customers can view their upcoming bookings.
+-📧 Users with a stud.noroff.no email can register as venue managers.
+-🏗️ Registered venue managers can create venues.
+-🔄 Registered venue managers can update venues they manage.
+-🗑️ Registered venue managers can delete venues they manage.
+-👀 Registered venue managers can view bookings for venues they manage.
+-🔐 Registered users can log in.
+-🖼️ Registered users can update their avatars.
+-🔓 Registered users can log out.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack ⚙️
+This project was developed using the following technologies:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+-📚 React for building the user interface.
+-⚡ Vite as the build tool.
+-🎨 Tailwind CSS for styling.
+-🖌️ Figma for designing the user interface.
+-📈 GitHub Projects for planning and managing tasks.
+-☁️ Netlify for hosting.
 
-### `npm test`
+## Live Demo 🔗
+You can visit the live demo of the project [here](https://holidaze-navy.vercel.app/).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Getting Started 🚀
+1.🍴 Fork the repository.
+2.📂 Clone the forked repository to your local machine.
+3.📝 Open the project in your favorite code editor.
+4.🛠️ Run npm install in the project root directory to install the necessary dependencies.
+5.🏃‍♀️ Run npm run dev to start the development server.
+6. The project should now be running on localhost:3000 (or whichever port your environment is set up to use).
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Connect with Me 🤝
+LinkedIn: [Sandra Bakken Møller Sørensen](https://www.linkedin.com/in/sandra-bakken-m%C3%B8ller-s%C3%B8rensen/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Happy coding! 💻
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
