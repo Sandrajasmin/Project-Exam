@@ -12,16 +12,27 @@ Holidaze was developed to cater to the following user stories
 -🏷️ Users can view a specific venue page by its ID.
 
 -🗓️ Users can view a calendar with available dates for a venue.
+
 -📧 Users with a noroff.no email can register as customers.
+
 -✍️ Registered customers can create bookings at venues.
+
 -📅 Registered customers can view their upcoming bookings.
+
 -📧 Users with a stud.noroff.no email can register as venue managers.
+
 -🏗️ Registered venue managers can create venues.
+
 -🔄 Registered venue managers can update venues they manage.
+
 -🗑️ Registered venue managers can delete venues they manage.
+
 -👀 Registered venue managers can view bookings for venues they manage.
+
 -🔐 Registered users can log in.
+
 -🖼️ Registered users can update their avatars.
+
 -🔓 Registered users can log out.
 
 
@@ -29,10 +40,15 @@ Holidaze was developed to cater to the following user stories
 This project was developed using the following technologies:
 
 -📚 React for building the user interface.
--⚡ Vite as the build tool.
+
+-⚡ Vite as the build tool
+
 -🎨 Tailwind CSS for styling.
+
 -🖌️ Figma for designing the user interface.
+
 -📈 GitHub Projects for planning and managing tasks.
+
 -☁️ Netlify for hosting.
 
 ## Live Demo 🔗
@@ -41,10 +57,15 @@ You can visit the live demo of the project [here](https://holidaze-navy.vercel.a
 
 ## Getting Started 🚀
 1.🍴 Fork the repository.
+
 2.📂 Clone the forked repository to your local machine.
+
 3.📝 Open the project in your favorite code editor.
+
 4.🛠️ Run npm install in the project root directory to install the necessary dependencies.
+
 5.🏃‍♀️ Run npm run dev to start the development server.
+
 6. The project should now be running on localhost:3000 (or whichever port your environment is set up to use).
 
 ## Connect with Me 🤝
