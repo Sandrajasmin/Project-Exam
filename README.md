@@ -1,4 +1,4 @@
-(https://github.com/Sandrajasmin/Project-Exam/assets/79982413/7103210a-aa53-40e6-b215-04149b8bac1f)
+<img src="readme.png" alt="Holidaze Screenshot" width="100%">
 # Holidaze 🏠
 
 Holidaze is a modern front-end accommodation booking application developed as a final exam project at Noroff School of Technology. The main objective of this project is to create a user-friendly platform similar to Airbnb, where users can easily search for various accommodation options and make bookings. Venue managers can also register on the platform to list and manage their own rental properties. The project utilizes an API provided by Noroff, which serves as the backend for data retrieval and storage. You can find the detailed API documentation [here](API_documentation_link). [here](https://noroff-api-docs.netlify.app/social-endpoints/posts).
