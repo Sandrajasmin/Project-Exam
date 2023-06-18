@@ -65,7 +65,7 @@ You can visit the live demo of the project [here](https://holidaze-navy.vercel.a
 
 4.🛠️ Run npm install in the project root directory to install the necessary dependencies.
 
-5.🏃‍♀️ Run npm run dev to start the development server.
+5.🏃‍♀️ Run npm run start to start the development server.
 
 6. The project should now be running on localhost:3000 (or whichever port your environment is set up to use).
 
