@@ -50,7 +50,7 @@ This project was developed using the following technologies:
 
 -📈 GitHub Projects for planning and managing tasks.
 
--☁️ Netlify for hosting.
+-☁️ Vercel for hosting.
 
 ## Live Demo 🔗
 You can visit the live demo of the project [here](https://holidaze-navy.vercel.app/).
