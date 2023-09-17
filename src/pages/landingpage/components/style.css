@@ -1,0 +1,60 @@
+/* Default styles for larger devices */
+.hero-section {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.46);
+    /* Full viewport height on larger devices */
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; /* Start the background from the center vertically */
+    right: -100%;
+    width: 200%;
+    height: 200%; /* Extend the height to cover the lower half of the section */
+    background-image: url('/src/assets/img/hero_img.jpeg');
+    background-size: cover;
+    animation: slidein 60s linear infinite;
+    z-index: -1;
+}
+
+@keyframes slidein {
+    0% {
+        right: -100%;
+    }
+
+    50% {
+        right: 0;
+    }
+
+    100% {
+        right: -100%;
+    }
+}
+
+/* Media query for smaller devices */
+@media screen and (max-width: 768px) {
+    .hero-section {
+        height: 600px;
+        /* Set a fixed height on smaller devices */
+    }
+    .hero-section::before {
+        top: 0;
+        right: -100%;
+        width: 200%;
+        height: 100%;
+    }
+}
+
+/* Media query for larger devices */
+@media screen and (min-width: 769px) {
+    .hero-section::before {
+        top: 100%; /* Move the background to the bottom of the section */
+        transform: translateY(-90%); /* Adjust for the new position */
+        right: -100%;
+        width: 200%;
+        height: 200%;
+    }
+}

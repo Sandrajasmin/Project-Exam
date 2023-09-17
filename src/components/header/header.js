@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Logo from '../../assets/img/logo_small.webp';
+import Logo from '../../assets/img/logo.png';
 import LogOutBtn from '../logout';
 import { NavLink } from 'react-router-dom';
 import DefaultAvatar from '../../assets/img/defaultAvatar.png';
@@ -102,39 +102,39 @@ export default function Header() {
                             <div className="flex flex-shrink-0 items-center ">
                                 <NavLink to="/" className="">
                                     <img
-                                        className="block h-12 w-12"
+                                        className="block"
                                         src={Logo}
                                         alt="Holidaze logo"
                                     />
                                 </NavLink>
                             </div>
-                            <div className="hidden text-center font-body sm:ml-6 sm:block">
+                            <div className="hidden text-center font-body sm:ml-6 sm:block mt-5">
                                 <div className="desktop">
                                     {accessToken ? (
-                                        <div className="flex items-center pt-8 font-body text-base">
-                                            <div className="relative inline-block text-left">
+                                        <div className="font-body text-base">
+                                            <div className="relative text-left">
                                                 <NavLink
-                                                    className="border-r border-black px-5"
+                                                    className="border-b border-black mx-5 hover:font-medium"
                                                     to="/venues"
                                                 >
                                                     Travel
                                                 </NavLink>
                                                 <NavLink
                                                     to="/createVenue"
-                                                    className="border-r border-black px-5"
+                                                    className="border-b border-black mx-5 hover:font-medium"
                                                 >
                                                     Create Venue
                                                 </NavLink>
                                             </div>
 
                                             <NavLink
-                                                className="border-r border-black px-5"
+                                                className="border-b border-black mx-5 hover:font-medium"
                                                 to="/bookings"
                                             >
                                                 Bookings
                                             </NavLink>
                                             <NavLink
-                                                className="border-r border-black px-5"
+                                                className="border-b border-black mx-5 hover:font-medium"
                                                 to="/dashboard"
                                             >
                                                 Dashboard
@@ -146,7 +146,7 @@ export default function Header() {
                                     ) : (
                                         <div>
                                             <NavLink
-                                                className="border-r border-black pr-5"
+                                                className="border-b border-black mx-5 hover:font-medium"
                                                 to="/venues"
                                                 role="menuitem"
                                                 onClick={closeMenu}
@@ -154,7 +154,7 @@ export default function Header() {
                                                 Venues
                                             </NavLink>
                                             <NavLink
-                                                className=" border-r border-black px-5"
+                                                    className="border-b border-black mx-5 hover:font-medium"
                                                 to="/register"
                                                 role="menuitem"
                                                 onClick={closeMenu}
@@ -162,7 +162,7 @@ export default function Header() {
                                                 Register
                                             </NavLink>
                                             <NavLink
-                                                className="pl-5"
+                                                    className="mx-5 hover:font-medium border-b border-black"
                                                 to="/log-in"
                                                 role="menuitem"
                                                 onClick={closeMenu}
@@ -187,16 +187,10 @@ export default function Header() {
                 {accessToken ? (
                     <div className="flex flex-col gap-5 px-2 pb-3 pt-10">
                         <div className="flex flex-col gap-5 font-body text-base">
-                            <NavLink
-                                to="/venues"
-                                className="border-b border-black pb-2"
-                            >
+                            <NavLink to="/venues" className="border-b border-black pb-2">
                                 Travel
                             </NavLink>
-                            <NavLink
-                                to="/createVenue"
-                                className="border-b border-black pb-2"
-                            >
+                            <NavLink to="/createVenue" className="border-b border-black pb-2">
                                 Create Venue
                             </NavLink>
                             <NavLink
@@ -219,11 +213,11 @@ export default function Header() {
                                     to="/dashboard"
                                     onClick={closeMenu}
                                 >
-                                    <div className='flex items-center gap-2 font-bold'>
+                                    <div className="flex items-center gap-2 font-bold">
                                         {userAvatar}
                                         {userName}
                                     </div>
-                                    <div className='font-light'>
+                                    <div className="font-light">
                                         <LogOutBtn handleLogout={handleLogout} />
                                     </div>
                                 </NavLink>
@@ -248,7 +242,12 @@ export default function Header() {
                         >
                             Register
                         </NavLink>
-                        <NavLink className="block py-2" to="log-in" role="menuitem" onClick={closeMenu}>
+                        <NavLink
+                            className="block py-2"
+                            to="log-in"
+                            role="menuitem"
+                            onClick={closeMenu}
+                        >
                             Log in
                         </NavLink>
                     </div>

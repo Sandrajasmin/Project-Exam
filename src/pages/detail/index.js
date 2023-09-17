@@ -222,7 +222,10 @@ const DetailPage = () => {
                                             </h3>
                                             <p className="">
                                                 Not a customer?{' '}
-                                                <Link to="/register" className="text-base text-blue">
+                                                <Link
+                                                    to="/register"
+                                                    className="text-base text-blue"
+                                                >
                                                     Register now
                                                 </Link>
                                             </p>

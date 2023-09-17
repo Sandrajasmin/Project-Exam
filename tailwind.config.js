@@ -5,6 +5,10 @@ module.exports = {
         extend: {
             colors: {
                 black: '#012030',
+                darkBlue: '#26528C',
+                lightBlue: '#3C92A6',
+                lightBeig: '#D9AB73',
+                darkBrown: '#A67665',
                 blue: '#13678A',
                 bluegreen: '#45C4B0',
                 green: '#9AEBA3',
@@ -16,7 +20,7 @@ module.exports = {
             fontFamily: {
                 heading: ['Roboto', 'sans-serif'],
                 subheading: ['Cormorant Garamond', 'serif'],
-                body: ['Hind Madurai', 'sans-serif']
+                body: ['Raleway', 'sans-serif']
             },
             animation: {
                 text: 'text 5s ease infinite'
