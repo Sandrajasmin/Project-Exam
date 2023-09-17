@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 const LogoutBtn = ({ handleLogout }) => {
     return (
         <div>
-            <button
-                onClick={handleLogout}
-                className="text-sm font-body"
-            >
+            <button onClick={handleLogout} className="font-body text-sm">
                 Log out
             </button>
         </div>
@@ -14,7 +11,7 @@ const LogoutBtn = ({ handleLogout }) => {
 };
 
 LogoutBtn.propTypes = {
-    handleLogout: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired
 };
 
 export default LogoutBtn;

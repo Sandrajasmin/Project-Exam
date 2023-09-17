@@ -36,8 +36,8 @@ Holidaze was developed to cater to the following user stories
 
 -🔓 Registered users can log out.
 
-
 ## Tech Stack ⚙️
+
 This project was developed using the following technologies:
 
 -📚 React for building the user interface.
@@ -53,10 +53,11 @@ This project was developed using the following technologies:
 -☁️ Vercel for hosting.
 
 ## Live Demo 🔗
+
 You can visit the live demo of the project [here](https://holidaze-navy.vercel.app/).
 
-
 ## Getting Started 🚀
+
 1.🍴 Fork the repository.
 
 2.📂 Clone the forked repository to your local machine.
@@ -70,7 +71,7 @@ You can visit the live demo of the project [here](https://holidaze-navy.vercel.a
 6. The project should now be running on localhost:3000 (or whichever port your environment is set up to use).
 
 ## Connect with Me 🤝
+
 LinkedIn: [Sandra Bakken Møller Sørensen](https://www.linkedin.com/in/sandra-bakken-m%C3%B8ller-s%C3%B8rensen/)
 
 Happy coding! 💻
-
