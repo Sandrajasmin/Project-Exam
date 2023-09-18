@@ -75,7 +75,7 @@ const AllProducts = () => {
                 ) : (
                     <Slider {...settings}>
                         {venues.slice(0, 20).map((venue) => {
-                            const truncatedName = truncateText(venue.name, 3); 
+                            const truncatedName = truncateText(venue.name, 3);
                             return (
                                 <div
                                     className="h-72 px-2 transition duration-500 hover:scale-105 hover:opacity-90"

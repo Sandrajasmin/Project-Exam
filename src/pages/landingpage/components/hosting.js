@@ -6,7 +6,7 @@ function HostSection() {
         <div className="mx-auto my-40 max-w-7xl">
             <div className="mx-5 flex justify-end">
                 <div className="max-w-xl">
-                    <h2 className="text-end font-heading text-7xl font-bold">
+                    <h2 className="text-end font-heading text-6xl font-bold md:text-7xl">
                         WANT TO BECOME A HOST?
                     </h2>
                     <hr className="my-7 h-[3px] max-w-2xl bg-black" />

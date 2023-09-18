@@ -76,6 +76,7 @@ export const fetchVenues = () => async (dispatch) => {
         );
         const data = await response.json();
         dispatch(SET_VENUES(data));
+        console.log(data);
         dispatch(setLoadingState(false));
     } catch (e) {
         dispatch(setLoadingState(false));
