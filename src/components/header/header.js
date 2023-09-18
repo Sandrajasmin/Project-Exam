@@ -46,12 +46,12 @@ export default function Header() {
     return (
         <nav>
             <div className="mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8 ">
-                <div className="fixed left-0 right-0 top-0 z-30 md:relative ">
-                    <div className="relative flex h-16 items-center justify-between bg-white">
+                <div className="fixed left-0 right-0 top-0 z-30 bg-white md:relative">
+                    <div className="relative my-5 flex h-16 items-center justify-between bg-white md:my-0">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                             <button
                                 type="button"
-                                className="inline-flex items-center justify-center rounded-md p-2 text-black"
+                                className="my-5 inline-flex items-center justify-center rounded-md p-2 text-black"
                                 aria-controls="mobile-menu"
                                 aria-expanded="false"
                                 onClick={toggleMenu}
@@ -98,43 +98,39 @@ export default function Header() {
                                 )}
                             </button>
                         </div>
-                        <div className="flex flex-1 justify-center sm:items-stretch sm:justify-between ">
+                        <div className="flex flex-1 justify-center sm:items-stretch  sm:justify-between ">
                             <div className="flex flex-shrink-0 items-center ">
                                 <NavLink to="/" className="">
-                                    <img
-                                        className="block"
-                                        src={Logo}
-                                        alt="Holidaze logo"
-                                    />
+                                    <img className="block" src={Logo} alt="Holidaze logo" />
                                 </NavLink>
                             </div>
-                            <div className="hidden text-center font-body sm:ml-6 sm:block mt-5">
+                            <div className="mt-5 hidden text-center font-body sm:ml-6 sm:block">
                                 <div className="desktop">
                                     {accessToken ? (
                                         <div className="font-body text-base">
                                             <div className="relative text-left">
                                                 <NavLink
-                                                    className="border-b border-black mx-5 hover:font-medium"
+                                                    className="mx-5 border-b border-black hover:font-medium"
                                                     to="/venues"
                                                 >
                                                     Travel
                                                 </NavLink>
                                                 <NavLink
                                                     to="/createVenue"
-                                                    className="border-b border-black mx-5 hover:font-medium"
+                                                    className="mx-5 border-b border-black hover:font-medium"
                                                 >
                                                     Create Venue
                                                 </NavLink>
                                             </div>
 
                                             <NavLink
-                                                className="border-b border-black mx-5 hover:font-medium"
+                                                className="mx-5 border-b border-black hover:font-medium"
                                                 to="/bookings"
                                             >
                                                 Bookings
                                             </NavLink>
                                             <NavLink
-                                                className="border-b border-black mx-5 hover:font-medium"
+                                                className="mx-5 border-b border-black hover:font-medium"
                                                 to="/dashboard"
                                             >
                                                 Dashboard
@@ -146,7 +142,7 @@ export default function Header() {
                                     ) : (
                                         <div>
                                             <NavLink
-                                                className="border-b border-black mx-5 hover:font-medium"
+                                                className="mx-5 border-b border-black hover:font-medium"
                                                 to="/venues"
                                                 role="menuitem"
                                                 onClick={closeMenu}
@@ -154,7 +150,7 @@ export default function Header() {
                                                 Venues
                                             </NavLink>
                                             <NavLink
-                                                    className="border-b border-black mx-5 hover:font-medium"
+                                                className="mx-5 border-b border-black hover:font-medium"
                                                 to="/register"
                                                 role="menuitem"
                                                 onClick={closeMenu}
@@ -162,7 +158,7 @@ export default function Header() {
                                                 Register
                                             </NavLink>
                                             <NavLink
-                                                    className="mx-5 hover:font-medium border-b border-black"
+                                                className="mx-5 border-b border-black hover:font-medium"
                                                 to="/log-in"
                                                 role="menuitem"
                                                 onClick={closeMenu}

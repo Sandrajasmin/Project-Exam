@@ -1,7 +1,5 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import Home from '../pages/homepage/index';
-import Venues from '../pages/venues/index';
 import DetailPage from '../pages/detail/index';
 import RegisterUser from '../pages/register';
 import LogIn from '../pages/signin/index';
@@ -12,7 +10,9 @@ import HostBooking from '../pages/hosting/bookings/index';
 import BookingById from '../pages/hosting/bookingById';
 import EditVenue from '../pages/editvenue/index';
 import Travel from '../pages/travel/index';
+
 import LandingPage from '../pages/landingpage/index';
+import Venues from '../pages/venue/index';
 
 function requireAuth(component) {
     const accessToken = localStorage.getItem('accessToken');
@@ -24,8 +24,7 @@ function requireAuth(component) {
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Home />} exact />
-            <Route path="/LandingPage" element={<LandingPage />} exact />
+            <Route path="/" element={<LandingPage />} exact />
             <Route path="/venues" element={<Venues />} exact />
             <Route path="/venue/:id" element={<DetailPage />} exact />
             <Route path="/register" element={<RegisterUser />} />
