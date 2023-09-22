@@ -14,7 +14,7 @@
     right: -100%;
     width: 200%;
     height: 200%; /* Extend the height to cover the lower half of the section */
-    background-image: url('/src/assets/img/hero_img.jpeg');
+    background-image: url('/src/assets/img/hero_img-min.jpeg');
     background-size: cover;
     animation: slidein 60s linear infinite;
     z-index: -1;

@@ -1,6 +1,5 @@
 import GetVenues from './components/getVenues';
 
-
 function VenuePage() {
     return (
         <>

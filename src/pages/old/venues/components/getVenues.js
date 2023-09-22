@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import dateFormat from '../../../components/date/dateFormat';
+import dateFormat from '../../../../components/date/dateFormat';
 import DefaultHouse from '../../../assets/img/default_house.jpeg';
 import SearchBar from './search';
 import NoResult from '../../../assets/img/no_result.webp';
-import { fetchVenues } from '../../../store/modules/VenueSlice';
+import { fetchVenues } from '../../../../store/modules/VenueSlice';
 import { FaWifi, FaParking, FaPaw } from 'react-icons/fa';
 import { GiKnifeFork } from 'react-icons/gi';
 // import ErrorComponent from "../../components/shared/ErrorComponent";

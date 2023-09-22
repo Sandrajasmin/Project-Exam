@@ -26,7 +26,6 @@ const SearchBar = ({ onSearch }) => {
                 >
                     SEARCH
                 </button>
-                
             </form>
         </div>
     );

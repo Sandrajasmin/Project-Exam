@@ -8,7 +8,7 @@ function FilteredSearch({ onFilter }) {
         pets: false,
         wifi: false,
         breakfast: false,
-        parking: false,
+        parking: false
     });
 
     const handleFilter = () => {
@@ -22,13 +22,13 @@ function FilteredSearch({ onFilter }) {
             const filterCriteria = {
                 price: {
                     min: minPrice,
-                    max: maxPrice,
+                    max: maxPrice
                 },
                 maxGuests: {
                     min: minGuests,
-                    max: maxGuestsValue,
+                    max: maxGuestsValue
                 },
-                amenities,
+                amenities
             };
             onFilter(filterCriteria);
         } else {
@@ -40,12 +40,12 @@ function FilteredSearch({ onFilter }) {
         const { name, checked } = event.target;
         setAmenities((prevAmenities) => ({
             ...prevAmenities,
-            [name]: checked,
+            [name]: checked
         }));
     };
 
     return (
-        <div className="my-5 flex pt-10 flex-col max-w-[300px]">
+        <div className="my-5 flex max-w-[300px] flex-col pt-10">
             <div>
                 <label
                     htmlFor="priceMin"
@@ -135,7 +135,7 @@ function FilteredSearch({ onFilter }) {
                     <legend className="py-2 font-body text-base font-medium leading-6 text-darkgrey">
                         Amenities
                     </legend>
-                    <div className="flex gap-5 flex-row">
+                    <div className="flex flex-row gap-5">
                         <div className="relative flex items-center gap-x-2 font-body text-sm font-light">
                             <input
                                 id="pets"
@@ -197,7 +197,7 @@ function FilteredSearch({ onFilter }) {
 }
 
 FilteredSearch.propTypes = {
-    onFilter: PropTypes.func.isRequired,
+    onFilter: PropTypes.func.isRequired
 };
 
 export default FilteredSearch;

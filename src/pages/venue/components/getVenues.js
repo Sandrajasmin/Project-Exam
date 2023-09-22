@@ -44,15 +44,15 @@ const AllVenues = () => {
         </div>
     );
 
-    return ( 
+    return (
         <div className="my-10 md:my-2">
             <SearchBar onSearch={handleSearch} />
             {filteredVenuesLength === 0 ? (
                 noResultContent
             ) : (
-                <div className="flex flex-col justify-center gap-10 w-full">
+                <div className="flex w-full flex-col justify-center gap-10">
                     {filteredVenues.map((venue) => (
-                        <div className="rounded-md bg-white shadow-lg w-full" key={venue.id}>
+                        <div className="w-full rounded-md bg-white shadow-lg" key={venue.id}>
                             <Link to={`/venue/${venue.id}`} className="md:flex">
                                 <div className="h-[300px] md:w-[300px]">
                                     <img

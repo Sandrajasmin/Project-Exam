@@ -141,3 +141,29 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
     background-color: #115e7f;
 }
+.slider {
+    display: flex;
+}
+.slide {
+    padding: 10px;
+}
+.slick-active {
+    padding: 20px 0;
+}
+
+.slick-center {
+    transform: scale(1.2);
+    max-height: 400px;
+}
+
+.slick-slide:not(.slick-active) {
+    margin: 20px 0;
+}
+
+.child {
+    width: 100%;
+}
+
+.slide:not(.slick-active) {
+    cursor: pointer;
+}

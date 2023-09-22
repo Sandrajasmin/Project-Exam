@@ -1,6 +1,5 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import DetailPage from '../pages/detail/index';
 import RegisterUser from '../pages/register';
 import LogIn from '../pages/signin/index';
 import DashBoard from '../pages/dashboard/index';
@@ -13,6 +12,7 @@ import Travel from '../pages/travel/index';
 
 import LandingPage from '../pages/landingpage/index';
 import Venues from '../pages/venue/index';
+import DetailPage from '../pages/details/index';
 
 function requireAuth(component) {
     const accessToken = localStorage.getItem('accessToken');
