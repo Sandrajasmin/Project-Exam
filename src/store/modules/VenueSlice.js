@@ -91,6 +91,7 @@ export const fetchSingleVenue = (id) => async (dispatch) => {
             `https://nf-api.onrender.com/api/v1/holidaze/venues/${id}?_owner=true`
         );
         const data = await response.json();
+        console.log(data);
         dispatch(SET_SINGLE_VENUE(data));
         dispatch(setLoadingState(false));
     } catch (e) {
