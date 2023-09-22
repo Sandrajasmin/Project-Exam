@@ -1,13 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { fetchSingleVenue, bookVenue } from '../../../store/modules/VenueSlice';
 import DatePicker from './calendar';
-import Logo from '../../../assets/img/logo_small.webp';
+import Logo from '../../../assets/img/logo.png';
+
+const calculatePriceTax = (dateFrom, dateTo, pricePerNight) => {
+    if (!dateFrom || !dateTo) {
+        return 0;
+    }
+
+    const start = new Date(dateFrom);
+    const end = new Date(dateTo);
+
+    if (isNaN(start) || isNaN(end)) {
+        return 0;
+    }
+
+    const timeDiff = Math.abs(end - start);
+    const numberOfNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+    const totalPriceTax = numberOfNights * pricePerNight + 500 + 100;
+    return totalPriceTax;
+};
 
 const calculatePrice = (dateFrom, dateTo, pricePerNight) => {
     if (!dateFrom || !dateTo) {
@@ -23,25 +41,25 @@ const calculatePrice = (dateFrom, dateTo, pricePerNight) => {
 
     const timeDiff = Math.abs(end - start);
     const numberOfNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    const totalPrice = numberOfNights * pricePerNight + 500 + 100;
+    const totalPrice = numberOfNights * pricePerNight;
     return totalPrice;
 };
 
 const Modal = ({ isOpen, onClose, children }) => {
     const modalClasses = `fixed inset-0 flex items-center justify-center z-50 ${
-        isOpen ? '' : 'hidden'
+        isOpen ? 'visible' : 'hidden'
     }`;
     return (
         <div className={modalClasses}>
-            <div className="modal-overlay absolute inset-0 bg-black opacity-50"></div>
-            <div className="modal-container z-50 mx-auto w-11/12 overflow-y-auto rounded bg-white shadow-lg md:max-w-md">
-                <div className="modal-content px-6 py-4 text-left">
+            <div className="modal-overlay absolute inset-0 bg-black opacity-70"></div>
+            <div className="modal-container z-50 mx-auto w-11/12 lg:w-4/4 overflow-y-auto bg-white shadow-lg md:max-w-md">
+                <div className="modal-content px-6 py-10 md:mx-10 lg:py-14 text-left">
                     <button
-                        className="modal-close absolute right-0 top-0 mr-4 mt-4"
+                        className="modal-close absolute right-0 top-0 mr-10 mt-14"
                         onClick={onClose}
                     >
                         <svg
-                            className="h-6 w-6 fill-current text-gray-500"
+                            className="h-6 w-6 fill-current text-black"
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                         >
@@ -87,7 +105,7 @@ const DetailPage = () => {
     });
 
     const dateToYMD = (date) => {
-        return format(date, 'yyyy-MM-dd');
+        return format(date, 'dd-MM-yyyy');
     };
 
     const formik = useFormik({
@@ -98,7 +116,7 @@ const DetailPage = () => {
             venueId: id
         },
         validationSchema,
-        onSubmit: async (values) => {
+        onSubmit: async (values, { resetForm }) => {
             const bookingData = {
                 dateFrom: values.dateFrom,
                 dateTo: values.dateTo,
@@ -108,7 +126,9 @@ const DetailPage = () => {
             //dispatch(setLoadingState(true));
             await dispatch(bookVenue(bookingData));
             // dispatch(setLoadingState(false));
+            resetForm();
             setFormSubmitted(true);
+            setModalOpen(true);
             window.scrollTo(0, 0);
         }
     });
@@ -117,20 +137,63 @@ const DetailPage = () => {
         dispatch(fetchSingleVenue(id));
     }, [dispatch, id]);
 
+    const totalPriceTax = calculatePriceTax(
+        formik.values.dateFrom,
+        formik.values.dateTo,
+        singleVenue.price
+    );
+
     const totalPrice = calculatePrice(
         formik.values.dateFrom,
         formik.values.dateTo,
         singleVenue.price
     );
 
+    const calculateNumberOfNights = () => {
+        if (!formik.values.dateFrom || !formik.values.dateTo) {
+            return 0;
+        }
+
+        const start = new Date(formik.values.dateFrom);
+        const end = new Date(formik.values.dateTo);
+
+        if (isNaN(start) || isNaN(end)) {
+            return 0;
+        }
+
+        const timeDiff = Math.abs(end - start);
+        const numberOfNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        return numberOfNights;
+    };
+
+    // Calculate the number of nights
+    const numberOfNights = calculateNumberOfNights();
+
     return (
         <>
             <div>
                 {formSubmitted ? (
                     <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                        <img src={Logo} alt="Logo" />
-                        <h1 className="text-xl font-bold">Thank you for your booking!</h1>
-                        <p className="mt-2">Email will be sent with your booking details</p>
+                        <div className="flex flex-col gap-5 items-center">
+                            <div className="h-15 w-15">
+                                <img src={Logo} alt="Logo w-full h-full" />
+                            </div>
+                            <div className='flex flex-col gap-5 w-full'>
+                                <div>
+                                    <h1 className="font-heading text-4xl font-bold">THANK YOU</h1>
+                                    <hr className="h-[3px] w-56 bg-black" />
+                                    <h2 className="font-heading text-base">For booking</h2>
+                                </div>
+                                <div>
+                                    <p className="text-sm font-body">
+                                        We will send you a email with your booking details shortly!
+                                    </p>
+                                    <Link to="/bookings" >
+                                        <p className='font-body text-sm '>You can manage your bookings <span className='underline'>here</span></p>
+                                    </Link>
+                                </div>
+                            </div>
+                        </div>
                     </Modal>
                 ) : (
                     <div className="max-w-md rounded-md bg-white px-6 py-5 drop-shadow-lg md:px-8">
@@ -139,7 +202,7 @@ const DetailPage = () => {
                                 <div>
                                     <label
                                         htmlFor="dateFrom"
-                                        className="block rounded-tl bg-bluegreen py-2 text-center font-body font-light text-black"
+                                        className="block rounded-tl bg-darkBlue py-2 text-center font-body font-light text-white"
                                     >
                                         Check in
                                     </label>
@@ -154,10 +217,10 @@ const DetailPage = () => {
                                             id="dateFrom"
                                             name="dateFrom"
                                             required
-                                            className="border-1 block w-full border border-bluegreen px-2 py-1.5"
+                                            className="border-1 block w-full border border-darkBlue px-2 py-1.5 text-center"
                                         />
                                         {formik.touched.dateFrom && formik.errors.dateFrom ? (
-                                            <div className="text-sm text-red-600">
+                                            <div className="text-center text-sm text-red-600">
                                                 {formik.errors.dateFrom}
                                             </div>
                                         ) : null}
@@ -166,7 +229,7 @@ const DetailPage = () => {
                                 <div className="">
                                     <label
                                         htmlFor="dateTo"
-                                        className="block rounded-tr bg-green py-2 text-center font-body font-light text-black"
+                                        className="block rounded-tr bg-lightBlue py-2 text-center font-body font-light text-white"
                                     >
                                         Check out
                                     </label>
@@ -181,10 +244,10 @@ const DetailPage = () => {
                                             id="dateTo"
                                             name="dateTo"
                                             required
-                                            className="border-1 block w-full border border-green px-2 py-1.5"
+                                            className="border-1 block w-full border border-lightBlue px-2 py-1.5 text-center"
                                         />
                                         {formik.touched.dateTo && formik.errors.dateTo ? (
-                                            <div className="text-sm text-red-600">
+                                            <div className="text-center text-sm text-red-600">
                                                 {formik.errors.dateTo}
                                             </div>
                                         ) : null}
@@ -201,8 +264,8 @@ const DetailPage = () => {
                                     type="number"
                                     min="1"
                                     required
-                                    placeholder="1 Guests"
-                                    className="border-1 block w-full border border-green px-4 py-1.5"
+                                    placeholder="Number of Guests"
+                                    className="border-1 block w-full border border-darkBlue px-4 py-1.5"
                                 />
                                 {formik.touched.guests && formik.errors.guests ? (
                                     <div className="text-sm text-red-600">
@@ -216,20 +279,23 @@ const DetailPage = () => {
                             <div className="flex flex-col items-center sm:block">
                                 <div className="flex w-full flex-col gap-2 px-2 font-body">
                                     <div className="flex justify-between">
-                                        <p>Price/ pr night</p>
-                                        {singleVenue.price}
+                                        <p>
+                                            {singleVenue.price} X {numberOfNights} Nights
+                                        </p>
+
+                                        <div>{totalPrice} $</div>
                                     </div>
                                     <div className="flex justify-between">
                                         <p>Cleaning Fee</p>
-                                        <p>$500</p>
+                                        <p>500 $</p>
                                     </div>
-                                    <div className="flex justify-between">
+                                    <div className="flex justify-between pb-5">
                                         <p>Tax</p>
-                                        <p>$100</p>
+                                        <p>100 $</p>
                                     </div>
-                                    <div className="flex w-full justify-between border-t border-black py-5 font-bold">
+                                    <div className="flex w-full justify-between border-t border-black pt-5 font-medium">
                                         <h2>Total</h2>
-                                        {totalPrice}
+                                        {totalPriceTax} $
                                     </div>
                                 </div>
                                 <div className=" flex justify-center md:my-1">

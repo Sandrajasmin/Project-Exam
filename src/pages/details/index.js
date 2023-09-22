@@ -34,7 +34,7 @@ const DetailPage = () => {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true
                 }
@@ -42,8 +42,8 @@ const DetailPage = () => {
             {
                 breakpoint: 600,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
                     initialSlide: 2
                 }
             },
@@ -299,11 +299,11 @@ const DetailPage = () => {
             </div>
 
             {modalOpen && (
-                <div className="fixed top-0 z-30 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80">
-                    <div className="modal-content p-10 relative">
+                <div className="fixed left-0 top-0 z-30 flex h-full w-full items-center justify-center bg-black bg-opacity-80">
+                    <div className="modal-content relative p-10">
                         <button
                             onClick={closeModal}
-                            className="absolute top-2 right-2 text-white hover:text-gray-700 cursor-pointer"
+                            className="absolute right-2 top-2 cursor-pointer text-white hover:text-gray-700"
                         >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
