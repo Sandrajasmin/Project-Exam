@@ -1,86 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { format } from 'date-fns';
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { fetchSingleVenue, bookVenue } from '../../../store/modules/VenueSlice';
+import { calculateNumberOfNights, calculatePriceTax, calculatePrice } from './calculatePrice';
 import DatePicker from './calendar';
 import Logo from '../../../assets/img/logo.png';
+import { Modal } from './confirmationModal';
 
-const calculatePriceTax = (dateFrom, dateTo, pricePerNight) => {
-    if (!dateFrom || !dateTo) {
-        return 0;
-    }
-
-    const start = new Date(dateFrom);
-    const end = new Date(dateTo);
-
-    if (isNaN(start) || isNaN(end)) {
-        return 0;
-    }
-
-    const timeDiff = Math.abs(end - start);
-    const numberOfNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    const totalPriceTax = numberOfNights * pricePerNight + 500 + 100;
-    return totalPriceTax;
-};
-
-const calculatePrice = (dateFrom, dateTo, pricePerNight) => {
-    if (!dateFrom || !dateTo) {
-        return 0;
-    }
-
-    const start = new Date(dateFrom);
-    const end = new Date(dateTo);
-
-    if (isNaN(start) || isNaN(end)) {
-        return 0;
-    }
-
-    const timeDiff = Math.abs(end - start);
-    const numberOfNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-    const totalPrice = numberOfNights * pricePerNight;
-    return totalPrice;
-};
-
-const Modal = ({ isOpen, onClose, children }) => {
-    const modalClasses = `fixed inset-0 flex items-center justify-center z-50 ${
-        isOpen ? 'visible' : 'hidden'
-    }`;
-    return (
-        <div className={modalClasses}>
-            <div className="modal-overlay absolute inset-0 bg-black opacity-70"></div>
-            <div className="modal-container z-50 mx-auto w-11/12 lg:w-4/4 overflow-y-auto bg-white shadow-lg md:max-w-md">
-                <div className="modal-content px-6 py-10 md:mx-10 lg:py-14 text-left">
-                    <button
-                        className="modal-close absolute right-0 top-0 mr-10 mt-14"
-                        onClick={onClose}
-                    >
-                        <svg
-                            className="h-6 w-6 fill-current text-black"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                className="heroicon-ui"
-                                d="M14.35 14.35a1 1 0 0 1-1.42 0L10 11.41l-2.93 2.93a1 1 0 0 1-1.42-1.42L8.59 10 5.66 7.07a1 1 0 0 1 1.42-1.42L10 8.59l2.93-2.93a1 1 0 0 1 1.42 1.42L11.41 10l2.93 2.93a1 1 0 0 1 0 1.42z"
-                            />
-                        </svg>
-                    </button>
-                    {children}
-                </div>
-            </div>
-        </div>
-    );
-};
-
-Modal.propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    onClose: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired
-};
 
 const DetailPage = () => {
     const dispatch = useDispatch();
@@ -104,10 +33,6 @@ const DetailPage = () => {
             .required('Required')
     });
 
-    const dateToYMD = (date) => {
-        return format(date, 'dd-MM-yyyy');
-    };
-
     const formik = useFormik({
         initialValues: {
             dateFrom: '',
@@ -123,9 +48,7 @@ const DetailPage = () => {
                 guests: values.guests,
                 venueId: values.venueId
             };
-            //dispatch(setLoadingState(true));
             await dispatch(bookVenue(bookingData));
-            // dispatch(setLoadingState(false));
             resetForm();
             setFormSubmitted(true);
             setModalOpen(true);
@@ -133,9 +56,12 @@ const DetailPage = () => {
         }
     });
 
-    useEffect(() => {
-        dispatch(fetchSingleVenue(id));
-    }, [dispatch, id]);
+    const dateToYMD = (date) => {
+        return format(date, 'dd-MM-yyyy');
+    };
+
+    // Calculate the number of nights
+    const numberOfNights = calculateNumberOfNights(formik);
 
     const totalPriceTax = calculatePriceTax(
         formik.values.dateFrom,
@@ -149,47 +75,30 @@ const DetailPage = () => {
         singleVenue.price
     );
 
-    const calculateNumberOfNights = () => {
-        if (!formik.values.dateFrom || !formik.values.dateTo) {
-            return 0;
-        }
-
-        const start = new Date(formik.values.dateFrom);
-        const end = new Date(formik.values.dateTo);
-
-        if (isNaN(start) || isNaN(end)) {
-            return 0;
-        }
-
-        const timeDiff = Math.abs(end - start);
-        const numberOfNights = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-        return numberOfNights;
-    };
-
-    // Calculate the number of nights
-    const numberOfNights = calculateNumberOfNights();
-
     return (
         <>
             <div>
                 {formSubmitted ? (
                     <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-                        <div className="flex flex-col gap-5 items-center">
+                        <div className="flex flex-col items-center gap-5">
                             <div className="h-15 w-15">
                                 <img src={Logo} alt="Logo w-full h-full" />
                             </div>
-                            <div className='flex flex-col gap-5 w-full'>
+                            <div className="flex w-full flex-col gap-5">
                                 <div>
                                     <h1 className="font-heading text-4xl font-bold">THANK YOU</h1>
                                     <hr className="h-[3px] w-56 bg-black" />
                                     <h2 className="font-heading text-base">For booking</h2>
                                 </div>
                                 <div>
-                                    <p className="text-sm font-body">
-                                        We will send you a email with your booking details shortly!
+                                    <p className="font-body text-sm">
+                                        We will send you an email with your booking details shortly!
                                     </p>
-                                    <Link to="/bookings" >
-                                        <p className='font-body text-sm '>You can manage your bookings <span className='underline'>here</span></p>
+                                    <Link to="/bookings">
+                                        <p className="font-body text-sm ">
+                                            You can manage your bookings{' '}
+                                            <span className="underline">here</span>
+                                        </p>
                                     </Link>
                                 </div>
                             </div>
@@ -282,8 +191,7 @@ const DetailPage = () => {
                                         <p>
                                             {singleVenue.price} X {numberOfNights} Nights
                                         </p>
-
-                                        <div>{totalPrice} $</div>
+                                        {totalPrice}
                                     </div>
                                     <div className="flex justify-between">
                                         <p>Cleaning Fee</p>

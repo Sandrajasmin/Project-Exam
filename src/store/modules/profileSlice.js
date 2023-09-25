@@ -34,6 +34,7 @@ export const fetchProfile = (name, profileData) => async (dispatch) => {
             }
         );
         const data = await response.json();
+        console.log('data', data);
         dispatch(SET_SINGLE_PROFILE(data));
         dispatch(setLoadingState(false));
     } catch (e) {

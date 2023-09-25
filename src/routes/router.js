@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import RegisterUser from '../pages/register';
 import LogIn from '../pages/signin/index';
 import DashBoard from '../pages/dashboard/index';
@@ -22,6 +22,12 @@ function requireAuth(component) {
 }
 
 function App() {
+    const location = useLocation(); // Use useLocation hook to get the current location
+
+    useEffect(() => {
+        window.scrollTo(0, 0); // Scroll to the top on route changes
+    }, [location.pathname]); // Listen to changes in location.pathname
+
     return (
         <Routes>
             <Route path="/" element={<LandingPage />} exact />

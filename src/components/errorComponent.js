@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 
 const ErrorComponent = ({ message }) => {
     return (
-        <div className="my-4 bg-bluegreen px-4 py-3 text-black shadow-md" role="alert">
-            <div className="flex">
-                <div className="py-1">
+        <div className="my-4 bg-darkBrown px-4 py-3 text-black shadow-md" role="alert">
+            <div className="flex items-center">
+                <div className="">
                     <svg
                         className="mr-4 h-6 w-6 fill-current text-black"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
                     >
-                        <path d="M10 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0-8a1.5 1.5 0 0 1 1.5 1.5v4a1.5 1.5 0 0 1-3 0v-4A1.5 1.5 0 0 1 10 4z" />
+                        <path d="M6.293 6.293a1 1 0 0 1 1.414 0L10 8.586l2.293-2.293a1 1 0 1 1 1.414 1.414L11.414 10l2.293 2.293a1 1 0 0 1-1.414 1.414L10 11.414l-2.293 2.293a1 1 0 0 1-1.414-1.414L8.586 10 6.293 7.707a1 1 0 0 1 0-1.414z" />
                     </svg>
                 </div>
                 <div>
