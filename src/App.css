@@ -156,6 +156,10 @@
     max-height: 400px;
 }
 
+.slick-center img {
+    width: 300px;
+}
+
 .slick-slide:not(.slick-active) {
     margin: 20px 0;
 }

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/img/logo.png';
 import LogOutBtn from '../logout';
-import { NavLink } from 'react-router-dom';
-import DefaultAvatar from '../../assets/img/defaultAvatar.png';
+import getAvatar from '../getAvatar';
 import { handleLogout } from '../../utils/auth';
 
 export default function Header() {
@@ -32,17 +32,10 @@ export default function Header() {
     }
 
     const accessToken = localStorage.getItem('accessToken');
-    const avatar = localStorage.getItem('avatar');
+    const userEmail = localStorage.getItem('email');
     const userName = localStorage.getItem('userName');
 
-    let userAvatar;
-
-    if (avatar) {
-        userAvatar = <img src={avatar} alt="avatar" className="h-8 w-8 rounded-full" />;
-    } else {
-        userAvatar = <img src={DefaultAvatar} alt="avatar" className=" h-8 w-8 rounded-full" />;
-    }
-
+    console.log(accessToken);
     return (
         <nav>
             <div className="mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8 ">
@@ -99,7 +92,7 @@ export default function Header() {
                             </button>
                         </div>
                         <div className="flex flex-1 justify-center sm:items-stretch  sm:justify-between ">
-                            <div className="flex flex-shrink-0 items-center ">
+                            <div className="flex flex-shrink-0 items-center">
                                 <NavLink to="/" className="">
                                     <img className="block" src={Logo} alt="Holidaze logo" />
                                 </NavLink>
@@ -107,7 +100,7 @@ export default function Header() {
                             <div className="mt-5 hidden text-center font-body sm:ml-6 sm:block">
                                 <div className="desktop">
                                     {accessToken ? (
-                                        <div className="font-body text-base">
+                                        <div className="flex items-center font-body text-base">
                                             <div className="relative text-left">
                                                 <NavLink
                                                     className="mx-5 border-b border-black hover:font-medium"
@@ -116,27 +109,15 @@ export default function Header() {
                                                     Travel
                                                 </NavLink>
                                                 <NavLink
-                                                    to="/createVenue"
                                                     className="mx-5 border-b border-black hover:font-medium"
+                                                    to="/dashboard"
                                                 >
-                                                    Create Venue
+                                                    Dashboard
                                                 </NavLink>
                                             </div>
 
-                                            <NavLink
-                                                className="mx-5 border-b border-black hover:font-medium"
-                                                to="/bookings"
-                                            >
-                                                Bookings
-                                            </NavLink>
-                                            <NavLink
-                                                className="mx-5 border-b border-black hover:font-medium"
-                                                to="/dashboard"
-                                            >
-                                                Dashboard
-                                            </NavLink>
                                             <NavLink className="pl-5" to="/dashboard">
-                                                {userAvatar}
+                                                {getAvatar()}
                                             </NavLink>
                                         </div>
                                     ) : (
@@ -175,26 +156,16 @@ export default function Header() {
             </div>
 
             <div
-                className={`fixed left-0 top-16 z-20 ${
+                className={`fixed left-0 top-20 z-20 ${
                     isMenuOpen ? 'flex' : 'hidden'
                 } z-30 flex h-full w-full justify-center bg-white bg-clip-padding backdrop-blur-2xl backdrop-filter md:hidden`}
                 onBlur={closeMenu}
             >
                 {accessToken ? (
-                    <div className="flex flex-col gap-5 px-2 pb-3 pt-10">
-                        <div className="flex flex-col gap-5 font-body text-base">
+                    <div className="flex flex-col items-center gap-5 px-2 pb-3 pt-10 font-body text-base">
+                        <div className="flex w-24 flex-col gap-5 ">
                             <NavLink to="/venues" className="border-b border-black pb-2">
                                 Travel
-                            </NavLink>
-                            <NavLink to="/createVenue" className="border-b border-black pb-2">
-                                Create Venue
-                            </NavLink>
-                            <NavLink
-                                className="border-b border-black pb-2"
-                                to="/bookings"
-                                onClick={closeMenu}
-                            >
-                                Bookings
                             </NavLink>
                             <NavLink
                                 className="border-b border-black pb-2"
@@ -203,21 +174,22 @@ export default function Header() {
                             >
                                 Dashboard
                             </NavLink>
-                            <div className="">
-                                <NavLink
-                                    className="flex flex-col items-center rounded-md bg-blue px-3 py-2 text-white"
-                                    to="/dashboard"
-                                    onClick={closeMenu}
-                                >
-                                    <div className="flex items-center gap-2 font-bold">
-                                        {userAvatar}
-                                        {userName}
-                                    </div>
-                                    <div className="font-light">
-                                        <LogOutBtn handleLogout={handleLogout} />
-                                    </div>
-                                </NavLink>
-                            </div>
+                        </div>
+                        <div className="">
+                            <NavLink
+                                className="flex flex-col items-center gap-3 rounded-md px-10 py-4 text-black"
+                                to="/dashboard"
+                                onClick={closeMenu}
+                            >
+                                <div className="flex flex-col items-center gap-2">
+                                    {getAvatar()}
+                                    {userName}
+                                    {userEmail}
+                                </div>
+                                <div className="font-light">
+                                    <LogOutBtn handleLogout={handleLogout} />
+                                </div>
+                            </NavLink>
                         </div>
                     </div>
                 ) : (

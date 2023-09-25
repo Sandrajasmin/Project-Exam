@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleVenue } from '../../store/modules/VenueSlice';
 import { Link } from 'react-router-dom';
+import getProfileImg from '../../components/getProfileImg'
 import BookingCard from './components/bookingCard';
 import Slider from 'react-slick';
 import DefaultHouse from '../../assets/img/default_house.jpeg';
@@ -14,6 +15,7 @@ const DetailPage = () => {
     const { singleVenue, isError } = useSelector((state) => state.venues);
     let { id } = useParams();
     const accessToken = localStorage.getItem('accessToken');
+
 
     useEffect(() => {
         if (id) {
@@ -213,10 +215,13 @@ const DetailPage = () => {
                                 </div>
                                 <div className="my-5 flex items-center gap-2">
                                     <div className="h-10 w-10">
-                                        <img
+                                        {/* <img
                                             className="h-full w-full rounded-full object-cover"
-                                            src={singleVenue.owner.avatar}
-                                        />
+                                            src={userAvatar}
+                                        /> */}
+                                        <div className="h-full w-full rounded-full object-cover">
+                                            {getProfileImg}
+                                        </div>
                                     </div>
                                     <p className="font-body font-bold text-blue">
                                         {singleVenue.owner.name}
@@ -225,14 +230,14 @@ const DetailPage = () => {
                             </div>
                             {/* description */}
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-5">
-                                <div id="description" className="py-5 font-body text-base lg:w-2/4">
+                                <div id="description" className="py-5 font-body text-base lg:w-2/4 self-center">
                                     {singleVenue.description.length > 40 ? (
                                         singleVenue.description
                                             .split('.')
                                             .map((sentence, index) => (
                                                 <React.Fragment key={index}>
-                                                    <p>{sentence.trim()}.</p>
                                                     <br />
+                                                    <p>{sentence.trim()}</p>
                                                 </React.Fragment>
                                             ))
                                     ) : (
@@ -262,7 +267,7 @@ const DetailPage = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div className="self-center ">
+                                <div className="self-center">
                                     {accessToken ? (
                                         <div className="">
                                             <BookingCard />
