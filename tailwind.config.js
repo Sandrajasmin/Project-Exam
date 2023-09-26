@@ -19,7 +19,7 @@ module.exports = {
             },
             fontFamily: {
                 heading: ['Roboto', 'sans-serif'],
-                subheading: ['Cormorant Garamond', 'serif'],
+                subheading: ['Bitter', 'serif'],
                 body: ['Raleway', 'sans-serif']
             },
             animation: {

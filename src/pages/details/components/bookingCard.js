@@ -10,7 +10,6 @@ import DatePicker from './calendar';
 import Logo from '../../../assets/img/logo.png';
 import { Modal } from './confirmationModal';
 
-
 const DetailPage = () => {
     const dispatch = useDispatch();
     const singleVenue = useSelector((state) => state.venues.singleVenue);

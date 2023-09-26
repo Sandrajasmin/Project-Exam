@@ -1,5 +1,5 @@
 import React from 'react';
-import DefaultImage from '../assets/img/default_house.jpeg'
+import DefaultImage from '../assets/img/default_house.jpeg';
 
 function getProfileImage() {
     const avatar = localStorage.getItem('avatar');
@@ -11,7 +11,6 @@ function getProfileImage() {
     } else {
         userImage = <img src={DefaultImage} alt="avatar" className=" h-8 w-8 rounded-full" />;
     }
-
 
     return <div>{userImage}</div>;
 }

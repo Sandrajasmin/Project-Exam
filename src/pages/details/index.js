@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSingleVenue } from '../../store/modules/VenueSlice';
 import { Link } from 'react-router-dom';
-import getProfileImg from '../../components/getProfileImg'
+import getProfileImg from '../../components/getProfileImg';
 import BookingCard from './components/bookingCard';
 import Slider from 'react-slick';
 import DefaultHouse from '../../assets/img/default_house.jpeg';
@@ -15,7 +15,6 @@ const DetailPage = () => {
     const { singleVenue, isError } = useSelector((state) => state.venues);
     let { id } = useParams();
     const accessToken = localStorage.getItem('accessToken');
-
 
     useEffect(() => {
         if (id) {
@@ -230,7 +229,10 @@ const DetailPage = () => {
                             </div>
                             {/* description */}
                             <div className="flex flex-col lg:flex-row lg:justify-between lg:gap-5">
-                                <div id="description" className="py-5 font-body text-base lg:w-2/4 self-center">
+                                <div
+                                    id="description"
+                                    className="self-center py-5 font-body text-base lg:w-2/4"
+                                >
                                     {singleVenue.description.length > 40 ? (
                                         singleVenue.description
                                             .split('.')

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../assets/img/logo.png';
 import LogOutBtn from '../logout';
-import getAvatar from '../getAvatar';
+import GetAvatar from '../getAvatar';
 import { handleLogout } from '../../utils/auth';
 
 export default function Header() {
@@ -117,7 +117,7 @@ export default function Header() {
                                             </div>
 
                                             <NavLink className="pl-5" to="/dashboard">
-                                                {getAvatar()}
+                                                <GetAvatar size="8" fontsize="base" />
                                             </NavLink>
                                         </div>
                                     ) : (
@@ -182,9 +182,11 @@ export default function Header() {
                                 onClick={closeMenu}
                             >
                                 <div className="flex flex-col items-center gap-2">
-                                    {getAvatar()}
-                                    {userName}
-                                    {userEmail}
+                                    <GetAvatar size="8" fontsize="base" />
+                                    <div className="flex flex-col items-center">
+                                        <p>{userName}</p>
+                                        <p>{userEmail}</p>
+                                    </div>
                                 </div>
                                 <div className="font-light">
                                     <LogOutBtn handleLogout={handleLogout} />
