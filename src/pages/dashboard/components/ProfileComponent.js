@@ -21,9 +21,9 @@ function ProfileCard() {
     }, [dispatch, userDetails.username]);
 
     return (
-        <div className="relative bottom-10 flex flex-col items-center justify-center gap-10 rounded-md ">
-            <div className=" flex flex-col items-center justify-center gap-5">
-                <GetAvatar size="32" fontsize="5xl" shadowDepth="lg" />
+        <div className="relative bottom-6 flex flex-col items-center justify-center gap-10 rounded-md ">
+            <div className=" flex max-w-[120px] flex-col items-center justify-center gap-5">
+                <GetAvatar size="24" fontsize="5xl" shadowDepth="lg" />
                 <div className="text-center font-heading font-bold text-black ">
                     {userName}
                     <div className="font-light">{userEmail}</div>
@@ -78,7 +78,7 @@ function ProfileCard() {
                     </div>
                 </Link>
             </div>
-            <div id="links" className="flex flex-col gap-5">
+            <div id="links" className="flex flex-col gap-5 pb-10">
                 <Link className="mx-5 border-b border-black hover:font-medium" to="/createVenue">
                     Create Venue
                 </Link>

@@ -40,7 +40,7 @@ export default function Header() {
         <nav>
             <div className="mx-auto max-w-7xl px-2 py-5 sm:px-6 lg:px-8 ">
                 <div className="fixed left-0 right-0 top-0 z-30 bg-white md:relative">
-                    <div className="relative my-5 flex h-16 items-center justify-between bg-white md:my-0">
+                    <div className="relative my-2 flex h-16 items-center justify-between bg-white md:my-0">
                         <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                             <button
                                 type="button"
