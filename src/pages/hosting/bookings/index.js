@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 import { fetchBookingOwner } from '../../../store/modules/profileSlice';
 import { getUserDetails } from '../../../utils/auth';
 import formatDate from '../../../components/date/dateFormat';
-import Dashboard from '../../../components/dashboard/dashboard';
-import noBookingsImg from '../../../assets/img/neighbourhoodVector.png';
 import DefaultHouse from '../../../assets/img/default_house.jpeg';
 import ErrorComponent from '../../../components/errorComponent';
+import ListingGallery from './components/gallery';
 
 function ManageBooking() {
     const dispatch = useDispatch();
@@ -39,15 +38,12 @@ function ManageBooking() {
 
     return (
         <div className="mx-auto max-w-7xl px-5">
-            <div className="my-5 flex gap-5">
-                <Dashboard />
+            <div className="my-5 ">
+                {/* flex gap-5 */}
                 {isError ? (
                     <ErrorComponent message={errorMessage} />
                 ) : (
-                    <div className="w-full max-w-4xl md:bg-white md:px-5 md:py-5 md:drop-shadow-md">
-                        <h1 className="pb-5 font-heading text-4xl font-extrabold">
-                            Bookings on your Venues
-                        </h1>
+                    <div>
                         {singleProfile && singleProfile.length > 0 ? (
                             singleProfile.map((booking) => {
                                 const { id, name, media, bookings } = booking;
@@ -62,6 +58,9 @@ function ManageBooking() {
 
                                 return (
                                     <div key={id} className="my-4">
+                                        <h1 className="pb-5 font-heading text-4xl font-extrabold">
+                                            Bookings on your Venuejjjs
+                                        </h1>
                                         <h2 className="text-1xl font-heading font-semibold">
                                             {truncatedName}
                                         </h2>
@@ -116,16 +115,24 @@ function ManageBooking() {
                                 );
                             })
                         ) : (
-                            <div className="flex h-full w-full flex-col items-center justify-center bg-white p-8 drop-shadow-md">
-                                <img src={noBookingsImg} alt="No bookings" />
-                                <h1 className="font-paragraph font-md w-full py-10 text-center font-heading text-xl font-bold">
-                                    Sorry, you have no bookings right now{' '}
-                                </h1>
-                                <Link to="/dashboard">
-                                    <button className="rounded-md bg-blue px-5 py-2 font-body text-white">
-                                        Return to dashboard
-                                    </button>
-                                </Link>
+                            <div className="mx-auto my-32  flex max-w-7xl justify-between p-8 lg:my-5">
+                                <div className="flex w-full flex-col justify-center gap-10">
+                                    <div>
+                                        <h1 className="font-heading text-6xl font-bold">SORRY</h1>
+                                        <hr className="h-[3px] w-56 bg-black" />
+                                        <h2 className="font-body font-light">
+                                            You have no bookings right now
+                                        </h2>
+                                    </div>
+                                    <Link to="/dashboard">
+                                        <button className="hover:bg-lightBrown bg-darkBrown px-5 py-2 font-body text-white">
+                                            Return to dashboard
+                                        </button>
+                                    </Link>
+                                </div>
+                                <div className="hidden w-2/3 md:block">
+                                    <ListingGallery />
+                                </div>
                             </div>
                         )}
                     </div>

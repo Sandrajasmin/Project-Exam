@@ -52,31 +52,25 @@ function EditPersonalia() {
     });
 
     return (
-        <div className="mx-auto max-w-7xl px-5">
+        <div className="mx-auto px-5">
             <form onSubmit={formik.handleSubmit} className="my-8 flex flex-col gap-5 font-body">
                 <div id="input_title">
-                    <label
-                        htmlFor="name"
-                        className="block font-medium leading-6 text-darkgrey"
-                    >
+                    <label htmlFor="name" className="block font-medium leading-6 text-darkgrey">
                         Title
                     </label>
-                        <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-darkBlue sm:max-w-md">
-                            <input
-                                type="text"
-                                name="name"
-                                id="name"
-                                className="block flex-1 border-0 bg-transparent py-1.5 pl-2 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                                placeholder={userName}
-                                readOnly={true}
-                            />
-                        </div>
+                    <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-darkBlue sm:max-w-md">
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            className="block flex-1 border-0 bg-transparent py-1.5 pl-2 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                            placeholder={userName}
+                            readOnly={true}
+                        />
+                    </div>
                 </div>
                 <div id="input_email">
-                    <label
-                        htmlFor="email"
-                        className="block font-medium leading-6 text-darkgrey"
-                    >
+                    <label htmlFor="email" className="block font-medium leading-6 text-darkgrey">
                         Email
                     </label>
                     <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-darkBlue sm:max-w-md">
